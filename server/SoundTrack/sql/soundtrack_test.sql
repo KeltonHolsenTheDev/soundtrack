@@ -123,6 +123,7 @@ begin
 		("123 4th Street", "The Chapel"),
         ("45 West Avenue", "The Barn"),
         ("44 Sunset Blvd.", "Pa's House");
+        
 end //
 delimiter ;
 

@@ -1,15 +1,15 @@
 package soundtrack.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import soundtrack.data.LocationRepository;
 import soundtrack.models.Location;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Valid;
-import javax.validation.Validator;
+import javax.validation.*;
 import java.util.List;
 import java.util.Set;
 
+@Service
 public class LocationService {
 
     private final LocationRepository repository;
@@ -59,6 +59,9 @@ public class LocationService {
 
     private Result<Location> validate(Location location) {
         Result<Location> result = new Result<>();
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+
 
         if (result.isSuccess()) {
             Set<ConstraintViolation<Location>> violations = validator.validate(location);

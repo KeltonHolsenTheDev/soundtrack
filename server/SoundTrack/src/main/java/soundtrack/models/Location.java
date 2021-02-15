@@ -62,4 +62,13 @@ public class Location {
     public int hashCode() {
         return Objects.hash(locationId, address, name);
     }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "locationId=" + locationId +
+                ", address='" + address + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
