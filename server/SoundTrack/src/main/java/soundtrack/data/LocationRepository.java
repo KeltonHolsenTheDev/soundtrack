@@ -7,7 +7,7 @@ import java.util.List;
 public interface LocationRepository {
     List<Location> findAll();
     Location findById(int id);
-    void addLocation(Location location);
+    Location addLocation(Location location);
     boolean updateLocation(Location location);
     boolean deleteById(int id);
 }

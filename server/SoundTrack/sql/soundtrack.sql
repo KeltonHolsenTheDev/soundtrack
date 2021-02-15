@@ -5,6 +5,7 @@ use soundtrack;
 
 create table location (
 	location_id int primary key auto_increment,
+    location_name varchar(50) null,
     address varchar(128) not null
 );
 
