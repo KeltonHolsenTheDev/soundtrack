@@ -1,4 +1,9 @@
 # Planning
+## HTTP
+@url = http://localhost:8080/api/
+* @Get  
+* {{url}} HTTP/1.1  
+
 
 ## API Controllers
 * Event
@@ -26,6 +31,8 @@
     * delete a user by id  
 * Repair Ticket
     * get all repair tickets
+    * get all by user
+    * get all if "open case"  
     * post(create) a repair ticket
     * put(update) a repair ticket
     * delete a repair ticket by id
