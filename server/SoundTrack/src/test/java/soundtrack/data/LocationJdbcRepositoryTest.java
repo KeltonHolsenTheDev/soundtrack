@@ -3,13 +3,14 @@ package soundtrack.data;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import soundtrack.models.Location;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 class LocationJdbcRepositoryTest {
 
     @Autowired
@@ -18,27 +19,30 @@ class LocationJdbcRepositoryTest {
     @Autowired
     KnownGoodState knownGoodState;
 
-    @BeforeEach
-    void setup() {
-        knownGoodState.set();
+    private List<Location> getExpected() {
+        return List.of(
+                new Location(1, "123 4th Street", "The Chapel"),
+                new Location(2, "45 West Avenue", "The Barn"),
+                new Location(3, "44 Sunset Blvd.", "Pa's House")
+        );
     }
 
-    private List<Location> all = List.of(
-            new Location(1, "123 4th Street", "The Chapel"),
-            new Location(2, "45 West Avenue", "The Barn"),
-            new Location(3, "44 Sunset Blvd.", "Pa's House")
-    );
+    @BeforeEach
+    void setup() {
+        System.out.println("We ran setup");
+        knownGoodState.set();
+    }
 
     @Test
     void shouldFindAll() {
         List<Location> actual = repository.findAll();
-        List<Location> expected = all;
+        List<Location> expected = getExpected();
         assertEquals(expected, actual);
     }
 
     @Test
     void shouldFindById() {
-        Location expected = all.get(0);
+        Location expected = getExpected().get(0);
         Location actual = repository.findById(1);
         assertEquals(expected, actual);
     }
@@ -49,6 +53,7 @@ class LocationJdbcRepositoryTest {
         location.setAddress("451 21st Avenue");
         location.setName("The Bluff House");
         assertEquals(location, repository.addLocation(location));
+        assertEquals(4, repository.findAll().size());
     }
 
     @Test

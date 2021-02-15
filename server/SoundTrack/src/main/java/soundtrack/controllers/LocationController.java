@@ -1,9 +1,10 @@
 package soundtrack.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 import soundtrack.domain.LocationService;
 
-@Controller
+@RestController
 public class LocationController {
     private final LocationService service;
 

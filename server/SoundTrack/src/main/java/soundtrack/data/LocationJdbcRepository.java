@@ -22,13 +22,13 @@ public class LocationJdbcRepository implements LocationRepository {
 
     @Override
     public List<Location> findAll() {
-        final String sql = "select (location_id, location_name, address) from location;";
+        final String sql = "select location_id, location_name, address from location;";
         return jdbcTemplate.query(sql, new LocationMapper());
     }
 
     @Override
     public Location findById(int id) {
-        final String sql = "select (location_id, location_name, address) from location where location_id = ?;";
+        final String sql = "select location_id, location_name, address from location where location_id = ?;";
         return jdbcTemplate.query(sql, new LocationMapper(), id).stream().findFirst().orElse(null);
     }
 
@@ -56,7 +56,7 @@ public class LocationJdbcRepository implements LocationRepository {
     public boolean updateLocation(Location location) {
         final String sql = "update location set " +
                 "address = ?, " +
-                "location_name = ?, " +
+                "location_name = ? " +
                 "where location_id = ?;";
 
         return jdbcTemplate.update(sql, location.getAddress(), location.getName(), location.getLocationId()) > 0;
