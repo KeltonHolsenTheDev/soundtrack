@@ -23,12 +23,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f4d27fd-cd0d-4b6e-b89b-2e2ce654e8c6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/soundtrack/data/LocationJdbcRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/soundtrack/data/mappers/LocationMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/soundtrack/App.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sql/soundtrack.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql/soundtrack.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/soundtrack/data/LocationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/soundtrack/data/LocationRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/soundtrack/data/LocationJdbcRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/soundtrack/data/LocationJdbcRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/soundtrack/models/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/soundtrack/models/Location.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,5 +96,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="765" y="204" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1613422553804" />
+    <state x="490" y="175" key="Maven.ArtifactSearchDialog" timestamp="1613423145948">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="490" y="175" key="Maven.ArtifactSearchDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1613423145948" />
   </component>
 </project>
