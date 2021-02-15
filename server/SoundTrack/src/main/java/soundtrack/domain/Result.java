@@ -11,7 +11,7 @@ public class Result<T> {
 
     public ResultType getType() {return type;}
 
-    public boolean isSuccess() {return type == ResultType.SUCCESS};
+    public boolean isSuccess() {return type == ResultType.SUCCESS;}
 
     public T getPayLoad() {
         return payload;
@@ -25,5 +25,4 @@ public class Result<T> {
         messages.add(message);
         this.type = type;
     }
-
 }
