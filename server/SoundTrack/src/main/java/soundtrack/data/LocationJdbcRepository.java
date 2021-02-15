@@ -3,6 +3,7 @@ package soundtrack.data;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 import soundtrack.data.mappers.LocationMapper;
 import soundtrack.models.Location;
 
@@ -10,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 
+@Repository
 public class LocationJdbcRepository implements LocationRepository {
 
     private final JdbcTemplate jdbcTemplate;
@@ -60,9 +62,10 @@ public class LocationJdbcRepository implements LocationRepository {
         return jdbcTemplate.update(sql, location.getAddress(), location.getName(), location.getLocationId()) > 0;
     }
 
-    //workin on it
+
     @Override
     public boolean deleteById(int id) {
-        return false;
+        //Additional deletions will need to go here when other models are implemented
+        return jdbcTemplate.update("delete from location where location_id = ?;", id) > 0;
     }
 }
