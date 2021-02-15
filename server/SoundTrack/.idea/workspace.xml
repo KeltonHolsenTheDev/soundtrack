@@ -23,8 +23,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f4d27fd-cd0d-4b6e-b89b-2e2ce654e8c6" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/src/test/java/soundtrack/data/KnownGoodState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/soundtrack/models/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/soundtrack/models/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/soundtrack/data/LocationJdbcRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/soundtrack/data/LocationJdbcRepositoryTest.java" afterDir="false" />
+>>>>>>> 8925fe072e0ddacc4a3f0387a1bbeb0eba118b98
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,9 +43,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="Enum" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -90,10 +98,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="765" y="204" key="#com.intellij.ide.util.MemberChooser" timestamp="1613425837788">
+    <state x="765" y="204" key="#com.intellij.ide.util.MemberChooser" timestamp="1613426797874">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="204" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1613425837788" />
+    <state x="765" y="204" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1613426797874" />
     <state x="731" y="294" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1613425865564">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
