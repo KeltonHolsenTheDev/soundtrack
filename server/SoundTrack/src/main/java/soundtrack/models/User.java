@@ -22,7 +22,7 @@ public class User {
     @Email(message = "Email must be a valid email address")
     private String email;
 
-    @Pattern(regexp = "\"\\\\(?\\\\d\\\\d\\\\d\\\\)?[ -]?\\\\d\\\\d\\\\d[- ]?\\\\d\\\\d\\\\d\\\\d\"", message = "Phone number must be a valid phone number!")
+    @Pattern(regexp = "\\(?\\d\\d\\d\\)?[ -]?\\d\\d\\d[- ]?\\d\\d\\d\\d", message = "Phone number must be a valid phone number!")
     private String phone;
 
     private AccessLevel accessLevel;
@@ -34,6 +34,15 @@ public class User {
     private List<String> roles;
 
     public User() {
+    }
+
+    public User(@NotNull(message = "First name cannot be null!") @NotBlank(message = "First name cannot be blank") String firstName, @NotNull(message = "Last name cannot be null!") @NotBlank(message = "Last name cannot be blank") String lastName, @NotNull(message = "Email cannot be null!") @NotBlank(message = "Email cannot be blank") @Email(message = "Email must be a valid email address") String email, @Pattern(regexp = "\"\\\\(?\\\\d\\\\d\\\\d\\\\)?[ -]?\\\\d\\\\d\\\\d[- ]?\\\\d\\\\d\\\\d\\\\d\"", message = "Phone number must be a valid phone number!") String phone, AccessLevel accessLevel, @Size(min = 16, message = "Password must be at least 16 characters") String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.accessLevel = accessLevel;
+        this.password = password;
     }
 
     public User(@Min(value = 1, message = "Id cannot be less than 1!") int userId, @NotNull(message = "First name cannot be null!") @NotBlank(message = "First name cannot be blank") String firstName, @NotNull(message = "Last name cannot be null!") @NotBlank(message = "Last name cannot be blank") String lastName, @NotNull(message = "Email cannot be null!") @NotBlank(message = "Email cannot be blank") @Email(message = "Email must be a valid email address") String email, @Pattern(regexp = "\"\\\\(?\\\\d\\\\d\\\\d\\\\)?[ -]?\\\\d\\\\d\\\\d[- ]?\\\\d\\\\d\\\\d\\\\d\"", message = "Phone number must be a valid phone number!") String phone, AccessLevel accessLevel, @Size(min = 16, message = "Password must be at least 16 characters") String password) {
