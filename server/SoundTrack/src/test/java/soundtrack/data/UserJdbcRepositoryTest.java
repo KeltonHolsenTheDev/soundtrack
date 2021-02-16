@@ -65,4 +65,10 @@ class UserJdbcRepositoryTest {
         assertFalse(repository.deleteById(2));
     }
 
+    @Test
+    void userShouldHaveRoles() {
+        User kelton = repository.findById(1);
+        assertEquals(kelton.getRoles().get(0), "Sound Board");
+    }
+
 }

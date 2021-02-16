@@ -1,11 +1,12 @@
 package soundtrack.models;
 
 import javax.validation.constraints.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class User {
 
-    @Min(value = 1, message = "Id cannot be less than 1!")
     private int userId;
 
     @NotNull(message = "First name cannot be null!")
@@ -28,6 +29,9 @@ public class User {
 
     @Size(min = 16, message = "Password must be at least 16 characters")
     private String password;
+
+    @NotEmpty(message = "User must have at least one role!")
+    private List<String> roles;
 
     public User() {
     }
@@ -96,6 +100,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 
     @Override

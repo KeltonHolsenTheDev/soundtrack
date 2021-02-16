@@ -8,6 +8,8 @@ import soundtrack.data.mappers.UserMapper;
 import soundtrack.models.User;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
@@ -24,13 +26,37 @@ public class UserJdbcRepository implements UserRepository {
     @Override
     public List<User> findAll() {
         final String sql = "select user_id, first_name, last_name, email, phone, access_level, password_hash from system_user;";
-        return jdbcTemplate.query(sql, new UserMapper());
+        List<User> users = jdbcTemplate.query(sql, new UserMapper());
+        users.forEach(this::attachRoles);
+        return users;
     }
 
     @Override
     public User findById(int id) {
         final String sql = "select user_id, first_name, last_name, email, phone, access_level, password_hash from system_user where user_id = ?;";
-        return jdbcTemplate.query(sql, new UserMapper(), id).stream().findFirst().orElse(null);
+        User user = jdbcTemplate.query(sql, new UserMapper(), id).stream().findFirst().orElse(null);
+        if (user == null) {
+            return null;
+        }
+        attachRoles(user);
+        return user;
+    }
+
+    /**
+     * Gets all roles for a given user and attaches them to that user
+     * @param user: the user to find the roles for
+     */
+    private void attachRoles(User user) {
+        final String sql = "select r.role_name from system_user u " +
+                "inner join user_role ur on u.user_id = ur.user_id " +
+                "inner join role r on r.role_id = ur.role_id " +
+                "where u.user_id = ?;";
+        List<String> roles = jdbcTemplate.query(sql, this::mapString, user.getUserId());
+        user.setRoles(roles);
+    }
+
+    private String mapString(ResultSet resultSet, int i) throws SQLException {
+        return resultSet.getString("role_name");
     }
 
     @Override
