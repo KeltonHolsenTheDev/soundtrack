@@ -81,7 +81,7 @@ public class UserService {
         }
 
         List<User> all = repository.findAll();
-        if (all.stream().anyMatch(u -> u.getEmail().equals(user.getEmail()))) {
+        if (all.stream().anyMatch(u -> u.getEmail().equals(user.getEmail()) && u.getUserId() != user.getUserId())) {
             result.addMessage("User email already exists in the system!", ResultType.INVALID);
         }
         return result;
