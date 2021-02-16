@@ -1,6 +1,6 @@
 package soundtrack.controllers;
 
-<<<<<<< HEAD
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
@@ -15,13 +15,9 @@ import soundtrack.models.User;
 import javax.validation.Valid;
 import java.util.List;
 
-=======
->>>>>>> 93bc3575ac25a99dbd94c392cda74d211d4fc418
 /**
  * Warning: this class is not guaranteed to control your users.
  */
-
-<<<<<<< HEAD
 @RestController
 @CrossOrigin(origins = {"http://localhost:3000"})
 @RequestMapping("/api/user")
@@ -43,8 +39,7 @@ public class UserController {
         User user = service.findById(userId);
         if (user == null) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
-        else {
+        } else {
             return new ResponseEntity<>(user, HttpStatus.OK);
         }
     }
@@ -57,8 +52,7 @@ public class UserController {
         Result<User> userResult = service.add(user);
         if (!userResult.isSuccess()) {
             return new ResponseEntity<>(userResult.getMessages(), HttpStatus.BAD_REQUEST);
-        }
-        else {
+        } else {
             return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
         }
     }
@@ -74,11 +68,9 @@ public class UserController {
         Result<User> userResult = service.update(user);
         if (userResult.getType() == ResultType.NOT_FOUND) {
             return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
-        }
-        else if (userResult.getType() == ResultType.INVALID) {
+        } else if (userResult.getType() == ResultType.INVALID) {
             return new ResponseEntity<>(userResult.getMessages(), HttpStatus.BAD_REQUEST);
-        }
-        else {
+        } else {
             return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
         }
     }
@@ -87,14 +79,9 @@ public class UserController {
     public ResponseEntity<Object> deleteUser(@PathVariable int userId) {
         if (service.deleteById(userId)) {
             return new ResponseEntity<>("Deleted", HttpStatus.ACCEPTED);
-        }
-        else {
+        } else {
             return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
         }
     }
-=======
-public class UserController {
-
->>>>>>> 93bc3575ac25a99dbd94c392cda74d211d4fc418
 
 }
