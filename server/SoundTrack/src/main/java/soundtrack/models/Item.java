@@ -16,9 +16,11 @@ public class Item {
 
     private String Brand;
 
-    private int itemTypeId;
+    private String itemType;
 
     private ItemCategory itemCategory;
+
+    private int locationId;
 
     private String locationDescription;
 
@@ -26,13 +28,18 @@ public class Item {
 
     private String notes;
 
-    public Item(int itemId, @NotBlank(message = "Item name cannot be null or blank!") String itemName, @NotBlank(message = "") String description, String brand, int itemTypeId, ItemCategory itemCategory, String locationDescription, boolean isBroken, String notes) {
+    public Item() {
+
+    }
+
+    public Item(int itemId, @NotBlank(message = "Item name cannot be null or blank!") String itemName, @NotBlank(message = "") String description, String brand, String itemType, ItemCategory itemCategory, int locationId, String locationDescription, boolean isBroken, String notes) {
         this.itemId = itemId;
         this.itemName = itemName;
         this.description = description;
-        Brand = brand;
-        this.itemTypeId = itemTypeId;
+        this.Brand = brand;
+        this.itemType = itemType;
         this.itemCategory = itemCategory;
+        this.locationId = locationId;
         this.locationDescription = locationDescription;
         this.isBroken = isBroken;
         this.notes = notes;
@@ -70,12 +77,12 @@ public class Item {
         Brand = brand;
     }
 
-    public int getItemTypeId() {
-        return itemTypeId;
+    public String getItemType() {
+        return itemType;
     }
 
-    public void setItemTypeId(int itemTypeId) {
-        this.itemTypeId = itemTypeId;
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
     }
 
     public ItemCategory getItemCategory() {
@@ -85,6 +92,12 @@ public class Item {
     public void setItemCategory(ItemCategory itemCategory) {
         this.itemCategory = itemCategory;
     }
+
+    public int getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(int locationId) { this.locationId = locationId;}
 
     public String getLocationDescription() {
         return locationDescription;
@@ -116,11 +129,11 @@ public class Item {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
-        return itemId == item.itemId && itemTypeId == item.itemTypeId && isBroken == item.isBroken && Objects.equals(itemName, item.itemName) && Objects.equals(description, item.description) && Objects.equals(Brand, item.Brand) && itemCategory == item.itemCategory && Objects.equals(locationDescription, item.locationDescription) && Objects.equals(notes, item.notes);
+        return itemId == item.itemId && itemType == item.itemType && isBroken == item.isBroken && Objects.equals(itemName, item.itemName) && Objects.equals(description, item.description) && Objects.equals(Brand, item.Brand) && itemCategory == item.itemCategory && Objects.equals(locationId, item.locationId) && Objects.equals(locationDescription, item.locationDescription) && Objects.equals(notes, item.notes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(itemId, itemName, description, Brand, itemTypeId, itemCategory, locationDescription, isBroken, notes);
+        return Objects.hash(itemId, itemName, description, Brand, itemType, itemCategory, locationId, locationDescription, isBroken, notes);
     }
 }
