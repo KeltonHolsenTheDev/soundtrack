@@ -1,0 +1,9 @@
+.register-background {
+  background: url("../../img/audio-868487_1280.jpg") center;
+  background-size: cover;
+  height: 100vh;
+}
+
+.register-card {
+  align-items: center;
+}

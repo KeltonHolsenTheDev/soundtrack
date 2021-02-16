@@ -1,7 +1,7 @@
 import React from "react";
-import "./Home.css";
+import "./Login.css";
 
-const Home = function () {
+const Login = function () {
   return (
     <div className="container-fluid">
       <div className="row">
@@ -64,7 +64,7 @@ const Home = function () {
               </form>
             </div>
             <div className="card-footer text-center">
-              Don't have an account? <a href="#">Sign up</a>
+              Don't have an account? <a href="/register">Sign up</a>
             </div>
           </div>
         </div>
@@ -72,4 +72,4 @@ const Home = function () {
     </div>
   );
 };
-export default Home;
+export default Login;
