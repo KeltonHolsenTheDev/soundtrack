@@ -14,12 +14,11 @@ public class LocationService {
 
     private final LocationRepository repository;
 
-    @Autowired
-    private Validator validator;
-
     public LocationService(LocationRepository repository) {this.repository=repository; }
 
     public List<Location> findAll() {return repository.findAll(); }
+
+    public Location findById(int locationId) {return repository.findById(locationId);}
 
     public Result<Location> add(Location location) {
         Result<Location> result = validate(location);
@@ -55,7 +54,9 @@ public class LocationService {
         return result;
     }
 
-    public boolean deleteById(int locationId) {return repository.deleteById(locationId);}
+    public boolean deleteById(int locationId) {
+        return repository.deleteById(locationId);
+    }
 
     private Result<Location> validate(Location location) {
         Result<Location> result = new Result<>();

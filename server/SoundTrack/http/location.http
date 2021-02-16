@@ -1,0 +1,37 @@
+@url = http://localhost:8080/api/location
+
+## Testing find all locations
+GET {{url}} HTTP/1.1
+
+###
+
+## Testing find location by id
+GET {{url}}/1 HTTP/1.1
+
+###
+
+## Testing add a location
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "address": "481 Desnoyer St SE",
+    "name": "481"
+}
+
+###
+
+## Testing update a location
+PUT {{url}}/1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "locationId": 1,
+    "address": "821 Thornton St SE",
+    "name": "Thor"
+}
+
+###
+
+## Testing delete a location
+DELETE {{url}}/2 HTTP/1.1

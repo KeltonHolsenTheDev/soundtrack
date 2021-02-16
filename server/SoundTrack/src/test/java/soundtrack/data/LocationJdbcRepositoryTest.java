@@ -29,7 +29,6 @@ class LocationJdbcRepositoryTest {
 
     @BeforeEach
     void setup() {
-        System.out.println("We ran setup");
         knownGoodState.set();
     }
 
