@@ -14,12 +14,11 @@ public class LocationService {
 
     private final LocationRepository repository;
 
-    @Autowired
-    private Validator validator;
-
     public LocationService(LocationRepository repository) {this.repository=repository; }
 
     public List<Location> findAll() {return repository.findAll(); }
+
+    public Location findById(int locationId) {return repository.findById(locationId);}
 
     public Result<Location> add(Location location) {
         Result<Location> result = validate(location);
