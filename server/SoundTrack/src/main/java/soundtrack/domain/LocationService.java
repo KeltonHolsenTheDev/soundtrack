@@ -55,7 +55,9 @@ public class LocationService {
         return result;
     }
 
-    public boolean deleteById(int locationId) {return repository.deleteById(locationId);}
+    public boolean deleteById(int locationId) {
+        return repository.deleteById(locationId);
+    }
 
     private Result<Location> validate(Location location) {
         Result<Location> result = new Result<>();
