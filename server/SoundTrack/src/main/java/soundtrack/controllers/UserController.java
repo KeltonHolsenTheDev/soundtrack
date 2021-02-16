@@ -1,5 +1,6 @@
 package soundtrack.controllers;
 
+<<<<<<< HEAD
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
@@ -14,10 +15,13 @@ import soundtrack.models.User;
 import javax.validation.Valid;
 import java.util.List;
 
+=======
+>>>>>>> 93bc3575ac25a99dbd94c392cda74d211d4fc418
 /**
  * Warning: this class is not guaranteed to control your users.
  */
 
+<<<<<<< HEAD
 @RestController
 @CrossOrigin(origins = {"http://localhost:3000"})
 @RequestMapping("/api/user")
@@ -88,5 +92,9 @@ public class UserController {
             return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
         }
     }
+=======
+public class UserController {
+
+>>>>>>> 93bc3575ac25a99dbd94c392cda74d211d4fc418
 
 }
