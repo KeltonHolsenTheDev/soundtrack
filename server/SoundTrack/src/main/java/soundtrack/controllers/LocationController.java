@@ -25,7 +25,7 @@ public class LocationController {
     @GetMapping
     public List<Location> findAll() {return service.findAll();}
 
-    @GetMapping("/{locationId")
+    @GetMapping("/{locationId}")
     public ResponseEntity<Location> findById(@PathVariable int locationId) {
         Location location = service.findById(locationId);
         if(location == null) {

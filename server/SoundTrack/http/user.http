@@ -1,0 +1,52 @@
+@url = http://localhost:8080/api/user
+
+
+## Testing find all user
+GET {{url}} HTTP/1.1
+
+###
+
+## Testing find user by id
+GET {{url}}/1 HTTP/1.1
+
+###
+
+## Testing add a user
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "firstName": "Kelton",
+    "lastName": "Holsen",
+    "email": "kelton.holsen@gmail.com",
+    "phone": "xxx-xxx-xxxx",
+    "accessLevel": "USER",
+    "password": "keltonholsen",
+    "roles": [
+        "tech", "av"
+    ]
+}
+
+###
+
+## Testing update a user
+PUT {{url}}/1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "userId": 1,
+    "firstName": "AyDy",
+    "lastName": "Burling",
+    "email": "aydy.burling@gmail.com",
+    "phone": "123-456-7890",
+    "accessLevel": "USER",
+    "password": "password",
+    "roles": [
+        "pom"
+    ]
+}
+
+###
+
+## Testing delete a user
+DELETE {{url}}/1 HTTP/1.1
