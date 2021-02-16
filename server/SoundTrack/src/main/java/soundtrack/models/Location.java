@@ -5,7 +5,6 @@ import java.util.Objects;
 
 public class Location {
 
-    @NotNull(message = "Id cannot be null!")
     @Min(value = 1, message = "Id cannot be less than 1")
     private int locationId;
 

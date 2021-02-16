@@ -118,11 +118,17 @@ create procedure set_known_good_state()
 begin
 	delete from location;
     alter table location auto_increment = 1;
+    delete from system_user;
+    alter table system_user auto_increment = 1;
     
     insert into location(address, location_name) values
 		("123 4th Street", "The Chapel"),
         ("45 West Avenue", "The Barn"),
         ("44 Sunset Blvd.", "Pa's House");
+        
+	insert into system_user (first_name, last_name, email, phone, access_level, password_hash) values
+		("Kelton", "Holsen", "keltonholsen@gmail.com", "555-555-5555", "ADMINISTRATOR", "swordfishfishfish"),
+        ("Artemis", "Cat", "artemis@gmail.com", "777-777-7777", "USER", "meowmeowmeowmeow");
         
 end //
 delimiter ;
