@@ -1,11 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import "./Navbar.css";
 
 function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg">
       <NavLink className="navbar-brand" exact={true} to="/">
-        JAK
+        🎧
       </NavLink>
       <button
         className="navbar-toggler"
