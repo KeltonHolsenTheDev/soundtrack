@@ -1,0 +1,45 @@
+.home-brand-container {
+  background-color: rgba(39, 39, 39);
+}
+
+.home-background {
+  /* background: url("../../img/audio-868487_1280.jpg") center; */
+  background-color: rgba(39, 39, 39);
+  background-size: cover;
+  text-align: center;
+  color: rgb(248, 249, 250);
+  display: flex;
+}
+
+.home-headphones {
+  background: url("../../img/headphones-690685_1920.jpg") center;
+  background-size: cover;
+  height: 80vh;
+
+  margin-top: 10vh;
+}
+
+.login-card-container {
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(238, 238, 238);
+  height: 100vh;
+}
+
+.login-card {
+  width: 85%;
+  /* height: 60%; */
+}
+
+.form-group {
+  margin-bottom: 2rem !important;
+}
+
+.login-button-container {
+  margin-bottom: 10rem;
+}
+
+.login-text {
+  font-size: 1.5rem;
+  font-style: italic;
+}
