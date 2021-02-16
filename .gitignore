@@ -26,5 +26,6 @@ hs_err_pid*
 */application.properties 
 
 server/SoundTrack/.idea/workspace.xml
-.DS_STORE
+
 server/SoundTrack/.idea
+.DS_Store

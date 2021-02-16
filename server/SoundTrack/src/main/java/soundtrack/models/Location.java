@@ -4,20 +4,19 @@ import javax.validation.constraints.*;
 import java.util.Objects;
 
 public class Location {
-
-    @Min(value = 1, message = "Id cannot be less than 1")
+    
     private int locationId;
 
     @NotNull(message = "Address cannot be null!")
     @NotBlank(message = "Location needs an address")
     private String address;
-    
+
     private String name;
 
     public Location() {
     }
 
-    public Location(@NotNull(message = "Id cannot be null!") @Min(value = 1, message = "Id cannot be less than 1") int locationId, @NotNull(message = "Address cannot be null!") @NotBlank(message = "Location needs an address") String address, String name) {
+    public Location(int locationId, @NotNull(message = "Address cannot be null!") @NotBlank(message = "Location needs an address") String address, String name) {
         this.locationId = locationId;
         this.address = address;
         this.name = name;
