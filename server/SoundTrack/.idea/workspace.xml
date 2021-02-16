@@ -23,25 +23,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f4d27fd-cd0d-4b6e-b89b-2e2ce654e8c6" name="Default Changelist" comment="">
-<<<<<<< HEAD
-<<<<<<< HEAD
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/soundtrack/models/LocationTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-=======
-      <change afterPath="$PROJECT_DIR$/src/test/java/soundtrack/data/KnownGoodState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/application.properties" afterDir="false" />
-=======
->>>>>>> kelton
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sql/soundtrack_test.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql/soundtrack_test.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/soundtrack/controllers/LocationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/soundtrack/controllers/LocationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/soundtrack/data/LocationJdbcRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/soundtrack/data/LocationJdbcRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/soundtrack/domain/LocationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/soundtrack/domain/LocationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/soundtrack/domain/Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/soundtrack/domain/Result.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/soundtrack/models/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/soundtrack/models/Location.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/soundtrack/data/KnownGoodState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/soundtrack/data/KnownGoodState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/soundtrack/data/LocationJdbcRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/soundtrack/data/LocationJdbcRepositoryTest.java" afterDir="false" />
->>>>>>> 8925fe072e0ddacc4a3f0387a1bbeb0eba118b98
+      <change beforePath="$PROJECT_DIR$/src/test/java/soundtrack/domain/LocationServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/soundtrack/domain/LocationServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,93 +71,92 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.LocationJdbcRepositoryTest">
-    <configuration name="LocationJdbcRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.LocationTest">
+    <configuration name="LocationServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SoundTrack" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="soundtrack.data.*" />
+          <option name="PATTERN" value="soundtrack.domain.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="soundtrack.data" />
-      <option name="MAIN_CLASS_NAME" value="soundtrack.data.LocationJdbcRepositoryTest" />
+      <option name="PACKAGE_NAME" value="soundtrack.domain" />
+      <option name="MAIN_CLASS_NAME" value="soundtrack.domain.LocationServiceTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LocationJdbcRepositoryTest.shouldAdd" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LocationServiceTest.shouldDelete" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SoundTrack" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="soundtrack.data.*" />
+          <option name="PATTERN" value="soundtrack.domain.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="soundtrack.data" />
-      <option name="MAIN_CLASS_NAME" value="soundtrack.data.LocationJdbcRepositoryTest" />
-      <option name="METHOD_NAME" value="shouldAdd" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="LocationJdbcRepositoryTest.shouldDelete" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SoundTrack" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="soundtrack.data.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="soundtrack.data" />
-      <option name="MAIN_CLASS_NAME" value="soundtrack.data.LocationJdbcRepositoryTest" />
+      <option name="PACKAGE_NAME" value="soundtrack.domain" />
+      <option name="MAIN_CLASS_NAME" value="soundtrack.domain.LocationServiceTest" />
       <option name="METHOD_NAME" value="shouldDelete" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LocationJdbcRepositoryTest.shouldFindAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LocationServiceTest.shouldNotUpdateWhenAddressIsNull" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SoundTrack" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="soundtrack.data.*" />
+          <option name="PATTERN" value="soundtrack.domain.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="soundtrack.data" />
-      <option name="MAIN_CLASS_NAME" value="soundtrack.data.LocationJdbcRepositoryTest" />
-      <option name="METHOD_NAME" value="shouldFindAll" />
+      <option name="PACKAGE_NAME" value="soundtrack.domain" />
+      <option name="MAIN_CLASS_NAME" value="soundtrack.domain.LocationServiceTest" />
+      <option name="METHOD_NAME" value="shouldNotUpdateWhenAddressIsNull" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LocationJdbcRepositoryTest.shouldUpdate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LocationServiceTest.shouldNotUpdateWhenLocationIsSame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SoundTrack" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="soundtrack.data.*" />
+          <option name="PATTERN" value="soundtrack.domain.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="soundtrack.data" />
-      <option name="MAIN_CLASS_NAME" value="soundtrack.data.LocationJdbcRepositoryTest" />
-      <option name="METHOD_NAME" value="shouldUpdate" />
+      <option name="PACKAGE_NAME" value="soundtrack.domain" />
+      <option name="MAIN_CLASS_NAME" value="soundtrack.domain.LocationServiceTest" />
+      <option name="METHOD_NAME" value="shouldNotUpdateWhenLocationIsSame" />
       <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LocationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SoundTrack" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="soundtrack.models.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="soundtrack.models" />
+      <option name="MAIN_CLASS_NAME" value="soundtrack.models.LocationTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.LocationJdbcRepositoryTest" />
-        <item itemvalue="JUnit.LocationJdbcRepositoryTest.shouldDelete" />
-        <item itemvalue="JUnit.LocationJdbcRepositoryTest.shouldUpdate" />
-        <item itemvalue="JUnit.LocationJdbcRepositoryTest.shouldFindAll" />
-        <item itemvalue="JUnit.LocationJdbcRepositoryTest.shouldAdd" />
+        <item itemvalue="JUnit.LocationTest" />
+        <item itemvalue="JUnit.LocationServiceTest" />
+        <item itemvalue="JUnit.LocationServiceTest.shouldDelete" />
+        <item itemvalue="JUnit.LocationServiceTest.shouldNotUpdateWhenAddressIsNull" />
+        <item itemvalue="JUnit.LocationServiceTest.shouldNotUpdateWhenLocationIsSame" />
       </list>
     </recent_temporary>
   </component>
@@ -196,34 +183,15 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="92" y="92" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1613429988040">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="92" y="92" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1613429988040" />
-    <state x="765" y="204" key="#com.intellij.ide.util.MemberChooser" timestamp="1613429673284">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="765" y="204" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1613429673284" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1613430669775">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1613430669775" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1613430669775">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1613430669775" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1613430669775">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1613430669775" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1613430669775">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1613430669775" />
-    <state x="731" y="294" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1613425865564">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="731" y="294" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1613425865564" />
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/soundtrack/domain/LocationService.java</url>
+          <line>23</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
