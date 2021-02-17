@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AuthContext } from "../../auth/auth";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 import "./Registration.css";
 
 const Registration = function () {
+  const { setUser } = useContext(AuthContext);
+  const history = useHistory();
   const blankUser = {
     id: 0,
     firstName: "",
@@ -15,23 +19,24 @@ const Registration = function () {
     roles: [],
   };
 
-  const [user, setUser] = useState(blankUser);
+  const [newUser, setNewUser] = useState(blankUser);
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const onChangeHandler = (event) => {
-    const updatedUser = { ...user };
+    const updatedUser = { ...newUser };
     updatedUser[event.target.name] = event.target.value;
 
-    setUser(updatedUser);
+    setNewUser(updatedUser);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (user.password == confirmPassword) {
+    if (newUser.password == confirmPassword) {
       axios
-        .post("/api/user", user)
+        .post("/api/user", newUser)
         .then(function (response) {
-          console.log(response);
+          setUser(response.data);
+          history.push("/");
         })
         .catch(function (error) {
           console.log(error);
@@ -59,7 +64,7 @@ const Registration = function () {
                     id="formGroupExampleInput"
                     placeholder="Jane"
                     onChange={onChangeHandler}
-                    value={user.firstName}
+                    value={newUser.firstName}
                   />
                 </div>
                 <div class="form-group register-form-group">
@@ -71,7 +76,7 @@ const Registration = function () {
                     id="formGroupExampleInput2"
                     placeholder="Doe"
                     onChange={onChangeHandler}
-                    value={user.lastName}
+                    value={newUser.lastName}
                   />
                 </div>
                 <div class="form-group register-form-group">
@@ -83,7 +88,7 @@ const Registration = function () {
                     id="formGroupExampleInput"
                     placeholder="###-###-####"
                     onChange={onChangeHandler}
-                    value={user.phone}
+                    value={newUser.phone}
                   />
                 </div>
                 <div class="form-group register-form-group ">
@@ -96,7 +101,7 @@ const Registration = function () {
                       id="inputEmail3"
                       placeholder="jane@email.com"
                       onChange={onChangeHandler}
-                      value={user.email}
+                      value={newUser.email}
                     />
                   </div>
                 </div>
@@ -110,7 +115,7 @@ const Registration = function () {
                       id="inputPassword"
                       placeholder="Password"
                       onChange={onChangeHandler}
-                      value={user.password}
+                      value={newUser.password}
                     />
                   </div>
                 </div>
@@ -134,7 +139,7 @@ const Registration = function () {
                 <select
                   name="accessLevel"
                   class="custom-select custom-select-sm mb-2"
-                  value={user.accessLevel}
+                  value={newUser.accessLevel}
                   onChange={onChangeHandler}
                 >
                   <option selected>Open this select menu</option>
