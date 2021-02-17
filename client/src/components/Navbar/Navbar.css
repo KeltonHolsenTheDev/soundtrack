@@ -1,3 +1,7 @@
 .navbar {
   background-color: rgb(24, 24, 24);
 }
+
+.nav-link {
+  color: aliceblue;
+}

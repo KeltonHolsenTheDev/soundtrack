@@ -11,52 +11,49 @@ const Dashboard = function () {
     history.push("/login");
   }
   return user ? (
-    <div class="container-fluid dashboard-container ">
-      <div class="row no-gutters">
-        <div class="col-2 dashboard-col-2 px-0">
-          <div class="card dashboard-card rounded-0 w-100">
-            <div class=" d-flex justify-content-center mt-2">
+    <div className="container-fluid dashboard-container ">
+      <div className="row no-gutters">
+        <div className="col-2 dashboard-col-2 px-0">
+          <div className="card dashboard-card shadow rounded-0 w-100">
+            <div className=" d-flex justify-content-center mt-2">
               <img
                 src="https://picsum.photos/70"
-                class="rounded-circle dashboard-img card-img-top "
+                className="rounded-circle dashboard-img card-img-top border border-white "
                 alt="user pic"
               />
             </div>
             {/* prettier-ignore */}
-            <div class="card-body dashboard-card-body">
-              <h5 class="card-title text-center">
+            <div className="card-body dashboard-card-body">
+              <h5 className="card-title text-center">
               {`${user.firstName} ${user.lastName}`}
                 
               </h5>
               <h6 card-title> {user.accessLevel} </h6>
             </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item dashboard-card">
-                <div class="card-body  text-center">
-                  <a href="#" class="card-link">
-                    Card link
+            <ul className="list-group list-group-flush">
+              <li className="list-group-item dashboard-card">
+                <div className="card-body justify-content-center d-flex">
+                  <a href="#" className="card-link">
+                    <i class="fa fa-calendar fa-4x"></i>
                   </a>
                 </div>
               </li>
-              <li class="list-group-item dashboard-card">
-                <div class=" card-body text-center">
-                  <a href="#" class="card-link">
-                    Card link
+              <li className="list-group-item dashboard-card">
+                <div className="card-body justify-content-center d-flex">
+                  <a href="#" className="card-link">
+                    <i class="fa fa-comments fa-4x"></i>
                   </a>
                 </div>
               </li>
             </ul>
-            <div class="card-body">
-              <a href="#" class="card-link">
-                Card link
-              </a>
-              <a href="#" class="card-link">
-                Another link
+            <div className="card-body justify-content-center d-flex">
+              <a href="#" className="card-link">
+                <i class="fa fa-address-book fa-4x"></i>
               </a>
             </div>
           </div>
         </div>
-        <div className="col p-0">{/* event card here */}</div>
+        <div className="col dashboard-col p-0">{/* event card here */}</div>
       </div>
     </div>
   ) : (
