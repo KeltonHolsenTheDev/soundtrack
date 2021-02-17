@@ -4,7 +4,7 @@ import "./Login.css";
 import { useHistory } from "react-router-dom";
 
 const Login = function () {
-  const { user, setUser } = useContext(AuthContext);
+  const { setUser } = useContext(AuthContext);
   const history = useHistory();
   const blankUser = {
     email: "",
@@ -23,6 +23,7 @@ const Login = function () {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    // hard-coded for demonstration until authentication is available
     const blankUser = {
       id: 0,
       firstName: "George",
@@ -69,6 +70,8 @@ const Login = function () {
                       id="staticEmail"
                       value={login.email}
                       onChange={onChangeHandler}
+                      placeholder="email@email.com"
+                      required
                     />
                   </div>
                   <div className="col-1"></div>
@@ -89,6 +92,7 @@ const Login = function () {
                       placeholder="Password"
                       value={login.password}
                       onChange={onChangeHandler}
+                      required
                     />
                   </div>
                   <div className="col-1"></div>

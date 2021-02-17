@@ -4,15 +4,22 @@
   height: 100vh;
 }
 
+.dashboard-col {
+  background: url("../../img/brickwall_@2X.png") center;
+  background-repeat: repeat;
+}
+
 .dashboard-card-body {
-  color: black;
   display: inline;
   text-align: center;
   padding-bottom: 0%;
+  color: oldlace;
 }
 
 .dashboard-img {
   width: 60%;
+  border-width: 2px;
+  border-color: lightgray;
 }
 
 .dashboard-container {
@@ -20,5 +27,13 @@
 }
 
 .dashboard-card {
-  background-color: rgb(94, 6, 6);
+  background-color: rgb(61, 6, 6);
+}
+
+a.card-link {
+  color: oldlace;
+}
+
+i.fa.fa-comment-dots {
+  color: oldlace;
 }
