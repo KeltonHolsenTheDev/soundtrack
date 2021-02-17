@@ -1,5 +1,10 @@
 package soundtrack.domain;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import soundtrack.data.UserRepository;
 import soundtrack.models.Location;
@@ -13,7 +18,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UserRepository repository;
 
@@ -29,8 +34,15 @@ public class UserService {
         return repository.findById(id);
     }
 
-    public User findByEmail(String email) {
-        return repository.findByEmail(email);
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = repository.findByEmail(email);
+        if (user == null) {
+            throw new UsernameNotFoundException("No user exists with that email!");
+        }
+        List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(user.getAccessLevel().name()));
+        //annoying name sharing going on here
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
     }
 
     public Result<User> add(User user) {

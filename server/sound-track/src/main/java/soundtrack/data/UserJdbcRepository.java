@@ -22,6 +22,7 @@ public class UserJdbcRepository implements UserRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    private int nextUser = 1;
 
     @Override
     public List<User> findAll() {
@@ -89,7 +90,10 @@ public class UserJdbcRepository implements UserRepository {
         if (rowsAffected <= 0) {
             return null;
         }
-        addRoles(user.getRoles(), user.getUserId());
+        else {
+            addRoles(user.getRoles(), nextUser);
+            nextUser++;
+        }
 
         user.setUserId(keyHolder.getKey().intValue());
         return user;
@@ -114,6 +118,8 @@ public class UserJdbcRepository implements UserRepository {
                 System.out.println("Role " + role + " could not be added to user " + userId);
             }
             else {
+                System.out.println(userId);
+                System.out.println(roleId);
                 //Add the user and role relationship to the bridge table
                 sql = "insert into user_role (user_id, role_id) values (?, ?);";
                 jdbcTemplate.update(sql, userId, roleId);
