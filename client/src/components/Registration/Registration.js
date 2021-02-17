@@ -43,14 +43,14 @@ const Registration = function () {
 
   return (
     <div className="container-fluid register-background">
-      <div className="row h-100">
+      <div className="row ">
         <div className="col-3"></div>
-        <div className="col-6 register-card d-flex">
-          <div className="card shadow-lg px-4 w-100 rounded-0">
-            <div className="card-body">
-              <h1 className="card-title mb-5 text-center">Register</h1>
+        <div className="col-6 register-card-container d-flex mt-3">
+          <div className="card shadow-lg px-4 w-100 rounded-0 register-card">
+            <div className="card-body register-body">
+              <h1 className="card-title mb-3 text-center">Register</h1>
               <form onSubmit={handleSubmit}>
-                <div class="form-group">
+                <div class="form-group register-form-group">
                   <label for="formGroupExampleInput">First Name</label>
                   <input
                     type="text"
@@ -62,7 +62,7 @@ const Registration = function () {
                     value={user.firstName}
                   />
                 </div>
-                <div class="form-group">
+                <div class="form-group register-form-group">
                   <label for="formGroupExampleInput2">Last Name</label>
                   <input
                     type="text"
@@ -74,7 +74,7 @@ const Registration = function () {
                     value={user.lastName}
                   />
                 </div>
-                <div class="form-group">
+                <div class="form-group register-form-group">
                   <label for="formGroupExampleInput">Phone</label>
                   <input
                     type="tel"
@@ -86,7 +86,7 @@ const Registration = function () {
                     value={user.phone}
                   />
                 </div>
-                <div class="form-group ">
+                <div class="form-group register-form-group ">
                   <label for="inputEmail3">Email</label>
                   <div>
                     <input
@@ -100,7 +100,7 @@ const Registration = function () {
                     />
                   </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group register-form-group">
                   <label for="inputPassword">Password</label>
                   <div>
                     <input
@@ -114,7 +114,7 @@ const Registration = function () {
                     />
                   </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group register-form-group">
                   <label for="inputConfirmPassword">Confirm Password</label>
                   <div>
                     <input
@@ -133,7 +133,7 @@ const Registration = function () {
                 <label htmlFor="inputAccessLevel">Access Level</label>
                 <select
                   name="accessLevel"
-                  class="custom-select custom-select-sm mb-5"
+                  class="custom-select custom-select-sm mb-2"
                   value={user.accessLevel}
                   onChange={onChangeHandler}
                 >
@@ -141,7 +141,7 @@ const Registration = function () {
                   <option value="ADMINISTRATOR">Administrator</option>
                   <option value="USER">User</option>
                 </select>
-                <div class="form-group row">
+                <div class="form-group register-form-group row">
                   <div class="col-sm-10">
                     <button type="submit" class="btn btn-primary rounded-0">
                       Register

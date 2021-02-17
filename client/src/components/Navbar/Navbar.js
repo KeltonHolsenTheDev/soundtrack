@@ -1,8 +1,18 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext } from "react";
+import { AuthContext } from "../../auth/auth";
+import { NavLink, useHistory } from "react-router-dom";
 import "./Navbar.css";
 
 function Navbar() {
+  const { user, setUser } = useContext(AuthContext);
+  const history = useHistory();
+
+  const handleLogout = function (event) {
+    event.preventDefault();
+    setUser(null);
+    history.push("/login");
+  };
+
   return (
     <nav className="navbar navbar-expand-lg">
       <NavLink className="navbar-brand" exact={true} to="/">
@@ -21,16 +31,35 @@ function Navbar() {
       </button>
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav ml-auto">
-          <li className="nav-item">
-            <NavLink
-              exact={true}
-              className="nav-link"
-              activeClassName="nav-link active"
-              to="/login"
-            >
-              Login
-            </NavLink>
-          </li>
+          {user ? (
+            <li className="nav-item">
+              <a
+                className="nav-link"
+                onClick={(e) => {
+                  handleLogout(e);
+                }}
+                href="/"
+              >
+                Logout
+              </a>
+            </li>
+          ) : (
+            ""
+          )}
+          {user ? (
+            ""
+          ) : (
+            <li className="nav-item">
+              <NavLink
+                exact={true}
+                className="nav-link"
+                activeClassName="nav-link active"
+                to="/login"
+              >
+                Login
+              </NavLink>
+            </li>
+          )}
           <li className="nav-item">
             <NavLink
               exact={true}
@@ -41,16 +70,20 @@ function Navbar() {
               Dashboard
             </NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink
-              exact={true}
-              className="nav-link"
-              activeClassName="nav-link active"
-              to="/register"
-            >
-              Register
-            </NavLink>
-          </li>
+          {user ? (
+            ""
+          ) : (
+            <li className="nav-item">
+              <NavLink
+                exact={true}
+                className="nav-link"
+                activeClassName="nav-link active"
+                to="/register"
+              >
+                Register
+              </NavLink>
+            </li>
+          )}
         </ul>
       </div>
     </nav>

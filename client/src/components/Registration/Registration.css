@@ -1,9 +1,25 @@
 .register-background {
   background: url("../../img/audio-868487_1280.jpg") center;
   background-size: cover;
-  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.register-card-container {
+  align-items: center;
+  z-index: 4;
+}
+
+.register-form-group {
+  margin-bottom: 5px;
 }
 
 .register-card {
-  align-items: center;
+  border-color: rgb(37, 37, 37);
+  border-width: thick;
+}
+
+.register-body {
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
