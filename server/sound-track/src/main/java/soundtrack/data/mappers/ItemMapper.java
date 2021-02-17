@@ -21,6 +21,7 @@ public class ItemMapper implements RowMapper<Item> {
         item.setLocationId(resultSet.getInt("location_id"));
         item.setLocationDescription(resultSet.getString("location_description"));
         item.setBroken(resultSet.getBoolean("is_broken"));
+        item.setNotes(resultSet.getString("notes"));
         return item;
     }
 }
