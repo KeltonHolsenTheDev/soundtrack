@@ -71,4 +71,22 @@ class UserJdbcRepositoryTest {
         assertEquals(kelton.getRoles().get(0), "Sound Board");
     }
 
+    @Test
+    void shouldAddWithRoles() {
+        User addMe = new User(3, "AyDy", "Burling", "aydy@gmail.com", "444-444-4444", AccessLevel.ADMINISTRATOR, "passwordpassword");
+        addMe.setRoles(List.of("Carpenter"));
+        repository.addUser(addMe);
+        User out = repository.findById(3);
+        assertEquals(out.getRoles().get(0), "Carpenter");
+    }
+
+    @Test
+    void shouldUpdateRoles() {
+        User kelton = defaults.get(0);
+        kelton.setRoles(List.of("Carpenter"));
+        repository.update(kelton);
+        User out = repository.findById(1);
+        assertEquals(out.getRoles().get(0), "Carpenter");
+    }
+
 }

@@ -51,11 +51,11 @@ public class UserJdbcRepository implements UserRepository {
                 "inner join user_role ur on u.user_id = ur.user_id " +
                 "inner join role r on r.role_id = ur.role_id " +
                 "where u.user_id = ?;";
-        List<String> roles = jdbcTemplate.query(sql, this::mapString, user.getUserId());
+        List<String> roles = jdbcTemplate.query(sql, this::mapRoleName, user.getUserId());
         user.setRoles(roles);
     }
 
-    private String mapString(ResultSet resultSet, int i) throws SQLException {
+    private String mapRoleName(ResultSet resultSet, int i) throws SQLException {
         return resultSet.getString("role_name");
     }
 
@@ -78,9 +78,41 @@ public class UserJdbcRepository implements UserRepository {
         if (rowsAffected <= 0) {
             return null;
         }
+        addRoles(user.getRoles(), user.getUserId());
 
         user.setUserId(keyHolder.getKey().intValue());
         return user;
+    }
+
+    private void addRoles(List<String> roles, int userId) {
+        for (String role: roles) {
+            //Check if role is already present
+            String sql = "select role_id from role where role_name = ?;";
+            int roleId = jdbcTemplate.query(sql, this::mapRoleId, role).stream().findFirst().orElse(-1);
+
+            //If it isn't, add it
+            if (roleId == -1) {
+                sql = "insert into role (role_name) values (?);";
+                jdbcTemplate.update(sql, role);
+                //Get the id of the role
+                sql = "select role_id from role where role_name = ?;";
+                roleId = jdbcTemplate.query(sql, this::mapRoleId, role).stream().findFirst().orElse(-1);
+            }
+            if (roleId == -1) {
+                //give up. print since this is clearly an internal error
+                System.out.println("Role " + role + " could not be added to user " + userId);
+            }
+            else {
+                //Add the user and role relationship to the bridge table
+                sql = "insert into user_role (user_id, role_id) values (?, ?);";
+                jdbcTemplate.update(sql, userId, roleId);
+            }
+
+        }
+    }
+
+    private int mapRoleId(ResultSet resultSet, int i) throws SQLException {
+        return resultSet.getInt("role_id");
     }
 
     @Override
@@ -93,11 +125,21 @@ public class UserJdbcRepository implements UserRepository {
                 "access_level = ?, " +
                 "password_hash = ? " +
                 "where user_id = ?;";
-        return jdbcTemplate.update(sql, user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhone(), user.getAccessLevel().name(), user.getPassword(), user.getUserId()) > 0;
+        boolean success = jdbcTemplate.update(sql, user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhone(), user.getAccessLevel().name(), user.getPassword(), user.getUserId()) > 0;
+        updateRoles(user.getRoles(), user.getUserId());
+        return success;
+    }
+
+    private void updateRoles(List<String> roles, int userId) {
+        //Delete the user's old roles
+        jdbcTemplate.update("delete from user_role where user_id = ?;", userId);
+        //Add their new roles
+        addRoles(roles, userId);
     }
 
     @Override
     public boolean deleteById(int userId) {
+        jdbcTemplate.update("delete from user_role where user_id = ?;", userId); //delete the user's roles
         return jdbcTemplate.update("delete from system_user where user_id = ?;", userId) > 0;
     }
 }

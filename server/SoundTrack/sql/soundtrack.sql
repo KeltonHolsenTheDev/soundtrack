@@ -114,3 +114,7 @@ create table repair_ticket(
         references system_user(user_id)
 );
 
+select * from system_user;
+
+
+
