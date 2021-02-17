@@ -1,5 +1,6 @@
 package soundtrack.models;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
@@ -11,17 +12,22 @@ public class Item {
     @NotBlank(message = "Item name cannot be null or blank!")
     private String itemName;
 
-    @NotBlank(message = "")
     private String description;
 
-    private String Brand;
+    @NotBlank(message = "Brand cannot be null or blank!")
+    private String brand;
 
+    @NotBlank(message = "Item must have a type")
     private String itemType;
 
+    @NotNull(message = "Item must have a category!")
     private ItemCategory itemCategory;
 
     private int locationId;
 
+    private Location location;
+
+    @NotBlank(message = "If you don't describe where it goes, how will anyone find it?")
     private String locationDescription;
 
     private boolean isBroken;
@@ -32,11 +38,11 @@ public class Item {
 
     }
 
-    public Item(int itemId, @NotBlank(message = "Item name cannot be null or blank!") String itemName, @NotBlank(message = "") String description, String brand, String itemType, ItemCategory itemCategory, int locationId, String locationDescription, boolean isBroken, String notes) {
+    public Item(int itemId, @NotBlank(message = "Item name cannot be null or blank!") String itemName, @NotBlank(message = "") String description, String brand, String itemType, ItemCategory itemCategory, String locationDescription, boolean isBroken, String notes) {
         this.itemId = itemId;
         this.itemName = itemName;
         this.description = description;
-        this.Brand = brand;
+        this.brand = brand;
         this.itemType = itemType;
         this.itemCategory = itemCategory;
         this.locationId = locationId;
@@ -70,11 +76,11 @@ public class Item {
     }
 
     public String getBrand() {
-        return Brand;
+        return brand;
     }
 
     public void setBrand(String brand) {
-        Brand = brand;
+        this.brand = brand;
     }
 
     public String getItemType() {
@@ -123,17 +129,50 @@ public class Item {
         this.notes = notes;
     }
 
+    public int getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
+<<<<<<< HEAD
         return itemId == item.itemId && itemType == item.itemType && isBroken == item.isBroken && Objects.equals(itemName, item.itemName) && Objects.equals(description, item.description) && Objects.equals(Brand, item.Brand) && itemCategory == item.itemCategory && Objects.equals(locationId, item.locationId) && Objects.equals(locationDescription, item.locationDescription) && Objects.equals(notes, item.notes);
+=======
+        return itemId == item.itemId &&
+                locationId == item.locationId &&
+                isBroken == item.isBroken &&
+                Objects.equals(itemName, item.itemName) &&
+                Objects.equals(description, item.description) &&
+                Objects.equals(brand, item.brand) &&
+                Objects.equals(itemType, item.itemType) &&
+                itemCategory == item.itemCategory &&
+                Objects.equals(location, item.location) &&
+                Objects.equals(locationDescription, item.locationDescription) &&
+                Objects.equals(notes, item.notes);
+>>>>>>> main
     }
 
     @Override
     public int hashCode() {
+<<<<<<< HEAD
         return Objects.hash(itemId, itemName, description, Brand, itemType, itemCategory, locationId, locationDescription, isBroken, notes);
+=======
+        return Objects.hash(itemId, itemName, description, brand, itemType, itemCategory, locationId, location, locationDescription, isBroken, notes);
+>>>>>>> main
     }
 }

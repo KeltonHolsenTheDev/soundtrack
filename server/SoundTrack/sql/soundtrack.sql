@@ -61,7 +61,7 @@ create table item (
     description varchar(256) null,
     brand varchar(50) null,
     item_type_id int not null,
-    item_category ENUM('VIDEO','AUDIO','LIGHTING','OTHER') int not null,
+    item_category ENUM('VIDEO','AUDIO','LIGHTING','OTHER') not null,
     location_id int not null,
     location_description varchar(128) not null,
     is_broken boolean not null,
@@ -113,4 +113,8 @@ create table repair_ticket(
 		foreign key (assigned_to)
         references system_user(user_id)
 );
+
+select * from system_user;
+
+
 

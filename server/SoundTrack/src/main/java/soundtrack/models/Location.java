@@ -4,7 +4,7 @@ import javax.validation.constraints.*;
 import java.util.Objects;
 
 public class Location {
-
+    
     private int locationId;
 
     @NotNull(message = "Address cannot be null!")
