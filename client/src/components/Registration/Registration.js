@@ -56,7 +56,7 @@ const Registration = function () {
               <h1 className="card-title mb-3 text-center">Register</h1>
               <form onSubmit={handleSubmit}>
                 <div className="form-group register-form-group">
-                  <label for="formGroupExampleInput">First Name</label>
+                  <label htmlFor="formGroupExampleInput">First Name</label>
                   <input
                     type="text"
                     name="firstName"
@@ -69,7 +69,7 @@ const Registration = function () {
                   />
                 </div>
                 <div className="form-group register-form-group">
-                  <label for="formGroupExampleInput2">Last Name</label>
+                  <label htmlFor="formGroupExampleInput2">Last Name</label>
                   <input
                     type="text"
                     name="lastName"
@@ -82,7 +82,7 @@ const Registration = function () {
                   />
                 </div>
                 <div className="form-group register-form-group">
-                  <label for="formGroupExampleInput">Phone</label>
+                  <label htmlFor="formGroupExampleInput">Phone</label>
                   <input
                     type="tel"
                     name="phone"
@@ -96,7 +96,7 @@ const Registration = function () {
                   />
                 </div>
                 <div className="form-group register-form-group ">
-                  <label for="inputEmail3">Email</label>
+                  <label htmlFor="inputEmail3">Email</label>
                   <div>
                     <input
                       type="email"
@@ -111,7 +111,7 @@ const Registration = function () {
                   </div>
                 </div>
                 <div className="form-group register-form-group">
-                  <label for="inputPassword">Password</label>
+                  <label htmlFor="inputPassword">Password</label>
                   <div>
                     <input
                       type="password"
@@ -126,7 +126,7 @@ const Registration = function () {
                   </div>
                 </div>
                 <div className="form-group register-form-group">
-                  <label for="inputConfirmPassword">Confirm Password</label>
+                  <label htmlFor="inputConfirmPassword">Confirm Password</label>
                   <div>
                     <input
                       type="password"
