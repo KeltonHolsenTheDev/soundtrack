@@ -64,7 +64,7 @@ const Login = function () {
                   </label>
                   <div className="col-sm-9">
                     <input
-                      type="text"
+                      type="email"
                       name="email"
                       className="form-control"
                       id="staticEmail"
