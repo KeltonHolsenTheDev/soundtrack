@@ -19,7 +19,7 @@ import java.util.List;
  * Warning: this class is not guaranteed to control your users.
  */
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin(origins = {"http://localhost:3000","http://127.0.0.1:8081"})
 @RequestMapping("/api/user")
 public class UserController {
 
@@ -47,6 +47,7 @@ public class UserController {
     @PostMapping
     public ResponseEntity<Object> addUser(@RequestBody @Valid User user, BindingResult result) {
         if (result.hasErrors()) {
+            System.out.println(result.getAllErrors().toString());
             return new ResponseEntity<>(result.getAllErrors(), HttpStatus.BAD_REQUEST);
         }
         Result<User> userResult = service.add(user);

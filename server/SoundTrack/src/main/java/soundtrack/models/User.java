@@ -30,7 +30,7 @@ public class User {
     @Size(min = 16, message = "Password must be at least 16 characters")
     private String password;
 
-    @NotEmpty(message = "User must have at least one role!")
+    //@NotEmpty(message = "User must have at least one role!")
     private List<String> roles;
 
     public User() {

@@ -78,9 +78,14 @@ public class UserJdbcRepository implements UserRepository {
         if (rowsAffected <= 0) {
             return null;
         }
+        addRoles(user.getRoles())
 
         user.setUserId(keyHolder.getKey().intValue());
         return user;
+    }
+
+    private void addRoles(List<String> roles) {
+        //TODO: do this
     }
 
     @Override
