@@ -23,10 +23,10 @@
 hs_err_pid*
 
 
-*/application.properties 
+**/application.properties 
 
-server/SoundTrack/.idea/workspace.xml
+server/sound-track/.idea/workspace.xml
 
-server/SoundTrack/.idea
-server/SoundTrack/target
+server/sound-track/.idea
+server/sound-track/target
 .DS_Store
