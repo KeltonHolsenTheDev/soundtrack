@@ -29,6 +29,10 @@ public class UserService {
         return repository.findById(id);
     }
 
+    public User findByEmail(String email) {
+        return repository.findByEmail(email);
+    }
+
     public Result<User> add(User user) {
         Result<User> result = validate(user);
         if (!result.isSuccess()) {

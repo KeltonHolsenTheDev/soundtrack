@@ -42,6 +42,17 @@ public class UserJdbcRepository implements UserRepository {
         return user;
     }
 
+    @Override
+    public User findByEmail(String email) {
+        final String sql = "select user_id, first_name, last_name, email, phone, access_level, password_hash from system_user where user_id = ?;";
+        User user = jdbcTemplate.query(sql, new UserMapper(), email).stream().findFirst().orElse(null);
+        if (user == null) {
+            return null;
+        }
+        attachRoles(user);
+        return user;
+    }
+
     /**
      * Gets all roles for a given user and attaches them to that user
      * @param user: the user to find the roles for
