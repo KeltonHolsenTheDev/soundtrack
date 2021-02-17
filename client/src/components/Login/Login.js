@@ -30,7 +30,7 @@ const Login = function () {
       lastName: "Michael",
       phone: "999-999-9999",
       email: login.email,
-      accessLevel: "Access Level: Admininstrator",
+      accessLevel: "Access Level: Administrator",
       password: login.password,
       roles: [],
     };

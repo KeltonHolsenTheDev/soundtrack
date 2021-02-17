@@ -129,14 +129,6 @@ public class Item {
         this.notes = notes;
     }
 
-    public int getLocationId() {
-        return locationId;
-    }
-
-    public void setLocationId(int locationId) {
-        this.locationId = locationId;
-    }
-
     public Location getLocation() {
         return location;
     }
@@ -150,9 +142,6 @@ public class Item {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
-<<<<<<< HEAD
-        return itemId == item.itemId && itemType == item.itemType && isBroken == item.isBroken && Objects.equals(itemName, item.itemName) && Objects.equals(description, item.description) && Objects.equals(Brand, item.Brand) && itemCategory == item.itemCategory && Objects.equals(locationId, item.locationId) && Objects.equals(locationDescription, item.locationDescription) && Objects.equals(notes, item.notes);
-=======
         return itemId == item.itemId &&
                 locationId == item.locationId &&
                 isBroken == item.isBroken &&
@@ -164,15 +153,10 @@ public class Item {
                 Objects.equals(location, item.location) &&
                 Objects.equals(locationDescription, item.locationDescription) &&
                 Objects.equals(notes, item.notes);
->>>>>>> main
     }
 
     @Override
     public int hashCode() {
-<<<<<<< HEAD
-        return Objects.hash(itemId, itemName, description, Brand, itemType, itemCategory, locationId, locationDescription, isBroken, notes);
-=======
         return Objects.hash(itemId, itemName, description, brand, itemType, itemCategory, locationId, location, locationDescription, isBroken, notes);
->>>>>>> main
     }
 }

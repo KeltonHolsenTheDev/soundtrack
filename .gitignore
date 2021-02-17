@@ -28,4 +28,5 @@ hs_err_pid*
 server/SoundTrack/.idea/workspace.xml
 
 server/SoundTrack/.idea
+server/SoundTrack/target
 .DS_Store
