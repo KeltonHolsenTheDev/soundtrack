@@ -38,7 +38,10 @@ public class Item {
 
     }
 
-    public Item(int itemId, @NotBlank(message = "Item name cannot be null or blank!") String itemName, @NotBlank(message = "") String description, String brand, String itemType, ItemCategory itemCategory, String locationDescription, boolean isBroken, String notes) {
+    public Item(int itemId, @NotBlank(message = "Item name cannot be null or blank!") String itemName,
+                @NotBlank(message = "") String description, String brand, String itemType,
+                ItemCategory itemCategory, int locationId, Location location, String locationDescription,
+                boolean isBroken, String notes) {
         this.itemId = itemId;
         this.itemName = itemName;
         this.description = description;
@@ -105,6 +108,14 @@ public class Item {
 
     public void setLocationId(int locationId) { this.locationId = locationId;}
 
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
     public String getLocationDescription() {
         return locationDescription;
     }
@@ -129,14 +140,6 @@ public class Item {
         this.notes = notes;
     }
 
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -157,6 +160,7 @@ public class Item {
 
     @Override
     public int hashCode() {
-        return Objects.hash(itemId, itemName, description, brand, itemType, itemCategory, locationId, location, locationDescription, isBroken, notes);
+        return Objects.hash(itemId, itemName, description, brand, itemType, itemCategory,
+                locationId, location, locationDescription, isBroken, notes);
     }
 }
