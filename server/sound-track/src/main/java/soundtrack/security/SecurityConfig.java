@@ -27,9 +27,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 
         http.authorizeRequests()
+                //If one of the below methods is giving you grief about logging in, just replace the .hasRole([role]) with a .permitAll()
+                //Just make sure you put it back how it was when you're done :)
                 .antMatchers("/login", "/registration").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/user").hasIpAddress("127.0.0.1") //we will eventually want to change this
-                .antMatchers("/api/location", "/api/location/*").hasRole("ADMINISTRATOR")
+                .antMatchers(HttpMethod.GET, "/api/location", "/api/location/*").hasAnyRole("USER", "ADMINISTRATOR")
+                .antMatchers(HttpMethod.GET, "/api/item", "/api/item/*").hasAnyRole("USER", "ADMINISTRATOR")
+                .antMatchers("/api/user/{userId}").access("@webSecurity.checkUserId(authentication, #userId)")
+                .antMatchers(HttpMethod.GET, "/api/user", "/api/user/*").hasAnyRole("ADMINISTRATOR")
+                .antMatchers(HttpMethod.POST).hasAnyRole("ADMINISTRATOR")
+                .antMatchers(HttpMethod.PUT).hasAnyRole("ADMINISTRATOR")
+                .antMatchers(HttpMethod.DELETE).hasAnyRole("ADMINISTRATOR")
                 .antMatchers("**/").denyAll()
                 .and()
                 .addFilter(new JwtRequestFilter(authenticationManager(), converter)) // 3

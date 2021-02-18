@@ -8,20 +8,22 @@ GET {{url}} HTTP/1.1
 
 ## Testing find user by id
 GET {{url}}/1 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3VuZC10cmFjayIsInN1YiI6ImtlbHRvbi5ob2xzZW5AZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiS2VsdG9uIiwibGFzdE5hbWUiOiJIb2xzZW4iLCJwaG9uZSI6IjEyMy0xMjMtMTIzNCIsImFjY2VzcyI6IkFETUlOSVNUUkFUT1IiLCJyb2xlcyI6WyJhdiIsImF2IiwidGVjaCIsInRlY2giXSwiZXhwIjoxNjEzNjY4NTU0fQ.gmL3mk6vuHNYw05XMaxuOPoaLtbYOoByppcbvVfrKPw
 
 ###
 
 ## Testing add a user
 POST {{url}} HTTP/1.1
 Content-Type: application/json
+Authorization: "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3VuZC10cmFjayIsInN1YiI6ImtlbHRvbi5ob2xzZW5AZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiS2VsdG9uIiwibGFzdE5hbWUiOiJIb2xzZW4iLCJwaG9uZSI6IjEyMy0xMjMtMTIzNCIsImFjY2VzcyI6IkFETUlOSVNUUkFUT1IiLCIwIjoiYXYiLCIxIjoiYXYiLCIyIjoidGVjaCIsIjMiOiJ0ZWNoIiwiZXhwIjoxNjEzNjY4MTA4fQ.bDepX7ip_6eX7mKuv-vW7_qwpMyZ0QFRQkUCB2VNU5A"
 
 {
-    "firstName": "Kelton",
-    "lastName": "Holsen",
-    "email": "kelton.holsen@gmail.com",
+    "firstName": "Kelto",
+    "lastName": "Holse",
+    "email": "kelto.holser@gmail.com",
     "phone": "123-123-1234",
     "accessLevel": "USER",
-    "password": "keltonholsenholsenkelton",
+    "password": "keltonolsenholsenkelton",
     "roles": [
         "tech", "av"
     ]
@@ -34,7 +36,7 @@ PUT {{url}}/1 HTTP/1.1
 Content-Type: application/json
 
 {
-    "userId": 1,
+    "userId": 3,
     "firstName": "AyDy",
     "lastName": "Burling",
     "email": "aydy.burling@gmail.com",

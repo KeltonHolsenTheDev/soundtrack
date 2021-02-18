@@ -38,7 +38,7 @@ public class JwtConverter {
                 .claim("access", access)
                 // you should never return a password or hashed password back to the client
 //                .claim("password", user.getPassword())
-                .addClaims(roleMap)
+                .claim("roles", user.getRoles())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_MILLIS))
                 .signWith(key)
                 .compact();
@@ -64,11 +64,7 @@ public class JwtConverter {
             String lastName = (String) jws.getBody().get("lastName");
             String phone = (String) jws.getBody().get("phone");
 //            String password = (String) jws.getBody().get("password"); //this may be a bad practice and need changing idk
-            HashMap<String, String> hashRoles = (HashMap<String, String>)jws.getBody().get("roles");
-            List<String> roles = new ArrayList<>();
-            for (Map.Entry<String, String> e: hashRoles.entrySet()) {
-                roles.add(e.getValue());
-            }
+            List<String> roles = (List<String>) jws.getBody().get("roles");
             User user = new User();
             user.setFirstName(firstName);
             user.setLastName(lastName);

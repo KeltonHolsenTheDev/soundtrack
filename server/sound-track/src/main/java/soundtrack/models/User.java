@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+//we might make this extend one of the Spring Security User classes if it becomes a problem
 public class User {
 
     private int userId;
