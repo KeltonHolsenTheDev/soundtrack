@@ -38,6 +38,7 @@ public class AuthController {
         try {
             Authentication authentication = authenticationManager.authenticate(authToken); //This is where the error gets thrown
             if (authentication.isAuthenticated()) {
+                System.out.println(authentication.getPrincipal());
                 org.springframework.security.core.userdetails.User userDetails =
                         (org.springframework.security.core.userdetails.User)authentication.getPrincipal();
 

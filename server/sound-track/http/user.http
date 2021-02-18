@@ -3,27 +3,26 @@
 
 ## Testing find all user
 GET {{url}} HTTP/1.1
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3VuZC10cmFjayIsInN1YiI6ImtlbHRvbi5ob2xzZW5AZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiS2VsdG9uIiwibGFzdE5hbWUiOiJIb2xzZW4iLCJwaG9uZSI6IjEyMy0xMjMtMTIzNCIsImFjY2VzcyI6IkFETUlOSVNUUkFUT1IiLCJyb2xlcyI6WyJhdiIsImF2IiwidGVjaCIsInRlY2giXSwiZXhwIjoxNjEzNjcwMDQxfQ.sPpQGCIhBYJ7UPmV0-U1yngKBx7bZGlT0S_9zn9Mc7s
 ###
 
 ## Testing find user by id
-GET {{url}}/1 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3VuZC10cmFjayIsInN1YiI6ImtlbHRvbi5ob2xzZW5AZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiS2VsdG9uIiwibGFzdE5hbWUiOiJIb2xzZW4iLCJwaG9uZSI6IjEyMy0xMjMtMTIzNCIsImFjY2VzcyI6IkFETUlOSVNUUkFUT1IiLCJyb2xlcyI6WyJhdiIsImF2IiwidGVjaCIsInRlY2giXSwiZXhwIjoxNjEzNjY4NTU0fQ.gmL3mk6vuHNYw05XMaxuOPoaLtbYOoByppcbvVfrKPw
-
+GET {{url}}/2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3VuZC10cmFjayIsInN1YiI6ImtlbHRvbi5ob2xzZW5AZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiS2VsdG9uIiwibGFzdE5hbWUiOiJIb2xzZW4iLCJwaG9uZSI6IjEyMy0xMjMtMTIzNCIsImFjY2VzcyI6IkFETUlOSVNUUkFUT1IiLCJyb2xlcyI6WyJhdiIsImF2IiwidGVjaCIsInRlY2giXSwiZXhwIjoxNjEzNjcwMzc3fQ.ieJG6isF38DtuWb-GlinhTlNwFoyW0WqVqWpmV04xTE
 ###
 
 ## Testing add a user
 POST {{url}} HTTP/1.1
 Content-Type: application/json
-Authorization: "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3VuZC10cmFjayIsInN1YiI6ImtlbHRvbi5ob2xzZW5AZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiS2VsdG9uIiwibGFzdE5hbWUiOiJIb2xzZW4iLCJwaG9uZSI6IjEyMy0xMjMtMTIzNCIsImFjY2VzcyI6IkFETUlOSVNUUkFUT1IiLCIwIjoiYXYiLCIxIjoiYXYiLCIyIjoidGVjaCIsIjMiOiJ0ZWNoIiwiZXhwIjoxNjEzNjY4MTA4fQ.bDepX7ip_6eX7mKuv-vW7_qwpMyZ0QFRQkUCB2VNU5A"
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3VuZC10cmFjayIsInN1YiI6ImtlbHRvbi5ob2xzZW5AZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiS2VsdG9uIiwibGFzdE5hbWUiOiJIb2xzZW4iLCJwaG9uZSI6IjEyMy0xMjMtMTIzNCIsImFjY2VzcyI6IkFETUlOSVNUUkFUT1IiLCJyb2xlcyI6WyJhdiIsImF2IiwidGVjaCIsInRlY2giXSwiZXhwIjoxNjEzNjcwNzE5fQ.GRoLBaOzCKnC__mvR5wW16YO7zOfm6bIcgVzo4SmW5Y
 
 {
     "firstName": "Kelto",
     "lastName": "Holse",
-    "email": "kelto.holser@gmail.com",
+    "email": "keltob.holser@gmail.com",
     "phone": "123-123-1234",
     "accessLevel": "USER",
-    "password": "keltonolsenholsenkelton",
+    "password": "keltonholsenholsenkelton",
     "roles": [
         "tech", "av"
     ]
@@ -32,8 +31,10 @@ Authorization: "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3VuZC10cmFjayIsInN1YiI6ImtlbHR
 ###
 
 ## Testing update a user
-PUT {{url}}/1 HTTP/1.1
+PUT {{url}}/3 HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3VuZC10cmFjayIsInN1YiI6ImtlbHRvbi5ob2xzZW5AZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiS2VsdG9uIiwibGFzdE5hbWUiOiJIb2xzZW4iLCJwaG9uZSI6IjEyMy0xMjMtMTIzNCIsImFjY2VzcyI6IkFETUlOSVNUUkFUT1IiLCJyb2xlcyI6WyJhdiIsImF2IiwidGVjaCIsInRlY2giXSwiZXhwIjoxNjEzNjY4ODc2fQ.Eg3RXodkOz0RH6ypOtuw749MWW_crxCXJNpeuXncnkg
+
 
 {
     "userId": 3,

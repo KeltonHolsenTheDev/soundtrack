@@ -24,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+        http.csrf().disable();;
 
         http.authorizeRequests()
                 //If one of the below methods is giving you grief about logging in, just replace the .hasRole([role]) with a .permitAll()
@@ -32,15 +32,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login", "/registration").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/location", "/api/location/*").hasAnyRole("USER", "ADMINISTRATOR")
                 .antMatchers(HttpMethod.GET, "/api/item", "/api/item/*").hasAnyRole("USER", "ADMINISTRATOR")
-                .antMatchers("/api/user/{userId}").access("@webSecurity.checkUserId(authentication, #userId)")
                 .antMatchers(HttpMethod.GET, "/api/user", "/api/user/*").hasAnyRole("ADMINISTRATOR")
-                .antMatchers(HttpMethod.POST).hasAnyRole("ADMINISTRATOR")
+                .antMatchers("/api/user/{userId}").access("@webSecurity.checkUserId(authentication, #userId)")
+                .antMatchers(HttpMethod.POST, "/api/user").hasRole("ADMINISTRATOR")
                 .antMatchers(HttpMethod.PUT).hasAnyRole("ADMINISTRATOR")
                 .antMatchers(HttpMethod.DELETE).hasAnyRole("ADMINISTRATOR")
-                .antMatchers("**/").denyAll()
+                .antMatchers("/**").denyAll()
                 .and()
                 .addFilter(new JwtRequestFilter(authenticationManager(), converter)) // 3
-                .sessionManagement() // 4
+                .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 

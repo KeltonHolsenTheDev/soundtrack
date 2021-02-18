@@ -17,6 +17,7 @@ public class WebSecurity {
 
     public boolean checkUserId(Authentication authentication, int userId) {
         String email = (String) authentication.getPrincipal();
+        System.out.println(email);
         User user = service.findByEmail(email);
         if (user == null) {
             return false;
