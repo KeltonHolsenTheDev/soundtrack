@@ -45,7 +45,7 @@ public class UserJdbcRepository implements UserRepository {
 
     @Override
     public User findByEmail(String email) {
-        final String sql = "select user_id, first_name, last_name, email, phone, access_level, password_hash from system_user where user_id = ?;";
+        final String sql = "select user_id, first_name, last_name, email, phone, access_level, password_hash from system_user where email = ?;";
         User user = jdbcTemplate.query(sql, new UserMapper(), email).stream().findFirst().orElse(null);
         if (user == null) {
             return null;

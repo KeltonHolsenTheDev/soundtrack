@@ -38,7 +38,10 @@ public class AuthController {
         try {
             Authentication authentication = authenticationManager.authenticate(authToken); //This is where the error gets thrown
             if (authentication.isAuthenticated()) {
-                User user = (User)authentication.getPrincipal();
+                org.springframework.security.core.userdetails.User userDetails =
+                        (org.springframework.security.core.userdetails.User)authentication.getPrincipal();
+
+                User user = userService.findByEmail(userDetails.getUsername());
 
                 String jwtToken = jwtConverter.getTokenFromUser(user);
 
