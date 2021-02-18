@@ -39,7 +39,14 @@ const Registration = function () {
           history.push("/");
         })
         .catch(function (error) {
-          console.log(error);
+          console.log(error.response);
+          for (let message of error.response.data) {
+            if (message.defaultMessage) {
+              alert(message.defaultMessage);
+            } else {
+              alert(message);
+            }
+          }
         });
     } else {
       console.log("Passwords must match");
