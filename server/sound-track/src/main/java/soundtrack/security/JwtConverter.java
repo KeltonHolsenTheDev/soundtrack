@@ -32,10 +32,10 @@ public class JwtConverter {
                 .claim("lastName", user.getLastName())
                 .claim("phone", user.getPhone())
                 .claim("access", access)
-                .claim("authorization", List.of(access))
+                .claim("authorization", user.getAuthorities())
                 // you should never return a password or hashed password back to the client
 //                .claim("password", user.getPassword())
-                //.claim("roles", user.getRoles())
+                .claim("roles", user.getRoles())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_MILLIS))
                 .signWith(key)
                 .compact();
@@ -61,13 +61,14 @@ public class JwtConverter {
             String lastName = (String) jws.getBody().get("lastName");
             String phone = (String) jws.getBody().get("phone");
 //            String password = (String) jws.getBody().get("password"); //this may be a bad practice and need changing idk
-            //List<String> roles = (List<String>) jws.getBody().get("roles");
+            List<String> roles = (List<String>) jws.getBody().get("roles");
             User user = new User();
             user.setFirstName(firstName);
             user.setLastName(lastName);
             user.setEmail(email);
             user.setPhone(phone);
-            //user.setRoles(roles);
+            user.setRoles(roles);
+            user.addAuthority(authority);
 //            user.setPassword(password);
             user.setAccessLevel(AccessLevel.valueOf(authStr));
             return user;

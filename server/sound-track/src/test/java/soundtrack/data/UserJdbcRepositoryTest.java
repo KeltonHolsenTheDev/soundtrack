@@ -26,8 +26,8 @@ class UserJdbcRepositoryTest {
     }
 
     private static List<User> defaults = List.of(
-            new User(1, "Kelton", "Holsen", "keltonholsen@gmail.com", "555-555-5555", AccessLevel.ADMINISTRATOR, "swordfishfishfish"),
-            new User(2, "Artemis", "Cat", "artemis@gmail.com", "777-777-7777", AccessLevel.USER, "meowmeowmeowmeow")
+            new User(1, "Kelton", "Holsen", "keltonholsen@gmail.com", "555-555-5555", AccessLevel.ROLE_ADMINISTRATOR, "swordfishfishfish"),
+            new User(2, "Artemis", "Cat", "artemis@gmail.com", "777-777-7777", AccessLevel.ROLE_USER, "meowmeowmeowmeow")
     );
 
     @Test
@@ -46,14 +46,14 @@ class UserJdbcRepositoryTest {
 
     @Test
     void shouldAdd() {
-        User addMe = new User(3, "AyDy", "Burling", "aydy@gmail.com", "444-444-4444", AccessLevel.ADMINISTRATOR, "passwordpassword");
+        User addMe = new User(3, "AyDy", "Burling", "aydy@gmail.com", "444-444-4444", AccessLevel.ROLE_ADMINISTRATOR, "passwordpassword");
         assertEquals(addMe, repository.addUser(addMe));
         assertEquals(repository.findAll().size(), 3);
     }
 
     @Test
     void shouldUpdate() {
-        User newKelton = new User(1, "Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ADMINISTRATOR, "swordfshfshfsh");
+        User newKelton = new User(1, "Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ROLE_ADMINISTRATOR, "swordfshfshfsh");
         assertTrue(repository.update(newKelton));
         assertEquals(newKelton, repository.findById(1));
     }
@@ -73,7 +73,7 @@ class UserJdbcRepositoryTest {
 
     @Test
     void shouldAddWithRoles() {
-        User addMe = new User(3, "AyDy", "Burling", "aydy@gmail.com", "444-444-4444", AccessLevel.ADMINISTRATOR, "passwordpassword");
+        User addMe = new User(3, "AyDy", "Burling", "aydy@gmail.com", "444-444-4444", AccessLevel.ROLE_ADMINISTRATOR, "passwordpassword");
         addMe.setRoles(List.of("Carpenter"));
         repository.addUser(addMe);
         User out = repository.findById(3);
