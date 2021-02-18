@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../auth/auth";
-import { useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import "./Dashboard.css";
 
 const Dashboard = function () {
@@ -17,7 +17,7 @@ const Dashboard = function () {
           <div className="card dashboard-card shadow rounded-0 w-100">
             <div className=" d-flex justify-content-center mt-2">
               <img
-                src="https://picsum.photos/70"
+                src="https://picsum.photos/id/237/300"
                 className="rounded-circle dashboard-img card-img-top border border-white "
                 alt="user pic"
               />
@@ -47,9 +47,9 @@ const Dashboard = function () {
               </li>
             </ul>
             <div className="card-body justify-content-center d-flex">
-              <a href="#" className="card-link">
+              <NavLink to="/contacts" className="card-link">
                 <i class="fa fa-address-book fa-4x"></i>
-              </a>
+              </NavLink>
             </div>
           </div>
         </div>

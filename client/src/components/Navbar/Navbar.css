@@ -5,3 +5,7 @@
 .nav-link {
   color: aliceblue;
 }
+
+a:hover {
+  color: greenyellow;
+}

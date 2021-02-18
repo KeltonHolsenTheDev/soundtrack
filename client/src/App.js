@@ -7,6 +7,7 @@ import Registration from "./components/Registration";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Dashboard from "./components/Dashboard";
+import UserContainer from "./components/UserContainer";
 
 const App = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -18,6 +19,9 @@ const App = () => {
         <Switch>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/contacts">
+            <UserContainer />
           </Route>
           <Route path="/register">
             <Registration />

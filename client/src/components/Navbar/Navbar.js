@@ -32,21 +32,6 @@ function Navbar() {
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav ml-auto">
           {user ? (
-            <li className="nav-item">
-              <a
-                className="nav-link"
-                onClick={(e) => {
-                  handleLogout(e);
-                }}
-                href="/"
-              >
-                Logout
-              </a>
-            </li>
-          ) : (
-            ""
-          )}
-          {user ? (
             ""
           ) : (
             <li className="nav-item">
@@ -83,6 +68,21 @@ function Navbar() {
                 Register
               </NavLink>
             </li>
+          )}
+          {user ? (
+            <li className="nav-item">
+              <a
+                className="nav-link"
+                onClick={(e) => {
+                  handleLogout(e);
+                }}
+                href="/"
+              >
+                Logout
+              </a>
+            </li>
+          ) : (
+            ""
           )}
         </ul>
       </div>
