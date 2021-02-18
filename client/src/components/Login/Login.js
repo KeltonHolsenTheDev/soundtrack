@@ -4,7 +4,7 @@ import "./Login.css";
 import { useHistory } from "react-router-dom";
 
 const Login = function () {
-  const { setUser } = useContext(AuthContext);
+  const { loginUser } = useContext(AuthContext);
   const history = useHistory();
   const blankUser = {
     email: "",
@@ -18,24 +18,24 @@ const Login = function () {
     updatedUser[event.target.name] = event.target.value;
 
     setLogin(updatedUser);
-    console.log(updatedUser);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    loginUser(login, history);
     // hard-coded for demonstration until authentication is available
-    const blankUser = {
-      id: 0,
-      firstName: "George",
-      lastName: "Michael",
-      phone: "999-999-9999",
-      email: login.email,
-      accessLevel: "Access Level: Administrator",
-      password: login.password,
-      roles: [],
-    };
-    setUser(blankUser);
-    history.push("/");
+    // const blankUser = {
+    //   id: 0,
+    //   firstName: "George",
+    //   lastName: "Michael",
+    //   phone: "999-999-9999",
+    //   email: login.email,
+    //   accessLevel: "Access Level: Administrator",
+    //   password: login.password,
+    //   roles: [],
+    // };
+    // setUser(blankUser);
+    // history.push("/");
   };
 
   return (
