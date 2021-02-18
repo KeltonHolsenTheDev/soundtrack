@@ -25,7 +25,7 @@ class UserServiceTest {
 
     @Test
     void shouldAddValidUser() {
-        User kelton = new User("Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ADMINISTRATOR, "swordfishfishfish");
+        User kelton = new User("Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ROLE_ADMINISTRATOR, "swordfishfishfish");
         kelton.setRoles(List.of("The Boss"));
         User mockOut = kelton;
 
@@ -38,7 +38,7 @@ class UserServiceTest {
 
     @Test
     void shouldNotAddUserWithNoRoles() {
-        User kelton = new User("Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ADMINISTRATOR, "swordfishfishfish");
+        User kelton = new User("Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ROLE_ADMINISTRATOR, "swordfishfishfish");
         User mockOut = kelton;
 
         when(repository.addUser(kelton)).thenReturn(mockOut);
@@ -49,7 +49,7 @@ class UserServiceTest {
 
     @Test
     void shouldNotAddUserWithDuplicateEmail() {
-        User kelton = new User("Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ADMINISTRATOR, "swordfishfishfish");
+        User kelton = new User("Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ROLE_ADMINISTRATOR, "swordfishfishfish");
         kelton.setRoles(List.of("The Boss"));
         User mockOut = kelton;
 
@@ -68,7 +68,7 @@ class UserServiceTest {
 
     @Test
     void shouldUpdate() {
-        User kelton = new User(1, "Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ADMINISTRATOR, "swordfishfishfish");
+        User kelton = new User(1, "Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ROLE_ADMINISTRATOR, "swordfishfishfish");
         kelton.setRoles(List.of("The Boss"));
         User newKelton = kelton;
         newKelton.setPassword("artemisisthebestcat98");
@@ -82,14 +82,14 @@ class UserServiceTest {
 
     @Test
     void shouldNotUpdateToDuplicateEmail() {
-        User kelton = new User(1, "Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ADMINISTRATOR, "swordfishfishfish");
+        User kelton = new User(1, "Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ROLE_ADMINISTRATOR, "swordfishfishfish");
         kelton.setRoles(List.of("The Boss"));
         User newKelton = kelton;
         newKelton.setPassword("artemisisthebestcat98");
         newKelton.setEmail("keltonholsen@gmail.com");
 
         when(repository.update(newKelton)).thenReturn(true);
-        when(repository.findAll()).thenReturn(List.of(new User(2, "Kelton", "Holsen", "keltonholsen@gmail.com", "555-455-5555", AccessLevel.ADMINISTRATOR, "swordfishfishfish")));
+        when(repository.findAll()).thenReturn(List.of(new User(2, "Kelton", "Holsen", "keltonholsen@gmail.com", "555-455-5555", AccessLevel.ROLE_ADMINISTRATOR, "swordfishfishfish")));
 
         Result<User> actual = service.update(newKelton);
         assertFalse(actual.isSuccess());
@@ -97,7 +97,7 @@ class UserServiceTest {
 
     @Test
     void shouldNotUpdateToNoRoles() {
-        User kelton = new User(1, "Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ADMINISTRATOR, "swordfishfishfish");
+        User kelton = new User(1, "Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ROLE_ADMINISTRATOR, "swordfishfishfish");
         kelton.setRoles(List.of("The Boss"));
         User newKelton = kelton;
         newKelton.setPassword("artemisisthebestcat98");
