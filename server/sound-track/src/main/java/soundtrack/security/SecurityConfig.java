@@ -32,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //If one of the below methods is giving you grief about logging in, just replace the .hasRole([role]) with a .permitAll()
                 //Just make sure you put it back how it was when you're done :)
                 .antMatchers("/login", "/registration").permitAll()
+                .antMatchers("/**").permitAll() //comment this out unless you're testing controllers
                 .antMatchers(HttpMethod.GET, "/api/location", "/api/location/*").hasAnyRole("USER", "ADMINISTRATOR")
                 .antMatchers(HttpMethod.GET, "/api/item", "/api/item/*").hasAnyRole("USER", "ADMINISTRATOR")
                 .antMatchers("/api/user/{userId}").access("@webSecurity.checkUserId(authentication, #userId)")
@@ -39,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST).hasRole("ADMINISTRATOR")
                 .antMatchers(HttpMethod.PUT).hasAnyRole("ADMINISTRATOR")
                 .antMatchers(HttpMethod.DELETE).hasAnyRole("ADMINISTRATOR")
-                .antMatchers("/**").denyAll()
+                //.antMatchers("/**").denyAll() //when testing controllers ONLY, comment this out
                 .and()
                 .addFilter(new JwtRequestFilter(authenticationManager(), converter)) // 3
                 .sessionManagement()
