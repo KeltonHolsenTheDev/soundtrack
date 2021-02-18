@@ -116,6 +116,8 @@ create table repair_ticket(
 
 select * from system_user;
 
+select * from location;
+
 select * from role;
 
 select * from system_user u

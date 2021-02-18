@@ -1,21 +1,33 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../auth/auth";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import LocationCard from "./LocationCard";
 
-import ".Location.css";
+import "./Location.css";
 
 const Location = function () {
   const { setLocation } = useContext(AuthContext);
   const history = useHistory();
   const blankLocation = {
     id: 0,
-    address="",
-    name=""
+    address: "",
+    name: ""
   };
 
   const [newLocation, setNewLocation] = useState(blankLocation);
+  const [locations, setLocations] = useState([]);
+
+  useEffect(() => {
+    axios.get("/api/location").then(
+      (response) => {
+        setLocations(response.data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }, []);
 
   const onChangeHandler = (event) => {
     const updatedLocation = { ...newLocation };
@@ -27,13 +39,16 @@ const Location = function () {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-        .post("/api/Location", newLocation)
+        .post("/api/location", newLocation)
         .then(function (response) {
-          setLocation(response.data);
-          history.push("/");
+          console.log(response.data);
+          setLocations([...locations, response.data]);
         })
         .catch(function (error) {
           console.log(error.response);
+          if (error.response == undefined) {
+            return;
+          }
           for (let message of error.response.data) {
             if (message.defaultMessage) {
               alert(message.defaultMessage);
@@ -46,22 +61,31 @@ const Location = function () {
 
   const handleEdit = function (event, location, locationId) {
     event.preventDefault();
-    console.log(`editing location ${user.locationId}`);
+    console.log(`editing location ${locationId}`);
     axios
       .put(`/api/location/${locationId}`, location)
       .then(function (response) {
-        setLocation(response.data);
-        history.push("/");
+        console.log(response.data);
+        let newLocations = [...locations];
+        for (let i = 0; i < newLocations.length; i++) {
+          if (locations[i].locationId == locationId) {
+            newLocations.splice(i, 1, location);
+          }
+        }
+        setLocations([...newLocations]);
       })
       .catch(function (error) {
         console.log(error.response);
-          for (let message of error.response.data) {
-            if (message.defaultMessage) {
-              alert(message.defaultMessage);
-            } else {
-              alert(message);
-            }
+        if (error.response == undefined) {
+          return;
+        }
+        for (let message of error.response.data) {
+          if (message.defaultMessage) {
+            alert(message.defaultMessage);
+          } else {
+            alert(message);
           }
+        }
       });
   };
 
@@ -71,7 +95,7 @@ const Location = function () {
     axios
       .delete(`/api/location/${locationId}`)
       .then(function (response) {
-        history.push("/");
+        setLocations(locations.filter(l => l.locationId != locationId));
       })
       .catch(function (error) {
         console.log(error.response);
@@ -92,7 +116,7 @@ const Location = function () {
         <div className="col-6 register-card-container d-flex mt-3">
           <div className="card shadow-lg px-4 w-100 rounded-0 register-card">
             <div className="card-body register-body">
-              <h1 className="card-title mb-3 text-center">Add Location to Database</h1>
+              <h1 className="card-title mb-3 text-center">Location Add/Update</h1>
               <form onSubmit={handleSubmit}>
                 <div className="form-group register-form-group">
                   <label htmlFor="formGroupExampleInput">Location Name</label>
@@ -101,7 +125,7 @@ const Location = function () {
                     name="name"
                     className="form-control"
                     id="formGroupExampleInput"
-                    placeholder="Oz Church"
+                    placeholder="Bart's House"
                     onChange={onChangeHandler}
                     value={newLocation.name}
                   />
@@ -113,7 +137,7 @@ const Location = function () {
                     name="address"
                     className="form-control"
                     id="formGroupExampleInput2"
-                    placeholder="123 Corn Street"
+                    placeholder="742 Evergreen Terrace"
                     onChange={onChangeHandler}
                     value={newLocation.address}
                     required
@@ -133,7 +157,7 @@ const Location = function () {
         <div className="col-3"></div>
       </div>
       <div className="row">
-      <table className="table table-hover table-striped">
+      <table className="table table-hover table-dark">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -142,7 +166,7 @@ const Location = function () {
             <th scope="col"></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody >
           {locations.map((location) => {
             return (
               <LocationCard
@@ -150,7 +174,9 @@ const Location = function () {
                 name={location.name}
                 address={location.address}
                 handleEdit={(event) => {
-                  handleEdit(event, location);
+                  let loc = newLocation;
+                  loc.locationId = location.locationId;
+                  handleEdit(event, loc, location.locationId);
                 }}
                 handleDelete={(event) => {
                   handleDelete(event, location.locationId);

@@ -51,6 +51,11 @@ const Dashboard = function () {
                 <i class="fa fa-address-book fa-4x"></i>
               </NavLink>
             </div>
+            <div className="card-body justify-content-center d-flex">
+              <NavLink to="/location" className="card-link">
+                <i class="fa fa-home fa-4x"></i>
+              </NavLink>
+            </div>
           </div>
         </div>
         <div className="col dashboard-col p-0">{/* event card here */}</div>
