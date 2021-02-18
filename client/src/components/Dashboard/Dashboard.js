@@ -17,7 +17,7 @@ const Dashboard = function () {
           <div className="card dashboard-card shadow rounded-0 w-100">
             <div className=" d-flex justify-content-center mt-2">
               <img
-                src="https://picsum.photos/id/237/300"
+                src="https://picsum.photos/id/237/400"
                 className="rounded-circle dashboard-img card-img-top border border-white "
                 alt="user pic"
               />

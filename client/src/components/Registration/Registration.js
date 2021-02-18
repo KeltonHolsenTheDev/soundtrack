@@ -1,12 +1,11 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../../auth/auth";
-import axios from "axios";
 import { useHistory } from "react-router-dom";
 
 import "./Registration.css";
 
 const Registration = function () {
-  const { setUser } = useContext(AuthContext);
+  const { registerUser } = useContext(AuthContext);
   const history = useHistory();
   const blankUser = {
     id: 0,
@@ -32,22 +31,23 @@ const Registration = function () {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (newUser.password == confirmPassword) {
-      axios
-        .post("/api/user", newUser)
-        .then(function (response) {
-          setUser(response.data);
-          history.push("/");
-        })
-        .catch(function (error) {
-          console.log(error.response);
-          for (let message of error.response.data) {
-            if (message.defaultMessage) {
-              alert(message.defaultMessage);
-            } else {
-              alert(message);
-            }
-          }
-        });
+      // axios
+      //   .post("/api/user", newUser)
+      //   .then(function (response) {
+      //     setUser(response.data);
+      //     history.push("/");
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error.response);
+      //     for (let message of error.response.data) {
+      //       if (message.defaultMessage) {
+      //         alert(message.defaultMessage);
+      //       } else {
+      //         alert(message);
+      //       }
+      //     }
+      //   });
+      registerUser(newUser, history);
     } else {
       console.log("Passwords must match");
     }
@@ -158,8 +158,8 @@ const Registration = function () {
                   onChange={onChangeHandler}
                 >
                   <option value="">Open this select menu</option>
-                  <option value="ADMINISTRATOR">Administrator</option>
-                  <option value="USER">User</option>
+                  <option value="ROLE_ADMINISTRATOR">Administrator</option>
+                  <option value="ROLE_USER">User</option>
                 </select>
 
                 <div className="form-group register-form-group row">
