@@ -153,7 +153,6 @@ public class Item {
                 Objects.equals(brand, item.brand) &&
                 Objects.equals(itemType, item.itemType) &&
                 itemCategory == item.itemCategory &&
-                Objects.equals(location, item.location) &&
                 Objects.equals(locationDescription, item.locationDescription) &&
                 Objects.equals(notes, item.notes);
     }

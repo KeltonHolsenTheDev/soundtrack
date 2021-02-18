@@ -9,8 +9,11 @@ import soundtrack.models.Item;
 import soundtrack.models.ItemCategory;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -22,11 +25,53 @@ public class ItemJdbcRepository implements ItemRepository{
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    private void attachItemTypes(Item item) {
+        final String sql = "select it.type_name from item_type it " +
+                "inner join item i on i.item_type_id = it.item_type_id;";
+        String type_name = jdbcTemplate.query(sql, this::mapTypeName).stream().findFirst().orElse(null);
+        item.setItemType(type_name);
+    }
+
+    private String mapTypeName(ResultSet resultSet, int i) throws SQLException {
+        return resultSet.getString("type_name");
+    }
+
+    private void attachLocation(Item item) {
+        final String sql = "select l.location_name,  from item_type it " +
+                "inner join item i on i.item_type_id = it.item_type_id;";
+        String type_name = jdbcTemplate.query(sql, this::mapTypeName).stream().findFirst().orElse(null);
+        item.setItemType(type_name);
+    }
+
     @Override
     public List<Item> findAll() {
-        final String sql = "select item_id, item_name, description, brand, item_type, item_category, " +
+        final String sql = "select item_id, item_name, description, brand, item_type_id, item_category, " +
                 "location_id, location_description, is_broken, notes from item;";
-        return jdbcTemplate.query(sql, new ItemMapper());
+        List<Item> items = jdbcTemplate.query(sql, new ItemMapper());
+        items.forEach(this::attachItemTypes);
+        return items;
+    }
+
+    private void addItemType(List<String> typeNames, int itemId) {
+        for (String typeName: typeNames) {
+            String sql = "select item_type_id from item_type where type_name = ?;";
+            int itemTypeId = jdbcTemplate.query(sql, this::mapItemTypeId, typeName).stream().findFirst().orElse(-1);
+
+            if (itemTypeId == -1) {
+                sql = "insert into item_type (type_name) values (?);";
+                jdbcTemplate.update(sql, typeName);
+                sql = "select item_type_id from item_type where type_name = ?;";
+                itemTypeId = jdbcTemplate.query(sql, this::mapItemTypeId, typeName).stream().findFirst().orElse(-1);
+            }
+
+            if (itemTypeId == -1) {
+                System.out.println("Item type " + typeName + "could not be added to item " + itemId);
+            }
+        }
+    }
+
+    private int mapItemTypeId(ResultSet resultSet, int i) throws SQLException {
+        return resultSet.getInt("item_type_id");
     }
 
     @Override
