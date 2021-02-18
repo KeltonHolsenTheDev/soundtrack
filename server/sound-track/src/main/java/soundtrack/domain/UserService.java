@@ -5,6 +5,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import soundtrack.data.UserRepository;
 import soundtrack.models.Location;
@@ -22,8 +23,11 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository repository;
 
-    public UserService(UserRepository repository) {
+    private final PasswordEncoder encoder;
+
+    public UserService(UserRepository repository, PasswordEncoder encoder) {
         this.repository = repository;
+        this.encoder = encoder;
     }
 
     public List<User> findAll() {
@@ -50,6 +54,7 @@ public class UserService implements UserDetailsService {
         if (!result.isSuccess()) {
             return result;
         }
+        user.setPassword(encoder.encode(user.getPassword()));
         User out = repository.addUser(user);
         if (out == null) {
             result.addMessage("Could not add user due to repository error", ResultType.NOT_FOUND);
@@ -65,6 +70,7 @@ public class UserService implements UserDetailsService {
         if (!result.isSuccess()) {
             return result;
         }
+        user.setPassword(encoder.encode(user.getPassword()));
         if (repository.update(user)) {
             result.setPayLoad(user);
         }

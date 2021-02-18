@@ -25,20 +25,18 @@ public class JwtRequestFilter extends BasicAuthenticationFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request,
+    protected void doFilterInternal(HttpServletRequest request, //this has a null UserPrincipal for some reason
                                     HttpServletResponse response,
                                     FilterChain chain) throws IOException, ServletException {
 
-        String authorization = request.getHeader("access");
-        if (authorization != null && authorization.startsWith("Bearer ")) {
 
-            // 3. The value looks okay, confirm it with JwtConverter.
-            User user = converter.getUserFromToken(authorization);
+        String authorization = request.getHeader("Authorization"); //this is null but an exception even if that's ignored
+        if (authorization != null && authorization.startsWith("Bearer ")) {
+            User user = converter.getUserFromToken(authorization); //also ends up being null because authorization is null, so maybe don't do that
             if (user == null) {
                 response.setStatus(403); // Forbidden
             } else {
 
-                // 4. Confirmed. Set auth for this single request.
                 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                         user.getEmail(), null, List.of(new SimpleGrantedAuthority(user.getAccessLevel().name())));
 
@@ -46,7 +44,6 @@ public class JwtRequestFilter extends BasicAuthenticationFilter {
             }
         }
 
-        // 5. Keep the chain going.
-        chain.doFilter(request, response);
+        chain.doFilter(request, response); //This is where the exception gets thrown
     }
 }

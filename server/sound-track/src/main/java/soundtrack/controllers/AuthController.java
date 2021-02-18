@@ -29,15 +29,14 @@ public class AuthController {
         this.jwtConverter = jwtConverter;
     }
 
-    @PostMapping("/authenticate")
+    @PostMapping("/login")
     public ResponseEntity<?> authenticate(@RequestBody Map<String, String> credentials) {
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                credentials.get("email"), credentials.get("password")
+                credentials.get("email"), credentials.get("password") //these are read just fine
         );
 
         try {
-            Authentication authentication = authenticationManager.authenticate(authToken);
-
+            Authentication authentication = authenticationManager.authenticate(authToken); //This is where the error gets thrown
             if (authentication.isAuthenticated()) {
                 User user = (User)authentication.getPrincipal();
 

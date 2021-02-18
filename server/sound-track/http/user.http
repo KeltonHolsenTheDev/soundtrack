@@ -19,9 +19,9 @@ Content-Type: application/json
     "firstName": "Kelton",
     "lastName": "Holsen",
     "email": "kelton.holsen@gmail.com",
-    "phone": "xxx-xxx-xxxx",
+    "phone": "123-123-1234",
     "accessLevel": "USER",
-    "password": "keltonholsen",
+    "password": "keltonholsenholsenkelton",
     "roles": [
         "tech", "av"
     ]
@@ -40,7 +40,7 @@ Content-Type: application/json
     "email": "aydy.burling@gmail.com",
     "phone": "123-456-7890",
     "accessLevel": "USER",
-    "password": "password",
+    "password": "passwordpassword",
     "roles": [
         "pom"
     ]

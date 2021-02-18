@@ -14,20 +14,15 @@ import java.util.*;
 
 @Component
 public class JwtConverter {
-    // 1. Signing key
+    //Neither method in this class is causing the error...because neither of them is run during login anyways due to the null issue
+
     private Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-    // 2. "Configurable" constants
+
     private final String ISSUER = "sound-track";
     private final int EXPIRATION_MINUTES = 15;
     private final int EXPIRATION_MILLIS = EXPIRATION_MINUTES * 60 * 1000;
-    private final UserService service;
-
-    public JwtConverter(UserService service) {
-        this.service = service;
-    }
 
     public String getTokenFromUser(User user) {
-
         String access = user.getAccessLevel().name();
         Map<String, Object> roleMap = new HashMap<>();
         for (int i = 0; i < user.getRoles().size(); i++) {
