@@ -2,6 +2,7 @@
 
 ## Testing find all locations
 GET {{url}} HTTP/1.1
+Authorization: "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3VuZC10cmFjayIsInN1YiI6ImtlbHRvLmhvbHNlQGdtYWlsLmNvbSIsImZpcnN0TmFtZSI6IktlbHRvIiwibGFzdE5hbWUiOiJIb2xzZSIsInBob25lIjoiMTIzLTEyMy0xMjM0IiwiYWNjZXNzIjoiVVNFUiIsIjAiOiJhdiIsIjEiOiJ0ZWNoIiwiZXhwIjoxNjEzNjY4MDU2fQ.X7dg9u8FhUyQTuepU41byxSNVyFajyQtyRt6IKFal44"
 
 ###
 

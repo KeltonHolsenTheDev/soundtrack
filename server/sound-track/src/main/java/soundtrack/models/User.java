@@ -1,10 +1,13 @@
 package soundtrack.models;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+//we might make this extend one of the Spring Security User classes if it becomes a problem
 public class User {
 
     private int userId;
@@ -26,6 +29,8 @@ public class User {
     private String phone;
 
     private AccessLevel accessLevel;
+
+    private List<GrantedAuthority> authorities = new ArrayList<>();
 
     @Size(min = 16, message = "Password must be at least 16 characters")
     private String password;
@@ -117,6 +122,14 @@ public class User {
 
     public void setRoles(List<String> roles) {
         this.roles = roles;
+    }
+
+    public List<GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    public void addAuthority(GrantedAuthority authority) {
+        this.authorities.add(authority);
     }
 
     @Override

@@ -116,5 +116,20 @@ create table repair_ticket(
 
 select * from system_user;
 
+select * from role;
+
+select * from system_user u
+inner join user_role ur on ur.user_id = u.user_id
+inner join role r on r.role_id = ur.role_id;
+
+
+insert into role (role_name) values ("av");
+
+select role_id from role where role_name = "av";
+
+-- insert into user_role (user_id, role_id) values (1, 1);
+
+
+
 
 

@@ -14,7 +14,6 @@ import soundtrack.models.User;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -31,7 +30,7 @@ class UserControllerTest {
 
     @Test
     void shouldAdd() throws Exception {
-        User user = new User( "Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ADMINISTRATOR, "swordfishfishfish");
+        User user = new User( "Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ROLE_ADMINISTRATOR, "swordfishfishfish");
         user.setRoles(List.of("Carpenter"));
         ObjectMapper jsonMapper = new ObjectMapper();
         String jsonIn = jsonMapper.writeValueAsString(user);
@@ -61,7 +60,7 @@ class UserControllerTest {
 
     @Test
     void shouldUpdate() throws Exception {
-        User user = new User( 1, "Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ADMINISTRATOR, "swordfishfishfish");
+        User user = new User( 1, "Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ROLE_ADMINISTRATOR, "swordfishfishfish");
         user.setRoles(List.of("Carpenter"));
         ObjectMapper jsonMapper = new ObjectMapper();
         String jsonIn = jsonMapper.writeValueAsString(user);
@@ -78,7 +77,7 @@ class UserControllerTest {
     @Test
     void shouldNotUpdateWithConflict() throws Exception {
         //no ID
-        User user = new User(  1, "Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ADMINISTRATOR, "swordfishfishfish");
+        User user = new User(  1, "Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ROLE_ADMINISTRATOR, "swordfishfishfish");
         user.setRoles(List.of("Carpenter"));
         ObjectMapper jsonMapper = new ObjectMapper();
         String jsonIn = jsonMapper.writeValueAsString(user);
@@ -94,7 +93,7 @@ class UserControllerTest {
 
     @Test
     void shouldGiveNotFoundIfNotFound() throws Exception {
-        User user = new User( 1, "Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ADMINISTRATOR, "swordfishfishfish");
+        User user = new User( 1, "Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ROLE_ADMINISTRATOR, "swordfishfishfish");
         user.setRoles(List.of("Carpenter"));
         ObjectMapper jsonMapper = new ObjectMapper();
         String jsonIn = jsonMapper.writeValueAsString(user);
