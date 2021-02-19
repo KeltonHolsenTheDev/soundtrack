@@ -12,30 +12,29 @@ public class User {
 
     private int userId;
 
-    @NotNull(message = "First name cannot be null!")
-    @NotBlank(message = "First name cannot be blank")
+    @NotBlank(message = "First name cannot be null or blank!")
     private String firstName;
 
-    @NotNull(message = "Last name cannot be null!")
-    @NotBlank(message = "Last name cannot be blank")
+    @NotBlank(message = "Last name cannot be null or blank!")
     private String lastName;
 
-    @NotNull(message = "Email cannot be null!")
-    @NotBlank(message = "Email cannot be blank")
+    @NotBlank(message = "Email cannot be null or blank!")
     @Email(message = "Email must be a valid email address")
     private String email;
 
     @Pattern(regexp = "\\(?\\d\\d\\d\\)?[ -]?\\d\\d\\d[- ]?\\d\\d\\d\\d", message = "Phone number must be a valid phone number!")
     private String phone;
 
+    @NotNull(message = "Access level cannot be null!")
     private AccessLevel accessLevel;
 
     private List<GrantedAuthority> authorities = new ArrayList<>();
 
+    @NotBlank(message = "Password cannot be null or blank!")
     @Size(min = 16, message = "Password must be at least 16 characters")
     private String password;
 
-    //@NotEmpty(message = "User must have at least one role!")
+    @NotEmpty(message = "User must have at least one role!")
     private List<String> roles;
 
     public User() {

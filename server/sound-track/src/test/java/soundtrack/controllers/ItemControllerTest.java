@@ -21,8 +21,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
-@AutoConfigureMockMvc
+//@SpringBootTest
+//@AutoConfigureMockMvc
 class ItemControllerTest {
 
     @MockBean
@@ -36,8 +36,9 @@ class ItemControllerTest {
 
     @Test
     void shouldAdd() throws Exception {
-        Item item = new Item(1, "Microphone 1", "Bass mic", "Sony", "microphone", ItemCategory.AUDIO,
-                "Shelf A", false, "no notes");
+        Item item = new Item(1, "Microphone 1", "Bass mic", "Sony",
+                "microphone", ItemCategory.AUDIO, 1 ,null,"Shelf A",
+                false, "no notes");
         item.setLocationId(1);
         item.setLocation(new Location(1, "123 Church Street", "The Church"));
         ObjectMapper jsonMapper = new ObjectMapper();
@@ -55,8 +56,9 @@ class ItemControllerTest {
 
     @Test
     void should400ForBadData() throws Exception {
-        Item item = new Item(1, "Microphone 1", "Bass mic", "Sony", "microphone", ItemCategory.AUDIO,
-                "Shelf A", false, "no notes");
+        Item item = new Item(1, "Microphone 1", "Bass mic", "Sony",
+                "microphone", ItemCategory.AUDIO, 1 ,null,"Shelf A",
+                false, "no notes");
         ObjectMapper jsonMapper = new ObjectMapper();
         String jsonIn = jsonMapper.writeValueAsString(item);
         when(itemRepository.add(item)).thenReturn(item);
@@ -71,8 +73,9 @@ class ItemControllerTest {
 
     @Test
     void shouldAllowValidUpdate() throws Exception {
-        Item item = new Item(1, "Microphone 1", "Bass mic", "Sony", "microphone", ItemCategory.AUDIO,
-                "Shelf A", false, "no notes");
+        Item item = new Item(1, "Microphone 1", "Bass mic", "Sony",
+                "microphone", ItemCategory.AUDIO, 1 ,null,"Shelf A",
+                false, "no notes");
         item.setLocationId(1);
         item.setLocation(new Location(1, "123 Church Street", "The Church"));
         ObjectMapper jsonMapper = new ObjectMapper();
@@ -90,8 +93,9 @@ class ItemControllerTest {
 
     @Test
     void shouldNotAllowBadUpdate() throws Exception {
-        Item item = new Item(1, "Microphone 1", "Bass mic", "Sony", "microphone", ItemCategory.AUDIO,
-                "Shelf A", false, "no notes");
+        Item item = new Item(1, "Microphone 1", "Bass mic", "Sony",
+                "microphone", ItemCategory.AUDIO, 1 ,null,"Shelf A",
+                false, "no notes");
         ObjectMapper jsonMapper = new ObjectMapper();
         String jsonIn = jsonMapper.writeValueAsString(item);
         when(itemRepository.update(item)).thenReturn(true);
@@ -106,8 +110,9 @@ class ItemControllerTest {
 
     @Test
     void shouldHandleConflict() throws Exception {
-        Item item = new Item(1, "Microphone 1", "Bass mic", "Sony", "microphone", ItemCategory.AUDIO,
-                "Shelf A", false, "no notes");
+        Item item = new Item(1, "Microphone 1", "Bass mic", "Sony",
+                "microphone", ItemCategory.AUDIO, 1 ,null,"Shelf A",
+                false, "no notes");
         item.setLocationId(1);
         item.setLocation(new Location(1, "123 Church Street", "The Church"));
         ObjectMapper jsonMapper = new ObjectMapper();
@@ -125,8 +130,9 @@ class ItemControllerTest {
 
     @Test
     void shouldReturn404ForNotFound() throws Exception {
-        Item item = new Item(1, "Microphone 1", "Bass mic", "Sony", "microphone", ItemCategory.AUDIO,
-                "Shelf A", false, "no notes");
+        Item item = new Item(1, "Microphone 1", "Bass mic", "Sony",
+                "microphone", ItemCategory.AUDIO, 1 ,null,"Shelf A",
+                false, "no notes");
         item.setLocationId(1);
         item.setLocation(new Location(1, "123 Church Street", "The Church"));
         ObjectMapper jsonMapper = new ObjectMapper();
