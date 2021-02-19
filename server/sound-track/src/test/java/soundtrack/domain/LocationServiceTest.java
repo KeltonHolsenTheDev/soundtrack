@@ -32,14 +32,23 @@ public class LocationServiceTest {
     @Test
     void shouldNotAddLocationWhenAddressIsNull() {
         Location location = makeLocation();
-        location.setAddress("   ");
+        location.setAddress(null);
 
         Result<Location> actual = service.add(location);
         assertEquals(ResultType.INVALID, actual.getType());
     }
 
     @Test
-    void shouldAdd() {
+    void shouldNotAddLocationIfLocationIdIsNotZero() {
+        Location location = makeLocation();
+        location.setLocationId(1);
+
+        Result<Location> actual = service.add(location);
+        assertEquals(ResultType.INVALID, actual.getType());
+    }
+
+    @Test
+    void shouldAddLocation() {
         Location location = makeLocation();
         Location mockOut = makeLocation();
 
@@ -59,7 +68,6 @@ public class LocationServiceTest {
         location.setAddress(null);
         actual = service.update(location);
         assertEquals(ResultType.INVALID, actual.getType());
-
     }
 
     @Test
@@ -71,6 +79,25 @@ public class LocationServiceTest {
         location.setAddress("  ");
         actual = service.update(location);
         assertEquals(ResultType.INVALID, actual.getType());
+    }
+
+    @Test
+    void shouldNotUpdateIfLocationIdIsZeroOrLess() {
+        Location location = makeLocation();
+        Result<Location> actual = service.update(location);
+        location = makeLocation();
+        location.setLocationId(0);
+        actual = service.update(location);
+        assertEquals(ResultType.INVALID, actual.getType());
+    }
+
+    @Test
+    void shouldNotUpdateIfLocationIdNotFound() {
+        Location location = makeLocation();
+        location = makeLocation();
+        location.setLocationId(1);
+        Result<Location> actual = service.update(location);
+        assertEquals(ResultType.NOT_FOUND, actual.getType());
     }
 
     @Test
