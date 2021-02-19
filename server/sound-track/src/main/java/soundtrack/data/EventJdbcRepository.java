@@ -10,7 +10,6 @@ import soundtrack.models.Item;
 import soundtrack.models.User;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -157,14 +156,14 @@ public class EventJdbcRepository implements EventRepository {
     }
 
     private void updateStaff(Event event) {
-        jdbcTemplate.update("delete from event_user role where event_id = ?;", event.getEventId());
+        jdbcTemplate.update("delete from event_user_role where event_id = ?;", event.getEventId());
         addStaff(event.getStaffAndRoles(), event.getEventId());
     }
 
     @Override
-    public boolean deleteEvent(Event event) {
-        jdbcTemplate.update("delete from event_item where event_id = ?;", event.getEventId());
-        jdbcTemplate.update("delete from event_user role where event_id = ?;", event.getEventId());
-        return jdbcTemplate.update("delete from event where event_id = ?;", event.getEventId()) > 0;
+    public boolean deleteById(int eventId) {
+        jdbcTemplate.update("delete from event_item where event_id = ?;", eventId);
+        jdbcTemplate.update("delete from event_user_role where event_id = ?;", eventId);
+        return jdbcTemplate.update("delete from event_ where event_id = ?;", eventId) > 0;
     }
 }

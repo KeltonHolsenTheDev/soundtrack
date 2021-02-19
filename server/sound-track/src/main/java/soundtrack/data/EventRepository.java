@@ -10,5 +10,5 @@ public interface EventRepository {
     Event findByOwner(int ownerId);
     Event addEvent(Event event);
     boolean updateEvent(Event event);
-    boolean deleteEvent(Event event);
+    boolean deleteById(int eventId);
 }
