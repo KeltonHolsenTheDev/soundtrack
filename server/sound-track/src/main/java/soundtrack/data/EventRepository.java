@@ -7,8 +7,8 @@ import java.util.List;
 public interface EventRepository {
     List<Event> findAll();
     Event findById(int eventId);
-    Event findByOwner(int ownerId);
+    List<Event> findByOwner(int ownerId);
     Event addEvent(Event event);
     boolean updateEvent(Event event);
-    boolean deleteEvent(Event event);
+    boolean deleteById(int eventId);
 }
