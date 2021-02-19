@@ -1,0 +1,27 @@
+@url = http://localhost:8080/api/item
+
+GET {{url}} HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3VuZC10cmFjayIsInN1YiI6ImtlbHRvYi5ob2xzZXJAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiS2VsdG9uIiwibGFzdE5hbWUiOiJIb2xzZW4iLCJwaG9uZSI6IjEyMy0xMjMtMTIzNCIsImFjY2VzcyI6IlJPTEVfQURNSU5JU1RSQVRPUiIsImF1dGhvcml6YXRpb24iOltdLCJyb2xlcyI6WyJ0ZWNoIiwiYXYiXSwiZXhwIjoxNjEzNzYzMDI1fQ.TYtOfZMlJcKH3xhdGbbb_JllE30YYP0TxqF4O-ql7Y0
+
+###
+
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3VuZC10cmFjayIsInN1YiI6ImtlbHRvYi5ob2xzZXJAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiS2VsdG9uIiwibGFzdE5hbWUiOiJIb2xzZW4iLCJwaG9uZSI6IjEyMy0xMjMtMTIzNCIsImFjY2VzcyI6IlJPTEVfQURNSU5JU1RSQVRPUiIsImF1dGhvcml6YXRpb24iOltdLCJyb2xlcyI6WyJ0ZWNoIiwiYXYiXSwiZXhwIjoxNjEzNzYzODY2fQ.uP5nCI_cptd0e-7ZYygv1lLiQitDkD-kiDxxQyLnaPs
+
+{
+"itemName": "test item",
+"description": "test item description",
+"brand": "test brand",
+"itemType": "test item type",
+"itemCategory": "OTHER",
+"locationId": 1,
+"location": {
+     "locationId": 1,
+     "name": "481",
+     "address": "481 Desnoyer St SE"
+},
+"locationDescription": "red bin on shelf 2",
+"isBroken": true,
+"notes": "f;aldsfj;dslkf"
+}

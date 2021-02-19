@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();;
 
-
+        http.cors();
 
         http.authorizeRequests()
                 //If one of the below methods is giving you grief about logging in, just replace the .hasRole([role]) with a .permitAll()

@@ -38,6 +38,7 @@ create table user_role(
 
 create table event_(
 	event_id int primary key auto_increment,
+    event_name varchar(50) not null,
     location_id int not null,
     start_date date not null,
     end_date date not null,

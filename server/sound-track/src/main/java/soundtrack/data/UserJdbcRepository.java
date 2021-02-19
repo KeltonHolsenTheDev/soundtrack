@@ -22,8 +22,6 @@ public class UserJdbcRepository implements UserRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    private int nextUser = 1;
-
     @Override
     public List<User> findAll() {
         final String sql = "select user_id, first_name, last_name, email, phone, access_level, password_hash from system_user;";
@@ -91,8 +89,7 @@ public class UserJdbcRepository implements UserRepository {
             return null;
         }
         else {
-            addRoles(user.getRoles(), nextUser);
-            nextUser++;
+            addRoles(user.getRoles(), keyHolder.getKey().intValue());
         }
 
         user.setUserId(keyHolder.getKey().intValue());
@@ -141,7 +138,9 @@ public class UserJdbcRepository implements UserRepository {
                 "password_hash = ? " +
                 "where user_id = ?;";
         boolean success = jdbcTemplate.update(sql, user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhone(), user.getAccessLevel().name(), user.getPassword(), user.getUserId()) > 0;
-        updateRoles(user.getRoles(), user.getUserId());
+        if (success) {
+            updateRoles(user.getRoles(), user.getUserId());
+        }
         return success;
     }
 

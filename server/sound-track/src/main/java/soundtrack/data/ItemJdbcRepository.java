@@ -104,6 +104,9 @@ public class ItemJdbcRepository implements ItemRepository{
         if (rowsAffected <= 0) {
             return null;
         }
+        else {
+            addItemTypeId(item.getItemType(), keyHolder.getKey().intValue());
+        }
 
         item.setItemId(keyHolder.getKey().intValue());
         return item;
