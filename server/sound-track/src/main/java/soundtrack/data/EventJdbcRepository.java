@@ -10,8 +10,10 @@ import soundtrack.models.Item;
 import soundtrack.models.User;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Repository
 public class EventJdbcRepository implements EventRepository {
@@ -68,8 +70,23 @@ public class EventJdbcRepository implements EventRepository {
     public List<Event> findByOwner(int ownerId) {
         final String sql = "select event_id, event_name, location_id, start_date, end_date, owner_id from event_ where owner_id = ?;";
         List<Event> events = jdbcTemplate.query(sql, new EventMapper(), ownerId);
-        events.stream().forEach(this::attachItemIds);
-        events.stream().forEach(this::attachStaffIds);
+        events.forEach(this::attachItemIds);
+        events.forEach(this::attachStaffIds);
+        return events;
+    }
+
+    @Override
+    public List<Event> findByDate(LocalDate date) {
+        List<Event> all = this.findAll();
+        return all.stream().filter(event -> event.getStartDate().isBefore(date) && event.getEndDate().isAfter(date)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Event> findByName(String name) {
+        final String sql = "select event_id, event_name, location_id, start_date, end_date, owner_id from event_ where event_name = ?;";
+        List<Event> events = jdbcTemplate.query(sql, new EventMapper(), name);
+        events.forEach(this::attachItemIds);
+        events.forEach(this::attachStaffIds);
         return events;
     }
 
