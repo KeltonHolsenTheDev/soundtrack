@@ -65,15 +65,12 @@ public class EventJdbcRepository implements EventRepository {
     }
 
     @Override
-    public Event findByOwner(int ownerId) {
+    public List<Event> findByOwner(int ownerId) {
         final String sql = "select event_id, event_name, location_id, start_date, end_date, owner_id from event_ where owner_id = ?;";
-        Event event = jdbcTemplate.query(sql, new EventMapper(), ownerId).stream().findFirst().orElse(null);
-        if (event == null) {
-            return null;
-        }
-        attachItemIds(event);
-        attachStaffIds(event);
-        return event;
+        List<Event> events = jdbcTemplate.query(sql, new EventMapper(), ownerId);
+        events.stream().forEach(this::attachItemIds);
+        events.stream().forEach(this::attachStaffIds);
+        return events;
     }
 
     @Override
