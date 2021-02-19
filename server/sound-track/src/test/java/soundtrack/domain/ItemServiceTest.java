@@ -40,7 +40,6 @@ class ItemServiceTest {
     @Test
     void shouldNotAddItemForNonPresentLocation() {
         Item item = makeNewItem();
-        item.setLocation(new Location(1, "123 Church Street", "The Church"));
         when(itemRepository.add(item)).thenReturn(item);
         when(locationRepository.findAll()).thenReturn(new ArrayList<>());
         Result<Item> result = service.addItem(item);
@@ -66,10 +65,10 @@ class ItemServiceTest {
     }
 
     public Item makeNewItem(){
-        Location location = new Location(1, "123 Church Street", "The Church");
         Item item = new Item(1, "Microphone 1", "Bass mic", "Sony",
-                "microphone", ItemCategory.AUDIO, 1 ,location ,"Shelf A",
+                "microphone", ItemCategory.AUDIO, 1 ,null,"Shelf A",
                 false, "no notes");
+        item.setLocation(new Location(1, "123 Church Street", "The Church"));
         return item;
     }
 }
