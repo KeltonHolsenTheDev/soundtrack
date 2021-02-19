@@ -64,7 +64,7 @@ class ItemServiceTest {
         assertFalse(result.isSuccess());
     }
 
-    public Item makeNewItem(){
+    public static Item makeNewItem(){
         Item item = new Item(1, "Microphone 1", "Bass mic", "Sony",
                 "microphone", ItemCategory.AUDIO, 1 ,null,"Shelf A",
                 false, "no notes");

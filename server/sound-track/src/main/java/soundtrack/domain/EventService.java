@@ -1,5 +1,6 @@
 package soundtrack.domain;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import soundtrack.data.EventRepository;
 import soundtrack.data.ItemRepository;
@@ -55,9 +56,35 @@ public class EventService {
 
     public Result<Event> addEvent(Event event) {
         Result<Event> result = validate(event);
-
-
+        if (!result.isSuccess()) {
+            return result;
+        }
+        Event out = eventRepository.addEvent(event);
+        if (out == null) {
+            result.addMessage("Internal database error prevented adding event", ResultType.NOT_FOUND);
+        }
+        else {
+            result.setPayLoad(out);
+        }
         return result;
+    }
+
+    public Result<Event> updateEvent(Event event) {
+        Result<Event> result = validate(event);
+        if (!result.isSuccess()) {
+            return result;
+        }
+        if (eventRepository.updateEvent(event)) {
+            result.setPayLoad(event);
+        }
+        else {
+            result.addMessage("Event not found", ResultType.NOT_FOUND);
+        }
+        return result;
+    }
+
+    public boolean deleteById(int eventId) {
+        return eventRepository.deleteById(eventId);
     }
 
     private Result<Event> validate(Event event) {
@@ -85,7 +112,7 @@ public class EventService {
                 result.addMessage("Item " + item.getItemId() + ": " + item.getItemName() + " is broken!", ResultType.INVALID);
             }
         }
-        
+
         return result;
     }
 
@@ -93,11 +120,9 @@ public class EventService {
         List<Event> existing = eventRepository.findAll();
         for (Event e: existing) {
             if (checkOverlap(event, e)) { //conflicts don't matter if the time is different
-
                 if (e.getLocation().equals(event.getLocation())) { //two events can't use the same location
                     result.addMessage("Event at " + event.getLocation().getName() + " overlaps with existing event " + e.getEventId() + " from " + e.getStartDate() + " to " + e.getEndDate(), ResultType.INVALID);
                 }
-
                 for (Item item: event.getEquipment()) { //two events can't use the same item
                     for (Item i: e.getEquipment()) {
                         if (i.equals(item)) {
@@ -105,7 +130,6 @@ public class EventService {
                         }
                     }
                 }
-
                 for (User user: event.getStaffAndRoles().keySet()) { //a volunteer cannot work two events at the same time
                     for (User u: e.getStaffAndRoles().keySet()) {
                         if (u.equals(user)) {
@@ -114,7 +138,6 @@ public class EventService {
                     }
                 }
             }
-
         }
     }
 
