@@ -10,8 +10,10 @@ import soundtrack.models.Item;
 import soundtrack.models.User;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Repository
 public class EventJdbcRepository implements EventRepository {
@@ -68,8 +70,27 @@ public class EventJdbcRepository implements EventRepository {
     public List<Event> findByOwner(int ownerId) {
         final String sql = "select event_id, event_name, location_id, start_date, end_date, owner_id from event_ where owner_id = ?;";
         List<Event> events = jdbcTemplate.query(sql, new EventMapper(), ownerId);
-        events.stream().forEach(this::attachItemIds);
-        events.stream().forEach(this::attachStaffIds);
+        events.forEach(this::attachItemIds);
+        events.forEach(this::attachStaffIds);
+        return events;
+    }
+
+    @Override
+    public List<Event> findByDate(LocalDate date) {
+        List<Event> all = this.findAll();
+        return all.stream().filter(event -> ((event.getStartDate().isBefore(date) || event.getStartDate().isEqual(date))
+                && (event.getEndDate().isAfter(date) || event.getEndDate().isEqual(date)))).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Event> findByUser(int userId) {
+        final String sql = "select e.event_id, e.event_name, e.location_id, e.start_date, e.end_date, e.owner_id from event_ e " +
+                "inner join event_user_role eu on e.event_id = eu.event_id " +
+                "inner join user_role u on u.user_role_id = eu.user_role_id " +
+                "where u.user_id = ?;";
+        List<Event> events = jdbcTemplate.query(sql, new EventMapper(), userId);
+        events.forEach(this::attachItemIds);
+        events.forEach(this::attachStaffIds);
         return events;
     }
 

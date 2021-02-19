@@ -25,8 +25,8 @@ class EventJdbcRepositoryTest {
 
     private static List<Event> makeDefaults() {
         List<Event> defaults = List.of (
-            new Event(1, "Church Service", LocalDate.of(2021, 02, 21), LocalDate.of(2021, 02, 21), 1, 1),
-            new Event(2, "Rock Concert", LocalDate.of(2021, 02, 24), LocalDate.of(2021, 02, 25), 2, 2)
+            new Event(1, "Church Service", LocalDate.of(2021, 2, 21), LocalDate.of(2021, 2, 21), 1, 1),
+            new Event(2, "Rock Concert", LocalDate.of(2021, 2, 24), LocalDate.of(2021, 2, 25), 2, 2)
         );
         defaults.get(0).setEquipmentIds(List.of(1));
         defaults.get(0).setStaffIds(List.of(1));
@@ -50,6 +50,24 @@ class EventJdbcRepositoryTest {
     void shouldFindAnEvent() {
         Event actual = repository.findById(1);
         assertEquals(actual, makeDefaults().get(0));
+    }
+
+    @Test
+    void shouldFindByOwner() {
+        List<Event> actual = repository.findByOwner(1);
+        assertEquals(actual, List.of(makeDefaults().get(0)));
+    }
+
+    @Test
+    void shouldFindByDate() {
+        List<Event> actual = repository.findByDate(LocalDate.of(2021, 2, 21));
+        assertEquals(actual, List.of(makeDefaults().get(0)));
+    }
+
+    @Test
+    void shouldFindByUser() {
+        List<Event> actual = repository.findByUser(1);
+        assertEquals(actual, List.of(makeDefaults().get(0)));
     }
 
     @Test

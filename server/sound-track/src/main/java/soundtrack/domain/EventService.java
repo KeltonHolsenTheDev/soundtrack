@@ -14,6 +14,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -50,6 +51,18 @@ public class EventService {
 
     public List<Event> findByOwner(int ownerId) {
         List<Event> all = eventRepository.findByOwner(ownerId);
+        all.forEach(this::attachModels);
+        return all;
+    }
+
+    public List<Event> findByDate(LocalDate date) {
+        List<Event> all = eventRepository.findByDate(date);
+        all.forEach(this::attachModels);
+        return all;
+    }
+
+    public List<Event> findByUser(int userId) {
+        List<Event> all = eventRepository.findByUser(userId);
         all.forEach(this::attachModels);
         return all;
     }
