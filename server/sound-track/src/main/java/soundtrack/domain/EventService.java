@@ -61,6 +61,12 @@ public class EventService {
         return all;
     }
 
+    public List<Event> findByUser(int userId) {
+        List<Event> all = eventRepository.findByUser(userId);
+        all.forEach(this::attachModels);
+        return all;
+    }
+
     public Result<Event> addEvent(Event event) {
         Result<Event> result = validate(event);
         if (!result.isSuccess()) {
