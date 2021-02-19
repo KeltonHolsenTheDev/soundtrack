@@ -1,15 +1,22 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { AuthContext } from "../../auth/auth";
 import { NavLink, useHistory } from "react-router-dom";
 import "./Dashboard.css";
+import ItemContainer from "../ItemContainer";
 
 const Dashboard = function () {
+  const [showItems, setShowItems] = useState(false);
   const { user } = useContext(AuthContext);
   const history = useHistory();
 
   if (!user) {
     history.push("/login");
   }
+
+  const handleShowItems = function (event) {
+    setShowItems(true);
+  };
+
   return user ? (
     <div className="container-fluid dashboard-container ">
       <div className="row no-gutters">
@@ -40,9 +47,9 @@ const Dashboard = function () {
               </li>
               <li className="list-group-item dashboard-card">
                 <div className="card-body justify-content-center d-flex">
-                  <a href="#" className="card-link">
+                  <span className="card-link" onClick={handleShowItems}>
                     <i class="fa fa-comments fa-4x"></i>
-                  </a>
+                  </span>
                 </div>
               </li>
             </ul>
@@ -58,7 +65,10 @@ const Dashboard = function () {
             </div>
           </div>
         </div>
-        <div className="col dashboard-col p-0">{/* event card here */}</div>
+        <div className="col dashboard-col p-0">
+          {/* event card here */}
+          {showItems ? <ItemContainer /> : ""}
+        </div>
       </div>
     </div>
   ) : (
