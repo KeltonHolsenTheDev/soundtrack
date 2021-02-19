@@ -18,11 +18,11 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3VuZC10cmFjayIsInN1YiI6ImtlbHRvYi5ob2xzZXJAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiS2VsdG8iLCJsYXN0TmFtZSI6IkhvbHNlIiwicGhvbmUiOiIxMjMtMTIzLTEyMzQiLCJhY2Nlc3MiOiJST0xFX1VTRVIiLCJhdXRob3JpemF0aW9uIjpbXSwicm9sZXMiOltdLCJleHAiOjE2MTM2NzM5NzV9.nQW_gKNP7pFzRkICUEK98iqwSmXHsUavf0gjkr6uyGI
 
 {
-    "firstName": "Kelto",
-    "lastName": "Holse",
+    "firstName": "Kelton",
+    "lastName": "Holsen",
     "email": "keltob.holser@gmail.com",
     "phone": "123-123-1234",
-    "accessLevel": "ROLE_USER",
+    "accessLevel": "ROLE_ADMINISTRATOR",
     "password": "keltonholsenholsenkelton",
     "roles": [
         "tech", "av"

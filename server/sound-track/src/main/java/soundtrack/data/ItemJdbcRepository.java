@@ -90,7 +90,6 @@ public class ItemJdbcRepository implements ItemRepository{
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            attachItemTypes(item);
             ps.setString(1, item.getItemName());
             ps.setString(2, item.getDescription());
             ps.setString(3, item.getBrand());
@@ -105,6 +104,9 @@ public class ItemJdbcRepository implements ItemRepository{
 
         if (rowsAffected <= 0) {
             return null;
+        }
+        else {
+            addItemTypeId(item.getItemType(), keyHolder.getKey().intValue());
         }
 
         item.setItemId(keyHolder.getKey().intValue());

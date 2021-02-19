@@ -38,6 +38,7 @@ create table user_role(
 
 create table event_(
 	event_id int primary key auto_increment,
+    event_name varchar(50) not null,
     location_id int not null,
     start_date date not null,
     end_date date not null,
@@ -117,6 +118,13 @@ create table repair_ticket(
 delimiter //
 create procedure set_known_good_state()
 begin
+	
+    delete from event_user_role;
+    alter table event_user_role auto_increment = 1;
+    delete from event_item;
+    alter table event_item auto_increment = 1;
+    delete from event_;
+    alter table event_ auto_increment = 1;
     delete from item;
     alter table item auto_increment = 1;
     delete from item_type;
@@ -156,6 +164,18 @@ begin
 		("Microphone 1", "Bass mic", "Sony", 1, "AUDIO", 1 , "Shelf A", false, "no notes"),
         ("Drum", "Kick", "DrumstickInc", 2, "AUDIO", 1 , "Shelf B", false, "no notes"),
         ("Short Throw", "Projector", "Panasonic", 3, "VIDEO", 1 , "Shelf C", false, "this one is good for short distance projecting");
+        
+	insert into event_ (event_name, start_date, end_date, location_id, owner_id) values
+		("Church Service", '2021-02-21', '2021-02-21', 1, 1),
+        ("Rock Concert", '2021-02-24', '2021-02-25', 2, 2);
+        
+	insert into event_item (event_id, item_id) values
+    (1, 1),
+    (2, 2);
+    
+    insert into event_user_role(event_id, user_role_id) values
+    (1, 1),
+    (2, 2);
         
 end //
 delimiter ;
