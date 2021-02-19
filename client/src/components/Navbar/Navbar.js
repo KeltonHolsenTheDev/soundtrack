@@ -9,7 +9,8 @@ function Navbar() {
 
   const handleLogout = function (event) {
     event.preventDefault();
-    logoutUser(history);
+    logoutUser();
+    history.push("/login");
   };
 
   return (
@@ -54,9 +55,7 @@ function Navbar() {
               Dashboard
             </NavLink>
           </li>
-          {user ? (
-            ""
-          ) : (
+          {user && user.access === "ROLE_ADMINISTRATOR" ? (
             <li className="nav-item">
               <NavLink
                 exact={true}
@@ -64,9 +63,11 @@ function Navbar() {
                 activeClassName="nav-link active"
                 to="/register"
               >
-                Register
+                Add User
               </NavLink>
             </li>
+          ) : (
+            ""
           )}
           {user ? (
             <li className="nav-item">
