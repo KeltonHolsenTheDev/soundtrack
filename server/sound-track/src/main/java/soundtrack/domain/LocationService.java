@@ -47,8 +47,8 @@ public class LocationService {
             return result;
         }
 
-        if (!repository.updateLocation(location)) {
-            String msg = String.format("locationId: %s, not found", location.getLocationId());
+        else if (!repository.updateLocation(location)) {
+            result.addMessage(String.format("locationId: %s, not found", location.getLocationId()), ResultType.NOT_FOUND);
         }
 
         return result;
