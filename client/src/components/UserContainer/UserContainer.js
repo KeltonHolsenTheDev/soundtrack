@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { AuthContext } from "../../auth/auth";
+import { useHistory } from "react-router-dom";
 
 import "./UserContainer.css";
 import UserCard from "../UserCard";
+import EditUser from "../EditUser";
 
 const UserContainer = function () {
   // const users = [
@@ -28,29 +30,56 @@ const UserContainer = function () {
   // ];
 
   const [users, setUsers] = useState([]);
+  const [enableEdit, setEnableEdit] = useState(false);
+  const [chosenUser, setChosenUser] = useState(null);
+  const { user, logoutUser } = useContext(AuthContext);
+  const history = useHistory();
 
-  useEffect(() => {
+  if (!user) {
+    history.push("/login");
+  }
+
+  const renderUsers = function () {
     axios.get("/api/user").then(
       (response) => {
         setUsers(response.data);
       },
       (error) => {
-        console.log(error);
+        console.log(error.response);
       }
     );
+  };
+
+  useEffect(() => {
+    renderUsers();
   }, []);
 
-  const handleEdit = function (event, user) {
+  const handleEdit = function (event, editedUser) {
     event.preventDefault();
-    console.log(`editing user ${user.userId}`);
+    setChosenUser(editedUser);
+    setEnableEdit(true);
   };
 
-  const handleDelete = function (event, userId) {
+  const handleDelete = function (event, deletedUser) {
     event.preventDefault();
-    console.log(`deleting user ${userId}`);
+    axios
+      .delete(`/api/user/${deletedUser.userId}`)
+      .then(function (response) {
+        if (user.sub === deletedUser.email) {
+          logoutUser();
+          history.push("/login");
+        } else {
+          renderUsers();
+        }
+      })
+      .catch(function (error) {
+        console.log(error.response);
+      });
   };
 
-  return (
+  return enableEdit ? (
+    <EditUser chosenUser={chosenUser} />
+  ) : (
     <div className="container">
       <table className="table table-hover table-striped">
         <thead>
@@ -60,6 +89,7 @@ const UserContainer = function () {
             <th scope="col">Last</th>
             <th scope="col">Phone</th>
             <th scope="col">Email</th>
+            <th scope="col">Role</th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -72,12 +102,13 @@ const UserContainer = function () {
                 lastName={user.lastName}
                 phone={user.phone}
                 email={user.email}
+                role={user.accessLevel}
                 key={user.userId}
                 handleEdit={(event) => {
                   handleEdit(event, user);
                 }}
                 handleDelete={(event) => {
-                  handleDelete(event, user.userId);
+                  handleDelete(event, user);
                 }}
               />
             );
