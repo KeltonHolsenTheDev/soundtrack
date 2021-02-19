@@ -1,0 +1,147 @@
+@url = http://localhost:8080/api/event
+
+## Testing find all events
+GET {{url}} HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3VuZC10cmFjayIsInN1YiI6ImtlbHRvYi5ob2xzZXJAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiS2VsdG8iLCJsYXN0TmFtZSI6IkhvbHNlIiwicGhvbmUiOiIxMjMtMTIzLTEyMzQiLCJhY2Nlc3MiOiJST0xFX1VTRVIiLCJhdXRob3JpemF0aW9uIjpbXSwicm9sZXMiOltdLCJleHAiOjE2MTM2NzQxOTh9.BBhDO0xR8HtGeAYTMbHOlzesM7f71qEguRsPJMSdQSE
+
+###
+
+## Testing find event by id
+GET {{url}}/1 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3VuZC10cmFjayIsInN1YiI6ImtlbHRvLmhvbHNlQGdtYWlsLmNvbSIsImZpcnN0TmFtZSI6IktlbHRvIiwibGFzdE5hbWUiOiJIb2xzZSIsInBob25lIjoiMTIzLTEyMy0xMjM0IiwiYWNjZXNzIjoiVVNFUiIsImV4cCI6MTYxMzY2OTkwMn0.vsYXt4qxMbwqtFANxGGL1VYxPwy8OBQrEThbOj8Ouko
+###
+
+## Testing find event by name
+GET {{url}}/sws HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3VuZC10cmFjayIsInN1YiI6ImtlbHRvLmhvbHNlQGdtYWlsLmNvbSIsImZpcnN0TmFtZSI6IktlbHRvIiwibGFzdE5hbWUiOiJIb2xzZSIsInBob25lIjoiMTIzLTEyMy0xMjM0IiwiYWNjZXNzIjoiVVNFUiIsImV4cCI6MTYxMzY2OTkwMn0.vsYXt4qxMbwqtFANxGGL1VYxPwy8OBQrEThbOj8Ouko
+###
+
+## Testing find event by date
+GET {{url}}/2021-05-20 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3VuZC10cmFjayIsInN1YiI6ImtlbHRvLmhvbHNlQGdtYWlsLmNvbSIsImZpcnN0TmFtZSI6IktlbHRvIiwibGFzdE5hbWUiOiJIb2xzZSIsInBob25lIjoiMTIzLTEyMy0xMjM0IiwiYWNjZXNzIjoiVVNFUiIsImV4cCI6MTYxMzY2OTkwMn0.vsYXt4qxMbwqtFANxGGL1VYxPwy8OBQrEThbOj8Ouko
+###
+
+## Testing add a event
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3VuZC10cmFjayIsInN1YiI6ImtlbHRvbi5ob2xzZW5AZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiS2VsdG9uIiwibGFzdE5hbWUiOiJIb2xzZW4iLCJwaG9uZSI6IjEyMy0xMjMtMTIzNCIsImFjY2VzcyI6IlJPTEVfQURNSU5JU1RSQVRPUiIsImF1dGhvcml6YXRpb24iOltdLCJyb2xlcyI6WyJhdiIsImF2IiwiYXYiLCJ0ZWNoIiwidGVjaCIsInRlY2giXSwiZXhwIjoxNjEzNjc0MTc2fQ.QamP1cuYi-DdakusCew_-wsPEcJPt2WTDCIBLQNecs8
+
+{
+  "eventName": "",
+  "startDate": "2021-02-19",
+  "endDate": "2021-02-19",
+  "owner": {
+    "userId": 0,
+    "firstName": "",
+    "lastName": "",
+    "email": "",
+    "phone": "",
+    "accessLevel": "ROLE_USER",
+    "authorities": [
+      {}
+    ],
+    "password": "",
+    "roles": [
+      ""
+    ]
+  },
+  "ownerId": 0,
+  "staffAndRoles": {},
+  "staffIds": [
+    0
+  ],
+  "location": {
+    "locationId": 0,
+    "address": "",
+    "name": ""
+  },
+  "locationId": 0,
+  "equipment": [
+    {
+      "itemId": 0,
+      "itemName": "",
+      "description": "",
+      "brand": "",
+      "itemType": "",
+      "itemCategory": "AUDIO",
+      "locationId": 0,
+      "location": {
+        "locationId": 0,
+        "address": "",
+        "name": ""
+      },
+      "locationDescription": "",
+      "isBroken": false,
+      "notes": ""
+    }
+  ],
+  "equipmentIds": [
+    0
+  ]
+}
+
+###
+
+## Testing update a event
+PUT {{url}}/1 HTTP/1.1
+Content-Type: application/json
+
+{
+  "eventId": 1,
+  "eventName": "",
+  "startDate": "2021-02-19",
+  "endDate": "2021-02-19",
+  "owner": {
+    "userId": 0,
+    "firstName": "",
+    "lastName": "",
+    "email": "",
+    "phone": "",
+    "accessLevel": "ROLE_USER",
+    "authorities": [
+      {}
+    ],
+    "password": "",
+    "roles": [
+      ""
+    ]
+  },
+  "ownerId": 0,
+  "staffAndRoles": {},
+  "staffIds": [
+    0
+  ],
+  "location": {
+    "locationId": 0,
+    "address": "",
+    "name": ""
+  },
+  "locationId": 0,
+  "equipment": [
+    {
+      "itemId": 0,
+      "itemName": "",
+      "description": "",
+      "brand": "",
+      "itemType": "",
+      "itemCategory": "AUDIO",
+      "locationId": 0,
+      "location": {
+        "locationId": 0,
+        "address": "",
+        "name": ""
+      },
+      "locationDescription": "",
+      "isBroken": false,
+      "notes": ""
+    }
+  ],
+  "equipmentIds": [
+    0
+  ]
+}
+
+###
+
+## Testing delete a location
+DELETE {{url}}/2 HTTP/1.1
