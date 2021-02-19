@@ -44,18 +44,19 @@ const ItemContainer = function () {
     renderItems();
   }, []);
 
-  const handleEdit = function (event, editedUser) {
+  const handleEdit = function (event, editedItem) {
     event.preventDefault();
-    setChosenItem(editedUser);
+    console.log("editing item");
+    setChosenItem(editedItem);
     setEnableEdit(true);
   };
 
-  const handleDelete = function (event, deletedId) {
+  const handleDelete = function (event, deletedItem) {
     event.preventDefault();
     axios
-      .delete(`/api/item/${deletedId.itemId}`)
+      .delete(`/api/item/${deletedItem.itemId}`)
       .then(function (response) {
-        setItems(items.filter((i) => i.itemId != deletedId));
+        setItems(items.filter((i) => i.itemId != deletedItem.itemId));
       })
       .catch(function (error) {
         console.log(error.response);
