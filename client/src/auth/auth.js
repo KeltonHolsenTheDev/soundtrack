@@ -6,14 +6,13 @@ import setAuthToken from "../utils/setAuthToken";
 // Create user context to get user in nested pages
 export const AuthContext = React.createContext("auth");
 
-export const logoutUser = (setUser, history) => {
+export const logoutUser = (setUser) => {
   // Remove token from local storage
   localStorage.removeItem("jwtToken");
   // Remove auth header for future requests
   setAuthToken(false);
   // Set current user to empty object {} which will set isAuthenticated to false
   setUser(null);
-  history.push("/login");
 };
 
 export const loginUser = (setUser, setErrors) => (userData, history) => {
@@ -47,7 +46,7 @@ export const registerUser = (setErrors) => (userData, history) => {
   // console.log(userData);
   axios
     .post("api/user", userData)
-    .then((res) => history.push("/login"))
+    .then((res) => history.push("/"))
     .catch((err) => {
       console.log(err.response.data);
       // setErrors(err.response.data);
@@ -83,7 +82,7 @@ export function useAuth() {
     errors,
     loginUser: loginUser(setUser, setErrors),
     // loginUser: loginUser(setUser),
-    logoutUser: (history) => logoutUser(setUser, history),
+    logoutUser: () => logoutUser(setUser),
     registerUser: registerUser(setErrors),
     // registerUser: registerUser(),
   };
