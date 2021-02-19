@@ -10,7 +10,7 @@ public interface EventRepository {
     Event findById(int eventId);
     List<Event> findByOwner(int ownerId);
     List<Event> findByDate(LocalDate date);
-    List<Event> findByName(String name);
+    List<Event> findByUser(int userId);
     Event addEvent(Event event);
     boolean updateEvent(Event event);
     boolean deleteById(int eventId);

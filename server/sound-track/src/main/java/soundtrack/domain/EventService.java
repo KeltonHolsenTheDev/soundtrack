@@ -61,12 +61,6 @@ public class EventService {
         return all;
     }
 
-    public List<Event> findByName(String name) {
-        List<Event> all = eventRepository.findByName(name);
-        all.forEach(this::attachModels);
-        return all;
-    }
-
     public Result<Event> addEvent(Event event) {
         Result<Event> result = validate(event);
         if (!result.isSuccess()) {
