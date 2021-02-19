@@ -78,6 +78,67 @@ class EventServiceTest {
     }
 
     @Test
+    void shouldNotAddEventWithOverlapUser() {
+        Event toAdd = makeEvent();
+        when(eventRepository.addEvent(toAdd)).thenReturn(toAdd);
+        when(locationRepository.findAll()).thenReturn(List.of(new Location(1, "123 Church Street", "The Church")));
+        when(eventRepository.findAll()).thenReturn(List.of(makeEvent()));
+        when(userRepository.findById(1)).thenReturn(new User("Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ROLE_ADMINISTRATOR, "swordfishfishfish"));
+        toAdd.setEventId(2);
+        toAdd.setLocation(new Location(2, "The Barn", "124 Barn Bluff"));
+        Item differentItem = ItemServiceTest.makeNewItem();
+        differentItem.setItemId(2);
+        toAdd.setEquipment(List.of(differentItem));
+
+        Result<Event> result = service.addEvent(toAdd);
+        assertFalse(result.isSuccess());
+    }
+
+    @Test
+    void shouldNotAddEventWithOverlapLocation() {
+        Event toAdd = makeEvent();
+        when(eventRepository.addEvent(toAdd)).thenReturn(toAdd);
+        when(locationRepository.findAll()).thenReturn(List.of(new Location(1, "123 Church Street", "The Church")));
+        when(eventRepository.findAll()).thenReturn(List.of(makeEvent()));
+        when(userRepository.findById(1)).thenReturn(new User(1, "Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ROLE_ADMINISTRATOR, "swordfishfishfish"));
+        toAdd.setEventId(2);
+
+        Item differentItem = ItemServiceTest.makeNewItem();
+        differentItem.setItemId(2);
+        toAdd.setEquipment(List.of(differentItem));
+
+        User notKelton = new User("Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ROLE_ADMINISTRATOR, "swordfishfishfish");
+        notKelton.setUserId(3);
+        Map<User, List<String>> userRoles = new HashMap<>();
+        userRoles.put(notKelton, List.of("tech"));
+        toAdd.setStaffAndRoles(userRoles);
+
+        Result<Event> result = service.addEvent(toAdd);
+        assertFalse(result.isSuccess());
+    }
+
+    @Test
+    void shouldNotAddEventWithOverlapItem() {
+        Event toAdd = makeEvent();
+        when(eventRepository.addEvent(toAdd)).thenReturn(toAdd);
+        when(locationRepository.findAll()).thenReturn(List.of(new Location(1, "123 Church Street", "The Church")));
+        when(eventRepository.findAll()).thenReturn(List.of(makeEvent()));
+        when(userRepository.findById(1)).thenReturn(new User(1, "Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ROLE_ADMINISTRATOR, "swordfishfishfish"));
+        toAdd.setEventId(2);
+
+        toAdd.setLocation(new Location(2, "The Barn", "124 Barn Bluff"));
+
+        User notKelton = new User("Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ROLE_ADMINISTRATOR, "swordfishfishfish");
+        notKelton.setUserId(3);
+        Map<User, List<String>> userRoles = new HashMap<>();
+        userRoles.put(notKelton, List.of("tech"));
+        toAdd.setStaffAndRoles(userRoles);
+
+        Result<Event> result = service.addEvent(toAdd);
+        assertFalse(result.isSuccess());
+    }
+
+    @Test
     void shouldNotAddEventWithBadValues() {
         Event toAdd = makeEvent();
         when(eventRepository.addEvent(toAdd)).thenReturn(toAdd);
