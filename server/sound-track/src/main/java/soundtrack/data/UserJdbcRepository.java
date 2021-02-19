@@ -22,6 +22,7 @@ public class UserJdbcRepository implements UserRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    private int nextUser = 1;
 
     @Override
     public List<User> findAll() {
@@ -35,6 +36,17 @@ public class UserJdbcRepository implements UserRepository {
     public User findById(int id) {
         final String sql = "select user_id, first_name, last_name, email, phone, access_level, password_hash from system_user where user_id = ?;";
         User user = jdbcTemplate.query(sql, new UserMapper(), id).stream().findFirst().orElse(null);
+        if (user == null) {
+            return null;
+        }
+        attachRoles(user);
+        return user;
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        final String sql = "select user_id, first_name, last_name, email, phone, access_level, password_hash from system_user where email = ?;";
+        User user = jdbcTemplate.query(sql, new UserMapper(), email).stream().findFirst().orElse(null);
         if (user == null) {
             return null;
         }
@@ -78,7 +90,10 @@ public class UserJdbcRepository implements UserRepository {
         if (rowsAffected <= 0) {
             return null;
         }
-        addRoles(user.getRoles(), user.getUserId());
+        else {
+            addRoles(user.getRoles(), nextUser);
+            nextUser++;
+        }
 
         user.setUserId(keyHolder.getKey().intValue());
         return user;

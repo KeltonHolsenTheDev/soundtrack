@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Dashboard from "./components/Dashboard";
 import UserContainer from "./components/UserContainer";
+import Location from "./components/Locations/Location"
 
 const App = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -22,6 +23,9 @@ const App = () => {
           </Route>
           <Route path="/contacts">
             <UserContainer />
+          </Route>
+          <Route path="/location">
+            <Location />
           </Route>
           <Route path="/register">
             <Registration />

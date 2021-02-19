@@ -4,13 +4,12 @@ import { NavLink, useHistory } from "react-router-dom";
 import "./Navbar.css";
 
 function Navbar() {
-  const { user, setUser } = useContext(AuthContext);
+  const { user, logoutUser } = useContext(AuthContext);
   const history = useHistory();
 
   const handleLogout = function (event) {
     event.preventDefault();
-    setUser(null);
-    history.push("/login");
+    logoutUser(history);
   };
 
   return (
