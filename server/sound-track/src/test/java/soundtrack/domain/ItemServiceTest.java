@@ -30,10 +30,7 @@ class ItemServiceTest {
 
     @Test
     void shouldAddValidItem() {
-        Item item = new Item(1, "Microphone 1", "Bass mic", "Sony", "microphone", ItemCategory.AUDIO,
-                "Shelf A", false, "no notes");
-        item.setLocationId(1);
-        item.setLocation(new Location(1, "123 Church Street", "The Church"));
+        Item item = makeNewItem();
         when(itemRepository.add(item)).thenReturn(item);
         when(locationRepository.findAll()).thenReturn(List.of(new Location(1, "123 Church Street", "The Church")));
         Result<Item> result = service.addItem(item);
@@ -42,10 +39,7 @@ class ItemServiceTest {
 
     @Test
     void shouldNotAddItemForNonPresentLocation() {
-        Item item = new Item(1, "Microphone 1", "Bass mic", "Sony", "microphone", ItemCategory.AUDIO,
-                "Shelf A", false, "no notes");
-        item.setLocationId(1);
-        item.setLocation(new Location(1, "123 Church Street", "The Church"));
+        Item item = makeNewItem();
         when(itemRepository.add(item)).thenReturn(item);
         when(locationRepository.findAll()).thenReturn(new ArrayList<>());
         Result<Item> result = service.addItem(item);
@@ -54,10 +48,7 @@ class ItemServiceTest {
 
     @Test
     void shouldUpdateValidItem() {
-        Item item = new Item(1, "Microphone 1", "Bass mic", "Sony", "microphone", ItemCategory.AUDIO,
-                "Shelf A", false, "no notes");
-        item.setLocationId(1);
-        item.setLocation(new Location(1, "123 Church Street", "The Church"));
+        Item item = makeNewItem();
         when(itemRepository.update(item)).thenReturn(true);
         when(locationRepository.findAll()).thenReturn(List.of(new Location(1, "123 Church Street", "The Church")));
         Result<Item> result = service.updateItem(item);
@@ -66,13 +57,18 @@ class ItemServiceTest {
 
     @Test
     void shouldNotUpdateItemToBadLocation() {
-        Item item = new Item(1, "Microphone 1", "Bass mic", "Sony", "microphone", ItemCategory.AUDIO,
-                "Shelf A", false, "no notes");
-        item.setLocationId(1);
-        item.setLocation(new Location(1, "123 Church Street", "The Church"));
+        Item item = makeNewItem();
         when(itemRepository.update(item)).thenReturn(true);
         when(locationRepository.findAll()).thenReturn(new ArrayList<>());
         Result<Item> result = service.updateItem(item);
         assertFalse(result.isSuccess());
+    }
+
+    public Item makeNewItem(){
+        Item item = new Item(1, "Microphone 1", "Bass mic", "Sony",
+                "microphone", ItemCategory.AUDIO, 1 ,null,"Shelf A",
+                false, "no notes");
+        item.setLocation(new Location(1, "123 Church Street", "The Church"));
+        return item;
     }
 }

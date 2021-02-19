@@ -14,7 +14,7 @@ import javax.validation.ValidatorFactory;
 import java.util.List;
 import java.util.Set;
 
-//Service
+@Service
 public class ItemService {
 
     private final ItemRepository itemRepository;

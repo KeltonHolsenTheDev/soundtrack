@@ -117,7 +117,11 @@ create table repair_ticket(
 delimiter //
 create procedure set_known_good_state()
 begin
-	delete from location;
+    delete from item;
+    alter table item auto_increment = 1;
+    delete from item_type;
+    alter table item_type auto_increment = 1;
+    delete from location;
     alter table location auto_increment = 1;
     delete from user_role;
     alter table user_role auto_increment = 1;
@@ -142,6 +146,16 @@ begin
 	insert into user_role (user_id, role_id) values
 		(1, 1),
         (2, 2);
+        
+	insert into item_type (type_name) values
+		("microphone"),
+        ("drum"),
+        ("projector");
+        
+	insert into item (item_name, description, brand, item_type_id, item_category, location_id, location_description, is_broken, notes) values
+		("Microphone 1", "Bass mic", "Sony", 1, "AUDIO", 1 , "Shelf A", false, "no notes"),
+        ("Drum", "Kick", "DrumstickInc", 2, "AUDIO", 1 , "Shelf B", false, "no notes"),
+        ("Short Throw", "Projector", "Panasonic", 3, "VIDEO", 1 , "Shelf C", false, "this one is good for short distance projecting");
         
 end //
 delimiter ;
