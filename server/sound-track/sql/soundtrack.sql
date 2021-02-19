@@ -120,22 +120,31 @@ insert into location(address, location_name) values
         ("45 West Avenue", "The Barn"),
         ("44 Sunset Blvd.", "Pa's House");
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 insert into role (role_name) values
 		("Sound Board"),
         ("Light Board");
 
 =======
+=======
+
+>>>>>>> df27086fd296ada71f82564cc9fcf457391d5e63
         
 insert into role (role_name) values
 		("Sound Board"),
         ("Light Board");
         
+<<<<<<< HEAD
 >>>>>>> 2c3d366e91dd6b2a54b9ef9bb949bc0454421b44
+=======
+
+>>>>>>> df27086fd296ada71f82564cc9fcf457391d5e63
 insert into item_type (type_name) values
 		("microphone"),
         ("drum"),
         ("projector");
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 insert into item (item_name, description, brand, item_type_id, item_category, location_id, location_description, is_broken, notes) values
@@ -144,14 +153,22 @@ insert into item (item_name, description, brand, item_type_id, item_category, lo
         ("Short Throw", "Projector", "Panasonic", 3, "VIDEO", 1 , "Shelf C", false, "this one is good for short distance projecting");
 =======
         
+=======
+
+
+>>>>>>> df27086fd296ada71f82564cc9fcf457391d5e63
 insert into item (item_name, description, brand, item_type_id, item_category, location_id, location_description, is_broken, notes) values
 		("Microphone 1", "Bass mic", "Sony", 1, "AUDIO", 1 , "Shelf A", false, "no notes"),
         ("Drum", "Kick", "DrumstickInc", 2, "AUDIO", 1 , "Shelf B", false, "no notes"),
+        ("Short Throw", "Projector", "Panasonic", 3, "VIDEO", 1 , "Shelf C", false, "this one is good for short distance projecting");
+
         ("Short Throw", "Projector", "Panasonic", 3, "VIDEO", 1 , "Shelf C", false, "this one is good for short distance projecting");
 
 
 
 
 
-
+<<<<<<< HEAD
 >>>>>>> 2c3d366e91dd6b2a54b9ef9bb949bc0454421b44
+=======
+>>>>>>> df27086fd296ada71f82564cc9fcf457391d5e63
