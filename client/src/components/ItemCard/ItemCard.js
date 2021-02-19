@@ -12,6 +12,14 @@ const ItemCard = function (props) {
       <td>{props.itemCategory}</td>
       <td>{`${props.isBroken}`}</td>
       <td>{props.notes}</td>
+      <td>
+        <button className="btn btn-info mr-2" onClick={props.handleEdit}>
+          edit
+        </button>
+        <button className="btn btn-danger" onClick={props.handleDelete}>
+          delete
+        </button>
+      </td>
     </tr>
   );
 };

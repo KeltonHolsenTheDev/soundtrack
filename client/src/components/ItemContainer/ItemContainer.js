@@ -25,6 +25,8 @@ const ItemContainer = function () {
   ];
 
   const [items, setItems] = useState([testItems]);
+  const [enableEdit, setEnableEdit] = useState(false);
+  const [chosenItem, setChosenItem] = useState(null);
 
   const renderItems = function () {
     axios
@@ -41,6 +43,24 @@ const ItemContainer = function () {
   useEffect(() => {
     renderItems();
   }, []);
+
+  const handleEdit = function (event, editedUser) {
+    event.preventDefault();
+    setChosenItem(editedUser);
+    setEnableEdit(true);
+  };
+
+  const handleDelete = function (event, deletedId) {
+    event.preventDefault();
+    axios
+      .delete(`/api/item/${deletedId.itemId}`)
+      .then(function (response) {
+        setItems(items.filter((i) => i.itemId != deletedId));
+      })
+      .catch(function (error) {
+        console.log(error.response);
+      });
+  };
 
   return (
     <div className="container">
@@ -71,12 +91,12 @@ const ItemContainer = function () {
                 isBroken={item.broken}
                 notes={item.notes}
                 key={item.itemId}
-                // handleEdit={(event) => {
-                //   handleEdit(event, user);
-                // }}
-                // handleDelete={(event) => {
-                //   handleDelete(event, user);
-                // }}
+                handleEdit={(event) => {
+                  handleEdit(event, item);
+                }}
+                handleDelete={(event) => {
+                  handleDelete(event, item);
+                }}
               />
             );
           })}
