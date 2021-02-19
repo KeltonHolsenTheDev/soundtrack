@@ -10,9 +10,10 @@ import soundtrack.models.Item;
 import soundtrack.models.User;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Repository
 public class EventJdbcRepository implements EventRepository {
@@ -66,15 +67,27 @@ public class EventJdbcRepository implements EventRepository {
     }
 
     @Override
-    public Event findByOwner(int ownerId) {
+    public List<Event> findByOwner(int ownerId) {
         final String sql = "select event_id, event_name, location_id, start_date, end_date, owner_id from event_ where owner_id = ?;";
-        Event event = jdbcTemplate.query(sql, new EventMapper(), ownerId).stream().findFirst().orElse(null);
-        if (event == null) {
-            return null;
-        }
-        attachItemIds(event);
-        attachStaffIds(event);
-        return event;
+        List<Event> events = jdbcTemplate.query(sql, new EventMapper(), ownerId);
+        events.forEach(this::attachItemIds);
+        events.forEach(this::attachStaffIds);
+        return events;
+    }
+
+    @Override
+    public List<Event> findByDate(LocalDate date) {
+        List<Event> all = this.findAll();
+        return all.stream().filter(event -> event.getStartDate().isBefore(date) && event.getEndDate().isAfter(date)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Event> findByName(String name) {
+        final String sql = "select event_id, event_name, location_id, start_date, end_date, owner_id from event_ where event_name = ?;";
+        List<Event> events = jdbcTemplate.query(sql, new EventMapper(), name);
+        events.forEach(this::attachItemIds);
+        events.forEach(this::attachStaffIds);
+        return events;
     }
 
     @Override
@@ -157,14 +170,14 @@ public class EventJdbcRepository implements EventRepository {
     }
 
     private void updateStaff(Event event) {
-        jdbcTemplate.update("delete from event_user role where event_id = ?;", event.getEventId());
+        jdbcTemplate.update("delete from event_user_role where event_id = ?;", event.getEventId());
         addStaff(event.getStaffAndRoles(), event.getEventId());
     }
 
     @Override
-    public boolean deleteEvent(Event event) {
-        jdbcTemplate.update("delete from event_item where event_id = ?;", event.getEventId());
-        jdbcTemplate.update("delete from event_user role where event_id = ?;", event.getEventId());
-        return jdbcTemplate.update("delete from event where event_id = ?;", event.getEventId()) > 0;
+    public boolean deleteById(int eventId) {
+        jdbcTemplate.update("delete from event_item where event_id = ?;", eventId);
+        jdbcTemplate.update("delete from event_user_role where event_id = ?;", eventId);
+        return jdbcTemplate.update("delete from event_ where event_id = ?;", eventId) > 0;
     }
 }
