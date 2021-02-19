@@ -21,7 +21,7 @@ public class LocationTest {
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<Location>> violations = validator.validate(location);
 
-        assertEquals(2, violations.size());
+        assertEquals(1, violations.size());
     }
 
     @Test
@@ -33,7 +33,7 @@ public class LocationTest {
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<Location>> violations = validator.validate(location);
 
-        assertEquals(2, violations.size());
+        assertEquals(1, violations.size());
     }
 
     @Test
@@ -58,6 +58,18 @@ public class LocationTest {
         Set<ConstraintViolation<Location>> violations = validator.validate(location);
 
         assertEquals(1, violations.size());
+    }
+
+    @Test
+    void blankLocationNameShouldPass() {
+        Location location = makeNewLocation();
+        location.setName("   ");
+
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<Location>> violations = validator.validate(location);
+
+        assertEquals(0, violations.size());
     }
 
 

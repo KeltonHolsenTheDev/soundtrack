@@ -7,8 +7,7 @@ public class Location {
     
     private int locationId;
 
-    @NotNull(message = "Address cannot be null!")
-    @NotBlank(message = "Location needs an address")
+    @NotBlank(message = "Address cannot be null or blank!")
     private String address;
 
     private String name;
@@ -16,7 +15,7 @@ public class Location {
     public Location() {
     }
 
-    public Location(int locationId, @NotNull(message = "Address cannot be null!") @NotBlank(message = "Location needs an address") String address, String name) {
+    public Location(int locationId, @NotBlank(message = "Address cannot be null or blank!") String address, String name) {
         this.locationId = locationId;
         this.address = address;
         this.name = name;
