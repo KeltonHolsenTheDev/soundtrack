@@ -1,23 +1,28 @@
 package soundtrack.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Event {
     private int eventId;
 
+    @NotBlank(message = "Event needs a name")
+    private String eventName;
+
     @NotNull(message = "Start date cannot be null!")
     @FutureOrPresent(message = "Events cannot be created retroactively!")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
 
     @NotNull(message = "End date cannot be null!")
     @FutureOrPresent(message = "Events cannot be created retroactively!")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
 
     @NotNull(message = "Events must have an owner!")
@@ -39,12 +44,32 @@ public class Event {
 
     private List<Integer> equipmentIds = new ArrayList<>(); //service will grab the actual equipment
 
+    public Event() {
+    }
+
+    public Event(int eventId, @NotBlank(message = "Event needs a name") String eventName, @NotNull(message = "Start date cannot be null!") @FutureOrPresent(message = "Events cannot be created retroactively!") LocalDate startDate, @NotNull(message = "End date cannot be null!") @FutureOrPresent(message = "Events cannot be created retroactively!") LocalDate endDate, int ownerId, int locationId) {
+        this.eventId = eventId;
+        this.eventName = eventName;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.ownerId = ownerId;
+        this.locationId = locationId;
+    }
+
     public int getEventId() {
         return eventId;
     }
 
     public void setEventId(int eventId) {
         this.eventId = eventId;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 
     public LocalDate getStartDate() {
@@ -125,5 +150,25 @@ public class Event {
 
     public void setEquipmentIds(List<Integer> equipmentIds) {
         this.equipmentIds = equipmentIds;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return eventId == event.eventId &&
+                ownerId == event.ownerId &&
+                locationId == event.locationId &&
+                Objects.equals(eventName, event.eventName) &&
+                Objects.equals(startDate, event.startDate) &&
+                Objects.equals(endDate, event.endDate) &&
+                Objects.equals(staffIds, event.staffIds) &&
+                Objects.equals(equipmentIds, event.equipmentIds);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(eventId, eventName, startDate, endDate, ownerId, staffIds, locationId, equipmentIds);
     }
 }
