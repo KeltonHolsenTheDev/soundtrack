@@ -12,7 +12,7 @@ const Location = function () {
   const blankLocation = {
     id: 0,
     address: "",
-    name: ""
+    name: "",
   };
 
   const [newLocation, setNewLocation] = useState(blankLocation);
@@ -39,24 +39,24 @@ const Location = function () {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-        .post("/api/location", newLocation)
-        .then(function (response) {
-          console.log(response.data);
-          setLocations([...locations, response.data]);
-        })
-        .catch(function (error) {
-          console.log(error.response);
-          if (error.response == undefined) {
-            return;
+      .post("/api/location", newLocation)
+      .then(function (response) {
+        console.log(response.data);
+        setLocations([...locations, response.data]);
+      })
+      .catch(function (error) {
+        console.log(error.response);
+        if (error.response == undefined) {
+          return;
+        }
+        for (let message of error.response.data) {
+          if (message.defaultMessage) {
+            alert(message.defaultMessage);
+          } else {
+            alert(message);
           }
-          for (let message of error.response.data) {
-            if (message.defaultMessage) {
-              alert(message.defaultMessage);
-            } else {
-              alert(message);
-            }
-          }
-        });
+        }
+      });
   };
 
   const handleEdit = function (event, location, locationId) {
@@ -95,17 +95,17 @@ const Location = function () {
     axios
       .delete(`/api/location/${locationId}`)
       .then(function (response) {
-        setLocations(locations.filter(l => l.locationId != locationId));
+        setLocations(locations.filter((l) => l.locationId != locationId));
       })
       .catch(function (error) {
         console.log(error.response);
-          for (let message of error.response.data) {
-            if (message.defaultMessage) {
-              alert(message.defaultMessage);
-            } else {
-              alert(message);
-            }
+        for (let message of error.response.data) {
+          if (message.defaultMessage) {
+            alert(message.defaultMessage);
+          } else {
+            alert(message);
           }
+        }
       });
   };
 
@@ -116,7 +116,9 @@ const Location = function () {
         <div className="col-6 register-card-container d-flex mt-3">
           <div className="card shadow-lg px-4 w-100 rounded-0 register-card">
             <div className="card-body register-body">
-              <h1 className="card-title mb-3 text-center">Location Add/Update</h1>
+              <h1 className="card-title mb-3 text-center">
+                Location Add/Update
+              </h1>
               <form onSubmit={handleSubmit}>
                 <div className="form-group register-form-group">
                   <label htmlFor="formGroupExampleInput">Location Name</label>
@@ -156,36 +158,38 @@ const Location = function () {
         </div>
         <div className="col-3"></div>
       </div>
-      <div className="row">
-      <table className="table table-hover table-dark">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Address</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody >
-          {locations.map((location) => {
-            return (
-              <LocationCard
-                locationId={location.locationId}
-                name={location.name}
-                address={location.address}
-                handleEdit={(event) => {
-                  let loc = newLocation;
-                  loc.locationId = location.locationId;
-                  handleEdit(event, loc, location.locationId);
-                }}
-                handleDelete={(event) => {
-                  handleDelete(event, location.locationId);
-                }}
-              />
-            );
-          })}
-        </tbody>
-      </table>
+      <div className="container">
+        <div className="row mt-5">
+          <table className="table table-hover table-light table-striped thead-dark">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Address</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {locations.map((location) => {
+                return (
+                  <LocationCard
+                    locationId={location.locationId}
+                    name={location.name}
+                    address={location.address}
+                    handleEdit={(event) => {
+                      let loc = newLocation;
+                      loc.locationId = location.locationId;
+                      handleEdit(event, loc, location.locationId);
+                    }}
+                    handleDelete={(event) => {
+                      handleDelete(event, location.locationId);
+                    }}
+                  />
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

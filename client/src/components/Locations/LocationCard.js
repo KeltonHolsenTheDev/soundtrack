@@ -1,10 +1,8 @@
 import React from "react";
+import "./Location.css";
 
 const LocationCard = function (props) {
   return (
-    // <div class="card">
-    //   <div class="card-body">This is some text within a card body.</div>
-    // </div>
     <tr>
       <th scope="row">{props.locationId}</th>
       <td>{props.name}</td>

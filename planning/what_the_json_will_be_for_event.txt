@@ -1,0 +1,62 @@
+//If it's in parentheses, you shouldn't have to add it, but might need to if the model is acting up.
+//You could also make a new constructor that doesn't use it if you want
+
+{
+	"eventId": 1,
+	"eventName": "church service",
+	"startDate": "2021-19-02",
+	"endDate": "2021-19-02",
+	"owner": { //A user
+		"firstName": "Kelton",
+		"lastName": "Holsen",
+		"email": "kelton.holsen@gmail.com",
+		"phone": "123-123-1234",
+		"accessLevel": "ROLE_ADMINISTRATOR",
+		"password": "keltonholsenholsenkelton",
+		"roles": [
+			"tech", "av"
+		]
+	},
+	
+	("ownerId": 1,)
+	"staffAndRoles": {
+		//Maps a User to a list of Strings representing what roles they are fulfilling at the event
+		{
+		"firstName": "Kelton",
+		"lastName": "Holsen",
+		"email": "kelton.holsen@gmail.com",
+		"phone": "123-123-1234",
+		"accessLevel": "ROLE_ADMINISTRATOR",
+		"password": "keltonholsenholsenkelton",
+		"roles": [
+			"tech", "av"
+		]
+		}: ["tech"]	
+	},
+	("staffIds": [1],) //A list of user IDs
+	"location": {
+		"locationId": 1,
+		"address": "123 Church Street",
+		"name": "The Church"
+	},
+	("locationId": 1,)
+	"equipment": [ //A list of items
+		{
+		"itemName": "test item",
+		"description": "test item description",
+		"brand": "test brand",
+		"itemType": "test item type",
+		"itemCategory": "OTHER",
+		"locationId": 1,
+		"location": {
+			"locationId": 1,
+			"name": "481",
+			"address": "481 Desnoyer St SE"
+		},
+		"locationDescription": "red bin on shelf 2",
+		"isBroken": true,
+		"notes": "f;aldsfj;dslkf"
+		}
+	]
+	(,"equipmentIds": [1])	//A list of item IDs
+}
