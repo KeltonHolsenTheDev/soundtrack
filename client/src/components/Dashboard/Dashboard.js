@@ -3,6 +3,7 @@ import { AuthContext } from "../../auth/auth";
 import { NavLink, useHistory } from "react-router-dom";
 import "./Dashboard.css";
 import ItemContainer from "../ItemContainer";
+import image from "../../img/IMG_2224.JPG";
 
 const Dashboard = function () {
   const [showItems, setShowItems] = useState(false);
@@ -24,7 +25,7 @@ const Dashboard = function () {
           <div className="card dashboard-card shadow rounded-0 w-100">
             <div className=" d-flex justify-content-center mt-2">
               <img
-                src="https://picsum.photos/id/237/400"
+                src={image}
                 className="rounded-circle dashboard-img card-img-top border border-white "
                 alt="user pic"
               />
@@ -48,7 +49,7 @@ const Dashboard = function () {
               <li className="list-group-item dashboard-card">
                 <div className="card-body justify-content-center d-flex">
                   <span className="card-link" onClick={handleShowItems}>
-                    <i class="fa fa-comments fa-4x"></i>
+                    <i className="fa fa-shopping-basket fa-4x"></i>
                   </span>
                 </div>
               </li>
@@ -60,7 +61,7 @@ const Dashboard = function () {
             </div>
             <div className="card-body justify-content-center d-flex">
               <NavLink to="/location" className="card-link">
-                <i class="fa fa-home fa-4x"></i>
+                <i class="fa fa-map-signs fa-4x"></i>
               </NavLink>
             </div>
           </div>

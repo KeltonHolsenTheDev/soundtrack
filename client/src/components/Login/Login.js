@@ -107,9 +107,9 @@ const Login = function () {
                 </div>
               </form>
             </div>
-            <div className="card-footer text-center">
+            {/* <div className="card-footer text-center">
               Don't have an account? <a href="/register">Sign up</a>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

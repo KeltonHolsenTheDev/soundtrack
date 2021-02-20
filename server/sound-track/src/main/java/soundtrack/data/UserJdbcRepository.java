@@ -11,7 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class UserJdbcRepository implements UserRepository {
@@ -50,6 +52,21 @@ public class UserJdbcRepository implements UserRepository {
         }
         attachRoles(user);
         return user;
+    }
+
+    //this is used by EventService
+    @Override
+    public Map<User, String> findUserEventRoles(int userId, int eventId) {
+        User user = this.findById(userId);
+        final String sql = "select r.role_name from role r inner join user_role ur on r.role_id = ur.role_id " +
+                "inner join event_user_role er on er.user_role_id = ur.user_role_id " +
+                "where er.event_id = ?;";
+        List<String> roles = jdbcTemplate.query(sql, this::mapRoleName, eventId);
+        HashMap<User, String> roleMap = new HashMap<>();
+        for (String role: roles) {
+            roleMap.put(user, role);
+        }
+        return roleMap;
     }
 
     /**
