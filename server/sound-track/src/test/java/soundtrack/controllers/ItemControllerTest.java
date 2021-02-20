@@ -21,8 +21,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-//@SpringBootTest
-//@AutoConfigureMockMvc
+@SpringBootTest
+@AutoConfigureMockMvc
 class ItemControllerTest {
 
     @MockBean
