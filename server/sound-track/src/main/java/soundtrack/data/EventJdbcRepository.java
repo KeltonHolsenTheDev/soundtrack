@@ -159,8 +159,8 @@ public class EventJdbcRepository implements EventRepository {
                 "location_id = ?, " +
                 "owner_id = ? " +
                 "where event_id = ?;";
-        boolean success = jdbcTemplate.update(sql, event.getEventName(), event.getStartDate(), event.getEndDate(), event.getLocation().getLocationId(), event.getOwner().getUserId(),
-                event.getEventId()) > 0;
+        boolean success = jdbcTemplate.update(sql, event.getEventName(), event.getStartDate(), event.getEndDate(),
+                event.getLocation().getLocationId(), event.getOwner().getUserId(), event.getEventId()) > 0;
         if (success) {
             updateEquipment(event);
             updateStaff(event);
