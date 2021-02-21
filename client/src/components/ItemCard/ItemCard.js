@@ -15,7 +15,7 @@ const ItemCard = function (props) {
       <td>{props.itemType}</td>
       <td>{props.itemCategory}</td>
       <td>{props.broken ? "Needs repair" : "Good"}</td>
-      <td>{props.locationId}</td>
+      <td>{props.locationName}</td>
       <td>{props.locationDescription}</td>
       <td>{props.notes}</td>
       {buttonsAvailable ? (
