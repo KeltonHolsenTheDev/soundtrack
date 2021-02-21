@@ -3,6 +3,7 @@ import { AuthContext } from "../../auth/auth";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import LocationCard from "./LocationCard";
+import "./Location.css";
 
 import "./Location.css";
 
@@ -158,37 +159,39 @@ const Location = function () {
         </div>
         <div className="col-3"></div>
       </div>
-      <div className="container">
+      <div className="container-fluid">
         <div className="row mt-5">
-          <table className="table table-hover table-light table-striped thead-dark">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Address</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {locations.map((location) => {
-                return (
-                  <LocationCard
-                    locationId={location.locationId}
-                    name={location.name}
-                    address={location.address}
-                    handleEdit={(event) => {
-                      let loc = newLocation;
-                      loc.locationId = location.locationId;
-                      handleEdit(event, loc, location.locationId);
-                    }}
-                    handleDelete={(event) => {
-                      handleDelete(event, location.locationId);
-                    }}
-                  />
-                );
-              })}
-            </tbody>
-          </table>
+          <div className="col ml-auto">
+            <table className="table location-table table-hover table-light table-striped thead-dark text-center">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Address</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {locations.map((location) => {
+                  return (
+                    <LocationCard
+                      locationId={location.locationId}
+                      name={location.name}
+                      address={location.address}
+                      handleEdit={(event) => {
+                        let loc = newLocation;
+                        loc.locationId = location.locationId;
+                        handleEdit(event, loc, location.locationId);
+                      }}
+                      handleDelete={(event) => {
+                        handleDelete(event, location.locationId);
+                      }}
+                    />
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

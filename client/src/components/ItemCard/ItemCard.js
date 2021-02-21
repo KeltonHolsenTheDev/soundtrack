@@ -6,11 +6,14 @@ const ItemCard = function (props) {
     <tr>
       <th scope="row">{props.itemId}</th>
       <td>{props.itemName}</td>
-      <td>{props.descriptionName}</td>
+      <td>{props.description}</td>
       <td>{props.brand}</td>
       <td>{props.itemType}</td>
       <td>{props.itemCategory}</td>
       <td>{`${props.isBroken}`}</td>
+      <td>{props.locationId}</td>
+      <td>{props.locationDescription}</td>
+
       <td>{props.notes}</td>
       <td>
         <button className="btn btn-info mr-2" onClick={props.handleEdit}>

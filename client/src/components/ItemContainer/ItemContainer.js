@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./ItemContainer.css";
 import ItemCard from "../ItemCard";
+import EditItem from "../EditItem";
+import ItemForm from "../ItemForm";
 
 const ItemContainer = function () {
   const testItems = [
@@ -32,7 +34,6 @@ const ItemContainer = function () {
     axios
       .get("/api/item")
       .then(function (response) {
-        console.log(response.data);
         setItems(response.data);
       })
       .catch(function (error) {
@@ -46,7 +47,6 @@ const ItemContainer = function () {
 
   const handleEdit = function (event, editedItem) {
     event.preventDefault();
-    console.log("editing item");
     setChosenItem(editedItem);
     setEnableEdit(true);
   };
@@ -56,54 +56,63 @@ const ItemContainer = function () {
     axios
       .delete(`/api/item/${deletedItem.itemId}`)
       .then(function (response) {
-        setItems(items.filter((i) => i.itemId != deletedItem.itemId));
+        // setItems(items.filter((i) => i.itemId != deletedItem.itemId));
+        renderItems();
       })
       .catch(function (error) {
         console.log(error.response);
       });
   };
 
-  return (
-    <div className="container">
-      <table className="table table-hover table-striped">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Brand</th>
-            <th scope="col">Type</th>
-            <th scope="col">Category</th>
-            <th scope="col">Broken</th>
-            <th scope="col">Notes</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((item) => {
-            return (
-              <ItemCard
-                itemId={item.itemId}
-                itemName={item.itemName}
-                descriptionName={item.description}
-                brand={item.brand}
-                itemType={item.itemType}
-                itemCategory={item.itemCategory}
-                isBroken={item.broken}
-                notes={item.notes}
-                key={item.itemId}
-                handleEdit={(event) => {
-                  handleEdit(event, item);
-                }}
-                handleDelete={(event) => {
-                  handleDelete(event, item);
-                }}
-              />
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+  return enableEdit ? (
+    <EditItem
+      chosenItem={chosenItem}
+      setEnableEdit={setEnableEdit}
+      renderItems={renderItems}
+    />
+  ) : (
+    <table className="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Brand</th>
+          <th scope="col">Type</th>
+          <th scope="col">Category</th>
+          <th scope="col">Broken</th>
+          <th scope="col">Location #</th>
+          <th scope="col">Location Description</th>
+          <th scope="col">Notes</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {items.map((item) => {
+          return (
+            <ItemCard
+              itemId={item.itemId}
+              itemName={item.itemName}
+              description={item.description}
+              brand={item.brand}
+              itemType={item.itemType}
+              itemCategory={item.itemCategory}
+              locationId={item.locationId}
+              locationDescription={item.locationDescription}
+              isBroken={item.broken}
+              notes={item.notes}
+              key={item.itemId}
+              handleEdit={(event) => {
+                handleEdit(event, item);
+              }}
+              handleDelete={(event) => {
+                handleDelete(event, item);
+              }}
+            />
+          );
+        })}
+      </tbody>
+    </table>
   );
 };
 
