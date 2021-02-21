@@ -9,6 +9,8 @@ import image from "../../img/IMG_2224.JPG";
 const Dashboard = function () {
   const [showItems, setShowItems] = useState(false);
   const [showUsers, setShowUsers] = useState(false);
+  const [enableEditItem, setEnableEditItem] = useState(false);
+  const [enableEditUser, setEnableEditUser] = useState(false);
   const { user } = useContext(AuthContext);
   const history = useHistory();
 
@@ -19,19 +21,21 @@ const Dashboard = function () {
   const handleShowItems = function (event) {
     setShowUsers(false);
     setShowItems(true);
+    setEnableEditItem(false);
   };
 
   const handleShowUsers = function (event) {
     setShowItems(false);
     setShowUsers(true);
+    setEnableEditUser(false);
   };
 
   return user ? (
     <div className="container-fluid dashboard-container ">
-      <div className="row no-gutters">
+      <div className="row no-gutters dashboard-row">
         <div className="col-1 dashboard-col-2 px-0">
-          <div className="card dashboard-card shadow rounded-0 w-100">
-            <div className=" d-flex justify-content-center mt-2">
+          <div className="card dashboard-card shadow rounded-0 w-100 h-100">
+            <div className=" d-flex justify-content-center mt-2 mb-3">
               <img
                 src={image}
                 className="rounded-circle dashboard-img card-img-top border border-white "
@@ -39,7 +43,7 @@ const Dashboard = function () {
               />
             </div>
             {/* prettier-ignore */}
-            <div className="card-body dashboard-card-body">
+            <div className="dashboard-card-body">
               <h5 className="card-title text-center">
               {`${user.firstName} ${user.lastName}`}
                 
@@ -61,24 +65,28 @@ const Dashboard = function () {
                   </span>
                 </div>
               </li>
+              <li>
+                <div className="card-body justify-content-center d-flex">
+                  <span className="card-link" onClick={handleShowUsers}>
+                    <i class="fa fa-address-book fa-4x"></i>
+                  </span>
+                </div>
+              </li>
+              <li>
+                <div className="card-body justify-content-center d-flex">
+                  <NavLink to="/location" className="card-link">
+                    <i class="fa fa-map-signs fa-4x"></i>
+                  </NavLink>
+                </div>
+              </li>
             </ul>
-            <div className="card-body justify-content-center d-flex">
-              <span className="card-link" onClick={handleShowUsers}>
-                <i class="fa fa-address-book fa-4x"></i>
-              </span>
-            </div>
-            <div className="card-body justify-content-center d-flex">
-              <NavLink to="/location" className="card-link">
-                <i class="fa fa-map-signs fa-4x"></i>
-              </NavLink>
-            </div>
           </div>
         </div>
         {/* prettier-ignore */}
         <div className="col-11 dashboard-col p-0">
           {/* event card here */}
-          {showUsers ? <UserContainer /> : ""}
-          {showItems ? <ItemContainer /> : ""}
+          {showUsers ? <UserContainer enableEdit={enableEditUser} setEnableEdit={setEnableEditUser} /> : ""}
+          {showItems ? <ItemContainer enableEdit={enableEditItem} setEnableEdit={setEnableEditItem} /> : ""}
         </div>
       </div>
     </div>

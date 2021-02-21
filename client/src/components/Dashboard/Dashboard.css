@@ -1,12 +1,16 @@
 .dashboard-col-2 {
-  justify-content: center;
-  display: flex;
-  height: 100vh;
 }
 
 .dashboard-col {
   background: url("../../img/brickwall_@2X.png") center;
   background-repeat: repeat;
+  /* height: min-content; */
+}
+
+.dashboard-card {
+  /* height: min-content; */
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .dashboard-card-body {
@@ -14,6 +18,7 @@
   text-align: center;
   padding-bottom: 0%;
   color: oldlace;
+  /* height: min-content; */
 }
 
 .dashboard-img {
@@ -25,6 +30,10 @@
 
 .dashboard-container {
   padding: 0%;
+}
+
+.dashboard-row {
+  min-height: 100vh;
 }
 
 .dashboard-card {
