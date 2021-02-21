@@ -148,6 +148,7 @@ insert into role (role_name) values
 insert into item_type (type_name) values
 		("microphone"),
         ("drum"),
+        ("speaker");
 
 insert into item (item_name, description, brand, item_type_id, item_category, location_id, location_description, is_broken, notes) values
 		("Microphone 1", "Bass mic", "Sony", 1, "AUDIO", 1 , "Shelf A", false, "no notes"),
@@ -172,3 +173,5 @@ select * from system_user;
 select * from location;
 
 select * from item;
+
+select * from event_;

@@ -73,9 +73,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3VuZC10cmFjayIsInN1YiI6I
 }
 ###
 ## Testing add a event
+
 POST {{url}} HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3VuZC10cmFjayIsInN1YiI6ImtlbHRvbi5ob2xzZW5AZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiS2VsdG9uIiwibGFzdE5hbWUiOiJIb2xzZW4iLCJwaG9uZSI6IjEyMy0xMjMtMTIzNCIsImFjY2VzcyI6IlJPTEVfQURNSU5JU1RSQVRPUiIsImF1dGhvcml6YXRpb24iOltdLCJyb2xlcyI6WyJhdiIsImF2IiwiYXYiLCJ0ZWNoIiwidGVjaCIsInRlY2giXSwiZXhwIjoxNjEzNjc0MTc2fQ.QamP1cuYi-DdakusCew_-wsPEcJPt2WTDCIBLQNecs8
+
 {
   "eventName": "Church Service",
   "startDate": "2021-02-21",
@@ -87,9 +89,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3VuZC10cmFjayIsInN1YiI6I
     "email": "kholsen@gmail.com",
     "phone": "555-455-5555",
     "accessLevel": "ROLE_ADMINISTRATOR",
-    "authorities": [
-      {}
-    ],
     "password": "swordfishfishfish",
     "roles": [
       "tech"
@@ -98,6 +97,23 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3VuZC10cmFjayIsInN1YiI6I
   "ownerId": 1,
   "staffIds": [
     1
+  ],
+  "staffAndRoles": [
+    { 
+    "user": {
+      "userId": 1,
+      "firstName": "Kelton",
+      "lastName": "Holsen",
+      "email": "kholsen@gmail.com",
+      "phone": "555-455-5555",
+      "accessLevel": "ROLE_ADMINISTRATOR",
+      "password": "swordfishfishfish",
+      "roles": [
+        "tech"
+      ]
+    },
+    "roles": ["tech"]
+    }
   ],
   "location": {
     "locationId": 1,
@@ -128,6 +144,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3VuZC10cmFjayIsInN1YiI6I
     1
   ]
 }
+
 ###
 ## Testing update a event
 PUT {{url}}/1 HTTP/1.1

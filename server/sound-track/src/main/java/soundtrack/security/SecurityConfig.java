@@ -35,6 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**").permitAll() //comment this out unless you're testing controllers
                 .antMatchers(HttpMethod.GET, "/api/location", "/api/location/*").hasAnyRole("USER", "ADMINISTRATOR")
                 .antMatchers(HttpMethod.GET, "/api/item", "/api/item/*").hasAnyRole("USER", "ADMINISTRATOR")
+                .antMatchers(HttpMethod.GET, "/api/event", "/api/event/*").hasAnyRole("USER", "ADMINISTRATOR")
                 .antMatchers("/api/user/{userId}").access("@webSecurity.checkUserId(authentication, #userId)")
                 .antMatchers(HttpMethod.GET, "/api/user", "/api/user/*").hasAnyRole("ADMINISTRATOR")
                 .antMatchers(HttpMethod.POST).permitAll()

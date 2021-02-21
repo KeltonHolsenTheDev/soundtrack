@@ -141,7 +141,7 @@ public class EventService {
     }
 
     private void validateNoConflicts(Event event, Result<Event> result){
-        List<Event> existing = eventRepository.findAll();
+        List<Event> existing = this.findAll();
         for (Event e: existing) {
             if (checkOverlap(event, e)) { //conflicts don't matter if the time is different
                 if (e.getLocation().equals(event.getLocation())) { //two events can't use the same location
@@ -201,7 +201,8 @@ public class EventService {
         for (int userId: event.getStaffIds()) {
             Map<User, String> userMap = userRepository.findUserEventRoles(userId, event.getEventId());
             User user = userRepository.findById(userId);
-            roles.add(new UserRole(user, (List<String>) userMap.values()));
+            List<String> userRoles = new ArrayList<>(userMap.values());
+            roles.add(new UserRole(user, userRoles));
         }
         event.setStaffAndRoles(roles);
     }
