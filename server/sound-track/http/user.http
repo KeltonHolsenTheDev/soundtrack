@@ -20,7 +20,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzb3VuZC10cmFjayIsInN1YiI6I
 {
     "firstName": "Kelton",
     "lastName": "Holsen",
-    "email": "keltob.holser@gmail.com",
+    "email": "kelton.holsen@gmail.com",
     "phone": "123-123-1234",
     "accessLevel": "ROLE_ADMINISTRATOR",
     "password": "keltonholsenholsenkelton",

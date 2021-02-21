@@ -38,14 +38,15 @@ class EventServiceTest {
     LocationRepository locationRepository;
 
     private static Event makeEvent() {
-        Event event = new Event(1, "Church Service", LocalDate.of(2021, 02, 21), LocalDate.of(2021, 02, 21), 1, 1);
+        Event event = new Event(1, "Church Service", LocalDate.of(2021, 2, 21), LocalDate.of(2021, 2, 21), 1, 1);
         event.setLocationId(1);
         event.setLocation(new Location(1, "123 Church Street", "The Church"));
         event.setEquipment(List.of(ItemServiceTest.makeNewItem()));
         event.setEquipmentIds(List.of(1));
         User kelton = new User("Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ROLE_ADMINISTRATOR, "swordfishfishfish");
-        Map<User, List<String>> userRoles = new HashMap<>();
-        userRoles.put(kelton, List.of("tech"));
+        kelton.setRoles(List.of("tech"));
+        List<UserRole> userRoles = new ArrayList<>();
+        userRoles.add(new UserRole(kelton, List.of("tech")));
         event.setStaffAndRoles(userRoles);
         event.setOwnerId(1);
         event.setOwner(kelton);
@@ -109,8 +110,9 @@ class EventServiceTest {
 
         User notKelton = new User("Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ROLE_ADMINISTRATOR, "swordfishfishfish");
         notKelton.setUserId(3);
-        Map<User, List<String>> userRoles = new HashMap<>();
-        userRoles.put(notKelton, List.of("tech"));
+        notKelton.setRoles(List.of("tech"));
+        List<UserRole> userRoles = new ArrayList<>();
+        userRoles.add(new UserRole(notKelton, List.of("tech")));
         toAdd.setStaffAndRoles(userRoles);
 
         Result<Event> result = service.addEvent(toAdd);
@@ -130,8 +132,9 @@ class EventServiceTest {
 
         User notKelton = new User("Kelton", "Holsen", "kholsen@gmail.com", "555-455-5555", AccessLevel.ROLE_ADMINISTRATOR, "swordfishfishfish");
         notKelton.setUserId(3);
-        Map<User, List<String>> userRoles = new HashMap<>();
-        userRoles.put(notKelton, List.of("tech"));
+        notKelton.setRoles(List.of("tech"));
+        List<UserRole> userRoles = new ArrayList<>();
+        userRoles.add(new UserRole(notKelton, List.of("tech")));
         toAdd.setStaffAndRoles(userRoles);
 
         Result<Event> result = service.addEvent(toAdd);

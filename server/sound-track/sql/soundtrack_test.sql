@@ -119,13 +119,7 @@ delimiter //
 create procedure set_known_good_state()
 begin
 	
-    delete from event_user_role;
-    alter table event_user_role auto_increment = 1;
-    delete from event_item;
-    alter table event_item auto_increment = 1;
-    delete from event_;
-    alter table event_ auto_increment = 1;
-    delete from item;
+       delete from item;
     alter table item auto_increment = 1;
     delete from item_type;
     alter table item_type auto_increment = 1;
@@ -137,6 +131,7 @@ begin
     alter table system_user auto_increment = 1;
     delete from role;
     alter table role auto_increment = 1;
+    set sql_safe_updates = 1;
     
     insert into location(address, location_name) values
 		("123 4th Street", "The Chapel"),
@@ -144,8 +139,8 @@ begin
         ("44 Sunset Blvd.", "Pa's House");
         
 	insert into system_user (first_name, last_name, email, phone, access_level, password_hash) values
-		("Kelton", "Holsen", "keltonholsen@gmail.com", "555-555-5555", "ADMINISTRATOR", "swordfishfishfish"),
-        ("Artemis", "Cat", "artemis@gmail.com", "777-777-7777", "USER", "meowmeowmeowmeow");
+		("Kelton", "Holsen", "keltonholsen@gmail.com", "555-555-5555", "ROLE_ADMINISTRATOR", "swordfishfishfish"),
+        ("Artemis", "Cat", "artemis@gmail.com", "777-777-7777", "ROLE_USER", "meowmeowmeowmeow");
         
 	insert into role (role_name) values
 		("Sound Board"),
@@ -176,6 +171,7 @@ begin
     insert into event_user_role(event_id, user_role_id) values
     (1, 1),
     (2, 2);
+
         
 end //
 delimiter ;
