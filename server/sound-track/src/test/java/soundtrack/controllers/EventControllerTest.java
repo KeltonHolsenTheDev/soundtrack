@@ -44,9 +44,6 @@ public class EventControllerTest {
     @Autowired
     MockMvc mvc;
 
-<<<<<<< HEAD
-    @Test
-=======
     /*@Test cannot run due to user authorities issue
 >>>>>>> 1783696455b81ee90d909197cf6604ec14e7b690
     void shouldAdd() throws Exception {
@@ -95,7 +92,6 @@ public class EventControllerTest {
 
         mvc.perform(request)
                 .andExpect(status().isAccepted());
->>>>>>> 1783696455b81ee90d909197cf6604ec14e7b690
     }
 
     @Test
@@ -121,11 +117,7 @@ public class EventControllerTest {
     @Test
     void shouldDelete() throws Exception {
         when(eventRepository.deleteById(1)).thenReturn(true);
-<<<<<<< HEAD
-        var request = delete("/api/user/1");
-=======
         var request = delete("/api/event/1");
->>>>>>> 1783696455b81ee90d909197cf6604ec14e7b690
 
         mvc.perform(request)
                 .andExpect(status().isAccepted());
@@ -146,15 +138,10 @@ public class EventControllerTest {
         event.setEquipmentIds(List.of(1));
 
         User kelton = makeNewUser();
-<<<<<<< HEAD
-        Map<User, List<String>> userRoles = new HashMap<>();
-        userRoles.put(kelton, List.of("tech"));
-        kelton.setRoles(userRoles.get(kelton));
-=======
+
         List<UserRole> userRoles = new ArrayList<>();
         userRoles.add(new UserRole(kelton, List.of("tech")));
         kelton.setRoles(List.of("tech"));
->>>>>>> 1783696455b81ee90d909197cf6604ec14e7b690
 
         event.setStaffAndRoles(userRoles);
         event.setStaffIds(List.of(1));
