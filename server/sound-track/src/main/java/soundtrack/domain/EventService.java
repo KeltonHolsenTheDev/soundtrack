@@ -9,6 +9,7 @@ import soundtrack.data.UserRepository;
 import soundtrack.models.Event;
 import soundtrack.models.Item;
 import soundtrack.models.User;
+import soundtrack.models.UserRole;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -16,6 +17,7 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class EventService {
@@ -126,6 +128,15 @@ public class EventService {
             }
         }
 
+        //Frontend should only allow users to be given roles that they have, but we want to make sure that no bad roles snuck in
+        for (UserRole ur: event.getStaffAndRoles()) {
+            for (String role: ur.getRoles()) {
+                if (!ur.getUser().getRoles().contains(role)) {
+                    result.addMessage("User " + ur.getUser().getUserId() + " is not qualified for role " + role, ResultType.INVALID);
+                }
+            }
+        }
+
         return result;
     }
 
@@ -143,9 +154,9 @@ public class EventService {
                         }
                     }
                 }
-                for (User user: event.getStaffAndRoles().keySet()) { //a volunteer cannot work two events at the same time
-                    for (User u: e.getStaffAndRoles().keySet()) {
-                        if (u.equals(user)) {
+                for (User user: event.getStaffAndRoles().stream().map(UserRole::getUser).collect(Collectors.toList())) { //a volunteer cannot work two events at the same time
+                    for (User u: e.getStaffAndRoles().stream().map(UserRole::getUser).collect(Collectors.toList())) {
+                        if (u.getUserId() == user.getUserId()) {
                             result.addMessage("Event " + e.getEventName() + " is already using " + user.getFirstName() + " " + user.getLastName() + " at that time.", ResultType.INVALID);
                         }
                     }
@@ -186,12 +197,12 @@ public class EventService {
             items.add(item);
         }
         event.setEquipment(items);
-        Map<User, List<String>> staffRoles = new HashMap<>();
+        List<UserRole> roles = new ArrayList<>();
         for (int userId: event.getStaffIds()) {
             Map<User, String> userMap = userRepository.findUserEventRoles(userId, event.getEventId());
             User user = userRepository.findById(userId);
-            staffRoles.put(user, (List<String>) userMap.values());
+            roles.add(new UserRole(user, (List<String>) userMap.values()));
         }
-        event.setStaffAndRoles(staffRoles);
+        event.setStaffAndRoles(roles);
     }
 }

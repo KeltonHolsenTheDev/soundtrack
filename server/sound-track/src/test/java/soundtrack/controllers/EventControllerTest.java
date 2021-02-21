@@ -111,9 +111,9 @@ public class EventControllerTest {
         event.setEquipmentIds(List.of(1));
 
         User kelton = makeNewUser();
-        Map<User, List<String>> userRoles = new HashMap<>();
-        userRoles.put(kelton, List.of("tech"));
-        kelton.setRoles(userRoles.get(kelton));
+        List<UserRole> userRoles = new ArrayList<>();
+        userRoles.add(new UserRole(kelton, List.of("tech")));
+        kelton.setRoles(List.of("tech"));
 
         event.setStaffAndRoles(userRoles);
         event.setStaffIds(List.of(1));

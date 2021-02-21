@@ -1,5 +1,4 @@
 package soundtrack.controllers;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -8,23 +7,17 @@ import soundtrack.domain.EventService;
 import soundtrack.domain.Result;
 import soundtrack.domain.ResultType;
 import soundtrack.models.Event;
-
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
-
 @RestController
 @CrossOrigin(origins = {"http://localhost:3000","http://127.0.0.1:8081"})
 @RequestMapping("/api/event")
 public class EventController {
-
     private final EventService service;
-
     public EventController(EventService service) { this.service = service; }
-
     @GetMapping
     public List<Event> findAll() { return service.findAll(); }
-
     @GetMapping("/{eventId}")
     public ResponseEntity<Object> findById(@PathVariable int eventId) {
         Event event = service.findById(eventId);
@@ -35,7 +28,6 @@ public class EventController {
             return new ResponseEntity<>(event, HttpStatus.OK);
         }
     }
-
     @GetMapping("/{ownerId}")
     public ResponseEntity<Object> findByName(@PathVariable int ownerId) {
         List<Event> eventList = service.findByOwner(ownerId);
@@ -46,7 +38,6 @@ public class EventController {
             return new ResponseEntity<>(eventList, HttpStatus.OK);
         }
     }
-
     @GetMapping("/{eventDate}")
     public ResponseEntity<Object> findByDate(@PathVariable LocalDate eventDate) {
         List<Event> event = service.findByDate(eventDate);
@@ -57,7 +48,6 @@ public class EventController {
             return new ResponseEntity<>(event, HttpStatus.OK);
         }
     }
-
     @PutMapping
     public ResponseEntity<Object> addEvent(@RequestBody Event event, BindingResult result) {
         if (result.hasErrors()) {
@@ -71,7 +61,6 @@ public class EventController {
             return new ResponseEntity<>(event, HttpStatus.ACCEPTED);
         }
     }
-
     @PutMapping("/{eventId}")
     public ResponseEntity<Object> updateEvent(@PathVariable int eventId, @RequestBody @Valid Event event, BindingResult result) {
         if (event.getEventId() != eventId) {
@@ -91,7 +80,6 @@ public class EventController {
             return new ResponseEntity<>(eventResult.getPayLoad(), HttpStatus.ACCEPTED);
         }
     }
-
     @DeleteMapping("/{eventId}")
     public ResponseEntity<Object> deleteById(@PathVariable int eventId) {
         if (service.deleteById(eventId)) {

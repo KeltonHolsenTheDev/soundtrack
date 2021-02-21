@@ -31,7 +31,7 @@ public class Event {
     private int ownerId;
 
     @NotEmpty(message = "Events must have at least one staff member!")
-    private Map<User, List<String>> staffAndRoles = new HashMap<User, List<String>>(); //service will get this
+    private List<UserRole> staffAndRoles = new ArrayList<>(); //service will get this
 
     private List<Integer> staffIds = new ArrayList<>();
 
@@ -109,13 +109,12 @@ public class Event {
         this.ownerId = ownerId;
     }
 
-    public Map<User, List<String>> getStaffAndRoles() {
-//        return staffAndRoles;
-        return null;
+    public List<UserRole> getStaffAndRoles() {
+        return staffAndRoles;
     }
 
-    public void setStaffAndRoles(Map<User, List<String>> staffAndRoles) {
-//        this.staffAndRoles = staffAndRoles;
+    public void setStaffAndRoles(List<UserRole> staffAndRoles) {
+        this.staffAndRoles = staffAndRoles;
     }
 
     public List<Integer> getStaffIds() {
