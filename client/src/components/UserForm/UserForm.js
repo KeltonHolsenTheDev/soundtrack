@@ -4,8 +4,11 @@ import "./UserForm.css";
 
 const UserForm = function ({ defaultUser, submitFcn, formTitle }) {
   const history = useHistory();
+  console.log(defaultUser);
 
   const [newUser, setNewUser] = useState(defaultUser);
+  const [roleInput, setRoleInput] = useState("");
+  const [roles, setRoles] = useState(defaultUser.roles);
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const onChangeHandler = (event) => {
@@ -15,9 +18,25 @@ const UserForm = function ({ defaultUser, submitFcn, formTitle }) {
     setNewUser(updatedUser);
   };
 
+  const handleAddRole = (event) => {
+    event.preventDefault();
+    const newRoles = [...roles];
+    newRoles.push(roleInput);
+    setRoles(newRoles);
+    setRoleInput("");
+  };
+
+  const handleDeleteRole = (event, role) => {
+    event.preventDefault();
+    const newRoles = [...roles];
+    newRoles.splice(newRoles.indexOf(role), 1);
+    setRoles(newRoles);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (newUser.password == confirmPassword) {
+      newUser.roles = roles;
       submitFcn(newUser, history);
     } else {
       console.log("Passwords must match");
@@ -134,16 +153,36 @@ const UserForm = function ({ defaultUser, submitFcn, formTitle }) {
                   <option value="ROLE_ADMINISTRATOR">Administrator</option>
                   <option value="ROLE_USER">User</option>
                 </select>
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">Email address</label>
+                <div className="form-group userform-form-group">
+                  <label htmlFor="formGroupExampleInput">Roles</label>
+                  {roles.map((role) => (
+                    <p key={roles.indexOf(role)}>
+                      {role}
+                      <button
+                        type="button"
+                        className="close"
+                        aria-label="Close"
+                        onClick={(e) => handleDeleteRole(e, role)}
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </p>
+                  ))}
                   <input
-                    type="email"
-                    class="form-control"
-                    id="exampleFormControlInput1"
-                    placeholder="name@example.com"
+                    type="text"
+                    className="form-control"
+                    id="formGroupExampleInput"
+                    placeholder="Technician"
+                    onChange={(e) => setRoleInput(e.target.value)}
+                    value={roleInput}
                   />
+                  <button
+                    className="btn btn-info rounded-0"
+                    onClick={(e) => handleAddRole(e)}
+                  >
+                    Add role
+                  </button>
                 </div>
-
                 <div className="form-group userform-form-group row">
                   <div className="col-sm-10">
                     <button type="submit" className="btn btn-primary rounded-0">
