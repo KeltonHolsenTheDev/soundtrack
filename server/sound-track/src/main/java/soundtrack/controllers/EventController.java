@@ -58,7 +58,7 @@ public class EventController {
         }
     }
 
-    @PutMapping
+    @PostMapping
     public ResponseEntity<Object> addEvent(@RequestBody Event event, BindingResult result) {
         if (result.hasErrors()) {
             return new ResponseEntity<>(result.getAllErrors(), HttpStatus.BAD_REQUEST);

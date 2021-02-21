@@ -5,7 +5,7 @@ import ItemCard from "../ItemCard";
 import EditItem from "../EditItem";
 import ItemForm from "../ItemForm";
 
-const ItemContainer = function () {
+const ItemContainer = function ({ enableEdit, setEnableEdit }) {
   const testItems = [
     {
       itemId: 1,
@@ -27,7 +27,6 @@ const ItemContainer = function () {
   ];
 
   const [items, setItems] = useState([testItems]);
-  const [enableEdit, setEnableEdit] = useState(false);
   const [chosenItem, setChosenItem] = useState(null);
 
   const renderItems = function () {
@@ -72,7 +71,7 @@ const ItemContainer = function () {
       renderItems={renderItems}
     />
   ) : (
-    <table className="table table-hover table-striped">
+    <table className="table table-hover table-striped text-center">
       <thead>
         <tr>
           <th scope="col">#</th>

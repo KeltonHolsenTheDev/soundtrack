@@ -8,6 +8,7 @@ import soundtrack.data.mappers.EventMapper;
 import soundtrack.models.Event;
 import soundtrack.models.Item;
 import soundtrack.models.User;
+import soundtrack.models.UserRole;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -126,9 +127,9 @@ public class EventJdbcRepository implements EventRepository {
         }
     }
 
-    private void addStaff(Map<User, List<String>> staffAndRoles, int eventId) {
-        for (User user: staffAndRoles.keySet()) {
-            List<String> eventRoles = staffAndRoles.get(user);
+    private void addStaff(List<UserRole> staffAndRoles, int eventId) {
+        for (UserRole userRole: staffAndRoles) {
+            List<String> eventRoles = userRole.getRoles();
             for (String role: eventRoles) {
                 //get the ids of the user's roles for the event, assuming that they won't have been assigned roles they can't do
                 String sql = "select u.user_role_id from user_role u inner join role r on u.role_id = r.role_id " +
