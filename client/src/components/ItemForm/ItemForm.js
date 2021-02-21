@@ -14,6 +14,7 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
   const [locationDescription, setLocationDescription] = useState(
     defaultItem.locationDescription
   );
+  const [checked, setChecked] = useState(defaultItem.broken);
 
   useEffect(() => {
     axios.get("/api/location").then(function (response) {
@@ -40,7 +41,6 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // const item = { ...newItem };
     let location = {};
     for (let loc of allLocations) {
       if (loc.locationId == locationId) {
@@ -58,21 +58,21 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
       location: location,
       locationId: locationId,
       locationDescription: locationDescription,
+      broken: checked,
     };
     // item.location = chosenLocation;
     // item.locationId = chosenLocation.locationId;
-    console.log(item);
     submitFcn(item);
     // console.log(item);
     // console.log(submitFcn);
   };
 
   return (
-    <div className="container-fluid item-form-container">
+    <div className="container item-form-container">
       <div className="container item-form">
         <div className="row">
           <div className="col">
-            <div className="card item-form-card">
+            <div className="card shadow-lg item-form-card">
               <div className="card-body item-form-cardBody">
                 <h1 className="card-title mb-3 text-center">
                   {`${formTitle} Item `}
@@ -146,7 +146,7 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
                     <option value="LIGHTING">Lighting</option>
                     <option value="AUDIO">Audio</option>
                   </select>
-                  <label htmlFor="itemLocation">Location</label>
+                  <label htmlFor="itemLocation">Storage Location</label>
                   <select
                     // multiple
                     class="form-control"
@@ -172,7 +172,7 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
                   </select>
                   <div class="form-group">
                     <label htmlFor="formGroupExampleInput2">
-                      Location Description
+                      Storage Location Description
                     </label>
                     <input
                       type="text"
@@ -184,6 +184,18 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
                       value={locationDescription}
                       required
                     />
+                  </div>
+                  <div class="custom-control custom-checkbox">
+                    <input
+                      type="checkbox"
+                      class="custom-control-input"
+                      id="customCheck1"
+                      checked={checked}
+                      onChange={(e) => setChecked(e.target.checked)}
+                    />
+                    <label class="custom-control-label" for="customCheck1">
+                      Check if Item needs repair
+                    </label>
                   </div>
 
                   <div className="form-group userform-form-group row">

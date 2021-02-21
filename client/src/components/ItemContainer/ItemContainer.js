@@ -34,6 +34,7 @@ const ItemContainer = function () {
     axios
       .get("/api/item")
       .then(function (response) {
+        console.log(response.data);
         setItems(response.data);
       })
       .catch(function (error) {
@@ -80,9 +81,10 @@ const ItemContainer = function () {
           <th scope="col">Brand</th>
           <th scope="col">Type</th>
           <th scope="col">Category</th>
-          <th scope="col">Broken</th>
-          <th scope="col">Location #</th>
-          <th scope="col">Location Description</th>
+          <th scope="col">Condition</th>
+          <th scope="col">Storage Location #</th>
+          <th scope="col">Storage Location Description</th>
+          <th scope="col">Condition</th>
           <th scope="col">Notes</th>
           <th scope="col"></th>
         </tr>
@@ -99,7 +101,7 @@ const ItemContainer = function () {
               itemCategory={item.itemCategory}
               locationId={item.locationId}
               locationDescription={item.locationDescription}
-              isBroken={item.broken}
+              broken={item.broken}
               notes={item.notes}
               key={item.itemId}
               handleEdit={(event) => {

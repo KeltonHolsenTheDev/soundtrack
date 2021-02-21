@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 const AddItem = function () {
   const history = useHistory();
   const addItem = function (item) {
+    console.log(item);
     axios
       .post("/api/item", item)
       .then(function (response) {
@@ -26,6 +27,7 @@ const AddItem = function () {
     location: { locationId: 0, name: "blank", address: "blank" },
     locationId: 0,
     locationDescription: "",
+    broken: false,
   };
   return (
     <ItemForm defaultItem={blankItem} submitFcn={addItem} formTitle="Add" />

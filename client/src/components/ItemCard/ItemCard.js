@@ -10,7 +10,7 @@ const ItemCard = function (props) {
       <td>{props.brand}</td>
       <td>{props.itemType}</td>
       <td>{props.itemCategory}</td>
-      <td>{`${props.isBroken}`}</td>
+      <td>{props.broken ? "Needs repair" : "Good"}</td>
       <td>{props.locationId}</td>
       <td>{props.locationDescription}</td>
 
