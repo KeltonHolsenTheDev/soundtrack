@@ -3,10 +3,12 @@ import { AuthContext } from "../../auth/auth";
 import { NavLink, useHistory } from "react-router-dom";
 import "./Dashboard.css";
 import ItemContainer from "../ItemContainer";
+import UserContainer from "../UserContainer";
 import image from "../../img/IMG_2224.JPG";
 
 const Dashboard = function () {
   const [showItems, setShowItems] = useState(false);
+  const [showUsers, setShowUsers] = useState(false);
   const { user } = useContext(AuthContext);
   const history = useHistory();
 
@@ -15,13 +17,19 @@ const Dashboard = function () {
   }
 
   const handleShowItems = function (event) {
+    setShowUsers(false);
     setShowItems(true);
+  };
+
+  const handleShowUsers = function (event) {
+    setShowItems(false);
+    setShowUsers(true);
   };
 
   return user ? (
     <div className="container-fluid dashboard-container ">
       <div className="row no-gutters">
-        <div className="col-2 dashboard-col-2 px-0">
+        <div className="col-1 dashboard-col-2 px-0">
           <div className="card dashboard-card shadow rounded-0 w-100">
             <div className=" d-flex justify-content-center mt-2">
               <img
@@ -55,9 +63,9 @@ const Dashboard = function () {
               </li>
             </ul>
             <div className="card-body justify-content-center d-flex">
-              <NavLink to="/contacts" className="card-link">
+              <span className="card-link" onClick={handleShowUsers}>
                 <i class="fa fa-address-book fa-4x"></i>
-              </NavLink>
+              </span>
             </div>
             <div className="card-body justify-content-center d-flex">
               <NavLink to="/location" className="card-link">
@@ -66,8 +74,10 @@ const Dashboard = function () {
             </div>
           </div>
         </div>
-        <div className="col dashboard-col p-0">
+        {/* prettier-ignore */}
+        <div className="col-11 dashboard-col p-0">
           {/* event card here */}
+          {showUsers ? <UserContainer /> : ""}
           {showItems ? <ItemContainer /> : ""}
         </div>
       </div>

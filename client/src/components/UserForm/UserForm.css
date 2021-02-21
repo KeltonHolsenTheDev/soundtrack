@@ -1,9 +1,9 @@
-.userform-background {
+/* .userform-background {
   background: url("../../img/audio-868487_1280.jpg") center;
   background-size: cover;
   min-height: 100vh;
   overflow: hidden;
-}
+} */
 
 .userform-card-container {
   align-items: center;
@@ -15,8 +15,8 @@
 }
 
 .userform-card {
-  border-color: rgb(37, 37, 37);
-  border-width: thick;
+  /* border-color: rgb(37, 37, 37);
+  border-width: thick; */
 }
 
 .userform-body {

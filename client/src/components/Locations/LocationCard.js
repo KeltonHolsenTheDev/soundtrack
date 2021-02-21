@@ -3,8 +3,8 @@ import "./Location.css";
 
 const LocationCard = function (props) {
   return (
-    <tr>
-      <th scope="row">{props.locationId}</th>
+    <tr className="card-list">
+      <th>{props.locationId}</th>
       <td>{props.name}</td>
       <td>{props.address}</td>
       <td>
