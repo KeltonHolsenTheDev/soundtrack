@@ -69,6 +69,20 @@ function Navbar() {
           ) : (
             ""
           )}
+          {user && user.access === "ROLE_ADMINISTRATOR" ? (
+            <li className="nav-item">
+              <NavLink
+                exact={true}
+                className="nav-link"
+                activeClassName="nav-link active"
+                to="/item"
+              >
+                Add Item
+              </NavLink>
+            </li>
+          ) : (
+            ""
+          )}
           {user ? (
             <li className="nav-item">
               <a
