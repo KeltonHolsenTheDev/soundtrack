@@ -14,7 +14,7 @@ const Dashboard = function () {
 
   const [enableEditItem, setEnableEditItem] = useState(false);
   const [enableEditUser, setEnableEditUser] = useState(false);
-  const [enableEditEvent, setEnableEditEvent = useState(false);
+  const [enableEditEvent, setEnableEditEvent] = useState(false);
 
   const { user } = useContext(AuthContext);
   const history = useHistory();
