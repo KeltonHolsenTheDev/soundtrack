@@ -47,7 +47,12 @@ public class Event {
     public Event() {
     }
 
-    public Event(int eventId, @NotBlank(message = "Event needs a name") String eventName, @NotNull(message = "Start date cannot be null!") @FutureOrPresent(message = "Events cannot be created retroactively!") LocalDate startDate, @NotNull(message = "End date cannot be null!") @FutureOrPresent(message = "Events cannot be created retroactively!") LocalDate endDate, int ownerId, int locationId) {
+    public Event(int eventId, @NotBlank(message = "Event needs a name") String eventName,
+                 @NotNull(message = "Start date cannot be null!")
+                 @FutureOrPresent(message = "Events cannot be created retroactively!") LocalDate startDate,
+                 @NotNull(message = "End date cannot be null!")
+                 @FutureOrPresent(message = "Events cannot be created retroactively!") LocalDate endDate,
+                 int ownerId, int locationId) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.startDate = startDate;
@@ -105,11 +110,12 @@ public class Event {
     }
 
     public Map<User, List<String>> getStaffAndRoles() {
-        return staffAndRoles;
+//        return staffAndRoles;
+        return null;
     }
 
     public void setStaffAndRoles(Map<User, List<String>> staffAndRoles) {
-        this.staffAndRoles = staffAndRoles;
+//        this.staffAndRoles = staffAndRoles;
     }
 
     public List<Integer> getStaffIds() {
