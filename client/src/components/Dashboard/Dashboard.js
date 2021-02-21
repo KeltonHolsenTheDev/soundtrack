@@ -4,13 +4,18 @@ import { NavLink, useHistory } from "react-router-dom";
 import "./Dashboard.css";
 import ItemContainer from "../ItemContainer";
 import UserContainer from "../UserContainer";
+import EventContainer from "../EventContainer"
 import image from "../../img/IMG_2224.JPG";
 
 const Dashboard = function () {
   const [showItems, setShowItems] = useState(false);
   const [showUsers, setShowUsers] = useState(false);
+<<<<<<< HEAD
   const [enableEditItem, setEnableEditItem] = useState(false);
   const [enableEditUser, setEnableEditUser] = useState(false);
+=======
+  const [showEvents, setShowEvents] = useState(false);
+>>>>>>> kelton
   const { user } = useContext(AuthContext);
   const history = useHistory();
 
@@ -20,14 +25,22 @@ const Dashboard = function () {
 
   const handleShowItems = function (event) {
     setShowUsers(false);
+    setShowEvents(false);
     setShowItems(true);
     setEnableEditItem(false);
   };
 
   const handleShowUsers = function (event) {
     setShowItems(false);
+    setShowEvents(false);
     setShowUsers(true);
     setEnableEditUser(false);
+  };
+
+  const handleShowEvents = function (event) {
+    setShowItems(false);
+    setShowUsers(false);
+    setShowEvents(true);
   };
 
   return user ? (
@@ -53,9 +66,9 @@ const Dashboard = function () {
             <ul className="list-group list-group-flush">
               <li className="list-group-item dashboard-card">
                 <div className="card-body justify-content-center d-flex">
-                  <a href="#" className="card-link">
+                <span className="card-link" onClick={handleShowEvents}>
                     <i class="fa fa-calendar fa-4x"></i>
-                  </a>
+                  </span>
                 </div>
               </li>
               <li className="list-group-item dashboard-card">
@@ -84,7 +97,7 @@ const Dashboard = function () {
         </div>
         {/* prettier-ignore */}
         <div className="col-11 dashboard-col p-0">
-          {/* event card here */}
+          {showEvents ? <EventContainer enableEdit={enableEditEvent} setEnableEdit={setEnableEditEvent} /> : ""}
           {showUsers ? <UserContainer enableEdit={enableEditUser} setEnableEdit={setEnableEditUser} /> : ""}
           {showItems ? <ItemContainer enableEdit={enableEditItem} setEnableEdit={setEnableEditItem} /> : ""}
         </div>
