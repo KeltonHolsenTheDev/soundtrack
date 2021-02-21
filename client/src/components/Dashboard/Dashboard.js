@@ -10,12 +10,12 @@ import image from "../../img/IMG_2224.JPG";
 const Dashboard = function () {
   const [showItems, setShowItems] = useState(false);
   const [showUsers, setShowUsers] = useState(false);
-<<<<<<< HEAD
+  const [showEvents, setShowEvents] = useState(false);
+
   const [enableEditItem, setEnableEditItem] = useState(false);
   const [enableEditUser, setEnableEditUser] = useState(false);
-=======
-  const [showEvents, setShowEvents] = useState(false);
->>>>>>> kelton
+  const [enableEditEvent, setEnableEditEvent = useState(false);
+
   const { user } = useContext(AuthContext);
   const history = useHistory();
 
