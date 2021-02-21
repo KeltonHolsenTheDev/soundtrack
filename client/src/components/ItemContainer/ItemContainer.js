@@ -84,7 +84,6 @@ const ItemContainer = function () {
           <th scope="col">Condition</th>
           <th scope="col">Storage Location #</th>
           <th scope="col">Storage Location Description</th>
-          <th scope="col">Condition</th>
           <th scope="col">Notes</th>
           <th scope="col"></th>
         </tr>
