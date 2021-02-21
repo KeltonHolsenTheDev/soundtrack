@@ -7,7 +7,7 @@ import "./UserContainer.css";
 import UserCard from "../UserCard";
 import EditUser from "../EditUser";
 
-const UserContainer = function () {
+const UserContainer = function ({ enableEdit, setEnableEdit }) {
   // const users = [
   //   {
   //     firstName: "Mark",
@@ -30,7 +30,6 @@ const UserContainer = function () {
   // ];
 
   const [users, setUsers] = useState([]);
-  const [enableEdit, setEnableEdit] = useState(false);
   const [chosenUser, setChosenUser] = useState(null);
   const { user, logoutUser } = useContext(AuthContext);
   const history = useHistory();
