@@ -77,7 +77,11 @@ const UserContainer = function ({ enableEdit, setEnableEdit }) {
   };
 
   return enableEdit ? (
-    <EditUser chosenUser={chosenUser} />
+    <EditUser
+      chosenUser={chosenUser}
+      setEnableEdit={setEnableEdit}
+      renderUsers={renderUsers}
+    />
   ) : (
     <div className="container">
       <table className="table table-hover table-striped">

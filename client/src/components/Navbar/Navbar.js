@@ -31,7 +31,7 @@ function Navbar() {
       </button>
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav ml-auto">
-          {user ? (
+          {/* {user ? (
             ""
           ) : (
             <li className="nav-item">
@@ -44,17 +44,21 @@ function Navbar() {
                 Login
               </NavLink>
             </li>
+          )} */}
+          {user ? (
+            <li className="nav-item">
+              <NavLink
+                exact={true}
+                className="nav-link"
+                activeClassName="nav-link active"
+                to="/"
+              >
+                Dashboard
+              </NavLink>
+            </li>
+          ) : (
+            ""
           )}
-          <li className="nav-item">
-            <NavLink
-              exact={true}
-              className="nav-link"
-              activeClassName="nav-link active"
-              to="/"
-            >
-              Dashboard
-            </NavLink>
-          </li>
           {user && user.access === "ROLE_ADMINISTRATOR" ? (
             <li className="nav-item">
               <NavLink
