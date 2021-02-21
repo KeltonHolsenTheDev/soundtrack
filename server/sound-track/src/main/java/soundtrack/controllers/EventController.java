@@ -1,4 +1,5 @@
 package soundtrack.controllers;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -7,13 +8,16 @@ import soundtrack.domain.EventService;
 import soundtrack.domain.Result;
 import soundtrack.domain.ResultType;
 import soundtrack.models.Event;
+
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
+
 @RestController
 @CrossOrigin(origins = {"http://localhost:3000","http://127.0.0.1:8081"})
 @RequestMapping("/api/event")
 public class EventController {
+
     private final EventService service;
 
     public EventController(EventService service) { this.service = service; }

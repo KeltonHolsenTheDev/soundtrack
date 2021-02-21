@@ -115,6 +115,7 @@ public class Event {
 
     public void setStaffAndRoles(List<UserRole> staffAndRoles) {
         this.staffAndRoles = staffAndRoles;
+
     }
 
     public List<Integer> getStaffIds() {

@@ -124,6 +124,7 @@ public class EventControllerTest {
         event.setEquipmentIds(List.of(1));
 
         User kelton = makeNewUser();
+
         List<UserRole> userRoles = new ArrayList<>();
         userRoles.add(new UserRole(kelton, List.of("tech")));
         kelton.setRoles(List.of("tech"));
