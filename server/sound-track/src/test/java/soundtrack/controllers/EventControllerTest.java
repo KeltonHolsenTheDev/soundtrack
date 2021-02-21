@@ -45,21 +45,14 @@ public class EventControllerTest {
     MockMvc mvc;
 
     /*@Test cannot run due to user authorities issue
->>>>>>> 1783696455b81ee90d909197cf6604ec14e7b690
     void shouldAdd() throws Exception {
         Event event = makeNewEvent();
         ObjectMapper jsonMapper = new ObjectMapper();
         String jsonIn = jsonMapper.writeValueAsString(event);
         when(eventRepository.addEvent(event)).thenReturn(event);
-<<<<<<< HEAD
-        //when(locationRepository.findAll()).thenReturn(List.of(makeNewLocation()));
-        //when(userRepository.findById(1)).thenReturn(makeNewUser());
-        //when(itemRepository.findAll()).thenReturn(List.of(makeNewItem()));
-=======
         when(locationRepository.findAll()).thenReturn(List.of(makeNewLocation()));
         when(userRepository.findById(1)).thenReturn(makeNewUser());
         when(itemRepository.findAll()).thenReturn(List.of(makeNewItem()));
->>>>>>> 1783696455b81ee90d909197cf6604ec14e7b690
 
         var request = post("/api/event")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -67,13 +60,6 @@ public class EventControllerTest {
 
         mvc.perform(request)
                 .andExpect(status().isAccepted());
-<<<<<<< HEAD
-    }
-
-    @Test
-    void shouldNotAddBadData() {
-
-=======
     }*/
 
     @Test
