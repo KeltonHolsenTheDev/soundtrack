@@ -9,7 +9,7 @@ const EventContainer = function () {
   const testEvents = [
     {
       eventId: 1,
-      eventName: "Church Service",
+      eventName: "Event Name Here",
       startDate: "0000-00-00",
       endDate: "0000-00-00",
       owner: {
@@ -142,23 +142,23 @@ const EventContainer = function () {
         </tr>
       </thead>
       <tbody>
-        {events.map((event) => {
+        {events.map((event_) => {
           return (
             <EventCard
-              eventId={event.eventId}
-              eventName={event.eventName}
-              startDate={event.startDate}
-              endDate={event.endDate}
-              owner={event.owner}
-              location={event.location}
-              staffAndRoles={event.staffAndRoles}
-              equipment={event.equipment}
-              key={event.eventId}
+              eventId={event_.eventId}
+              eventName={event_.eventName}
+              startDate={event_.startDate}
+              endDate={event_.endDate}
+              owner={event_.owner}
+              location={event_.location}
+              staffAndRoles={event_.staffAndRoles}
+              equipment={event_.equipment}
+              key={event_.eventId}
               handleEdit={(event) => {
-                handleEdit(event, event);
+                handleEdit(event, event_);
               }}
               handleDelete={(event) => {
-                handleDelete(event, event);
+                handleDelete(event, event_);
               }}
             />
           );
