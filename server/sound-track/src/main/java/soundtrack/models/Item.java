@@ -14,7 +14,6 @@ public class Item {
 
     private String description;
 
-    @NotBlank(message = "Brand cannot be null or blank!")
     private String brand;
 
     @NotBlank(message = "Item must have a type")
@@ -23,8 +22,10 @@ public class Item {
     @NotNull(message = "Item must have a category!")
     private ItemCategory itemCategory;
 
+    @Min(1)
     private int locationId;
 
+    @NotNull(message = "Item must have a location!")
     private Location location;
 
     @NotBlank(message = "If you don't describe where it goes, how will anyone find it?")
@@ -51,8 +52,11 @@ public class Item {
     }
 
     public Item(int itemId, @NotBlank(message = "Item name cannot be null or blank!") String itemName,
-                @NotBlank(message = "") String description, String brand, String itemType,
-                ItemCategory itemCategory, int locationId, Location location, String locationDescription,
+                @NotBlank(message = "") String description, String brand,
+                @NotBlank(message = "Item must have a type") String itemType,
+                @NotNull(message = "Item must have a category!") ItemCategory itemCategory,
+                @Min(1) int locationId, @NotNull(message = "Item must have a location!") Location location,
+                @NotBlank(message = "If you don't describe where it goes, how will anyone find it?") String locationDescription,
                 boolean isBroken, String notes) {
         this.itemId = itemId;
         this.itemName = itemName;

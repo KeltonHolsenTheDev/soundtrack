@@ -86,7 +86,6 @@ public class ItemJdbcRepository implements ItemRepository{
                 "location_id, location_description, is_broken, notes) values (?,?,?,?,?,?,?,?,?);";
 
 
-
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
