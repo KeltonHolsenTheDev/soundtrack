@@ -99,7 +99,7 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
                       type="text"
                       className="form-control"
                       id="formGroupExampleInput2"
-                      placeholder="description"
+                      placeholder="Description"
                       name="description"
                       onChange={(e) => setDescription(e.target.value)}
                       value={description}
