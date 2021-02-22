@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import soundtrack.data.UserRepository;
+import soundtrack.models.AccessLevel;
 import soundtrack.models.Location;
 import soundtrack.models.User;
 
@@ -78,6 +79,13 @@ public class UserService implements UserDetailsService {
     public Result<User> update(User user) {
         Result<User> result = validate(user);
         if (!result.isSuccess()) {
+            return result;
+        }
+        //make it so that users cannot be updated to admin status under any circumstances
+        User oldValues = repository.findById(user.getUserId());
+        if (oldValues.getAccessLevel() == AccessLevel.ROLE_USER && user.getAccessLevel() == AccessLevel.ROLE_ADMINISTRATOR) {
+            result.addMessage("User access level cannot be escalated via update. Create a new account to give this user administrator access.",
+                    ResultType.INVALID);
             return result;
         }
         user.setPassword(encoder.encode(user.getPassword()));
