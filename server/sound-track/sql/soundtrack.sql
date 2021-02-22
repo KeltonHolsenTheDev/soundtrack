@@ -160,11 +160,6 @@ insert into item (item_name, description, brand, item_type_id, item_category, lo
         
 insert into user_role (user_id, role_id) values
 	(1, 1);
-    
-insert into event_item (event_id, item_id) values
-	(1, 1),
-    (2, 2),
-	(2, 3);
         
 insert into event_ (event_name, start_date, end_date, location_id, owner_id) values
 		("Church Service", '2021-02-21', '2021-02-21', 1, 1),
@@ -175,13 +170,15 @@ insert into event_item (event_id, item_id) values
     (2, 2);
     
 insert into event_user_role(event_id, user_role_id) values
-    (1, 2);
+    (1, 4);
            
 select * from system_user;
 
 select * from user_role;
 
 select * from event_user_role;
+
+select * from role;
 
 select * from event_;
 

@@ -11,7 +11,6 @@ const EventCard = function (props) {
   const owner = props.owner;
   const location = props.location;
   const staffAndRoles = props.staffAndRoles;
-  console.log(props.staffAndRoles);
   const equipment = props.equipment;
   return (
     <tr>
@@ -32,12 +31,21 @@ const EventCard = function (props) {
           </thead>
           <tbody>
             {staffAndRoles?.map((userRole) => {
+              console.log(userRole?.roles);
               return (
                 <tr>
                   <th scope="col">{userRole?.user?.lastName}</th>
-                  <th scope="col">{userRole?.roles}</th>
-                </tr>
-              );
+                  <th scope="col">{userRole?.roles?.map ((role) => {
+                    return (
+                      <ul>
+                        <li>{role}</li>
+                      </ul>
+                    );
+                  }
+
+                  )}</th>
+                </tr> 
+              );        
             })}
           </tbody>
         </table>
