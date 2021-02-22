@@ -47,8 +47,9 @@ export const registerUser = (setErrors) => (userData, history) => {
   axios
     .post("api/user", userData)
     .then((res) => history.push("/"))
-    .catch((err) => {
-      alert(err.response.data);
+    .catch((error) => {
+      alert(error.response.data[0].defaultMessage);
+      console.log(error.response.data);
       // setErrors(err.response.data);
     });
 };
