@@ -34,6 +34,7 @@ const AddEvent = function () {
       })
       .catch(function (error) {
         alert(error.response.data);
+        console.log(error.response.data);
       });
   };
 

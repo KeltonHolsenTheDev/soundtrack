@@ -41,6 +41,9 @@ const LocationContainer = function ({ enableEdit, setEnableEdit }) {
 
   const handleDelete = function (event, deletedLocation) {
     event.preventDefault();
+    if (!window.confirm("CONFIRM LOCATION DELETION:\n WARNING: Deleting a location will delete all associated events and items!")) {
+      return;
+    }
     axios
       .delete(`/api/location/${deletedLocation.locationId}`)
       .then(function (response) {

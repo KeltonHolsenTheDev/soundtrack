@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./EventForm.css";
+import events from "../EventContainer";
 import axios from "axios";
 
 const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
@@ -15,6 +16,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
     userId: 0,
     roles: [],
   });
+  
   const [selectedRoles, setSelectedRoles] = useState([]);
   const [allLocations, setAllLocations] = useState([]);
   const [locationId, setLocationId] = useState([defaultEvent.locationId]);
@@ -305,11 +307,13 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                     }
                   >
                     {allItems.map((item) => {
-                      return (
-                        <option value={item.itemId} key={item.itemId}>
-                          {item.itemName}
-                        </option>
-                      );
+                      if (!item.broken) {
+                        return (
+                          <option value={item.itemId} key={item.itemId}>
+                            {item.itemName}
+                          </option>
+                        );
+                      }
                     })}
                   </select>
                 </div>
