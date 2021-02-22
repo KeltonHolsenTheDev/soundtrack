@@ -53,6 +53,9 @@ const ItemContainer = function ({ enableEdit, setEnableEdit }) {
 
   const handleDelete = function (event, deletedItem) {
     event.preventDefault();
+    if (!window.confirm("Are you sure?")) {
+      return;
+    }
     axios
       .delete(`/api/item/${deletedItem.itemId}`)
       .then(function (response) {

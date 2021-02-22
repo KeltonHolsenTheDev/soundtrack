@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./EventForm.css";
+import events from "../EventContainer";
 import axios from "axios";
 
 const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
@@ -15,6 +16,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
     userId: 0,
     roles: [],
   });
+  
   const [selectedRoles, setSelectedRoles] = useState([]);
   const [allLocations, setAllLocations] = useState([]);
   const [locationId, setLocationId] = useState([defaultEvent.locationId]);
@@ -34,6 +36,9 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
 
   const handleSelectStaff = function (userId) {
     let selectedStaff;
+    if (userId == 0) {
+      return;
+    }
     for (let user of users) {
       if (user.userId == userId) {
         selectedStaff = user;
@@ -46,7 +51,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
   const handleSelectRoles = function (selectedOptions) {
     const roles = [];
     for (let option of selectedOptions) {
-      roles.push(option.value);
+        roles.push(option.value);
     }
     setSelectedRoles(roles);
   };
@@ -55,10 +60,23 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
     event.preventDefault();
     if (selectedStaff.userId != 0 && selectedRoles.length > 0) {
       const newStaffAndRoles = [...staffAndRoles];
-      newStaffAndRoles.push({
-        user: selectedStaff,
-        roles: selectedRoles,
-      });
+      let alreadyPresent = false;
+      for (let userRole of newStaffAndRoles) {
+        if (userRole?.user?.userId === selectedStaff.userId) {
+          alreadyPresent = true;
+          break;
+        }
+      }
+      if (alreadyPresent) {
+        alert("That volunteer has already been added");
+      }
+      else {
+        newStaffAndRoles.push({
+          user: selectedStaff,
+          roles: selectedRoles,
+        });
+      }
+      
       setStaffAndRoles(newStaffAndRoles);
     }
   };
@@ -143,7 +161,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                 <div className="form-group">
                   <label htmlFor="startDate">Start Date</label>
                   <input
-                    type="text"
+                    type="date"
                     className="form-control"
                     id="startDate"
                     aria-describedby="startDate"
@@ -155,7 +173,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                 <div className="form-group">
                   <label htmlFor="endDate">End Date</label>
                   <input
-                    type="text"
+                    type="date"
                     className="form-control"
                     id="endDate"
                     aria-describedby="endDate"
@@ -218,9 +236,10 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                   <select
                     className="custom-select mt-3 mb-1"
                     id="eventStaff"
-                    value={selectedStaff.userId}
+                    value={selectedStaff?.userId}
                     onChange={(e) => handleSelectStaff(e.target.value)}
                   >
+                    <option value="0">Select a staff member</option>
                     {users.map((user) => {
                       return (
                         <option
@@ -238,7 +257,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                       handleSelectRoles(e.target.selectedOptions)
                     }
                   >
-                    {selectedStaff.roles.map((role) => {
+                    {selectedStaff?.roles.map((role) => {
                       return (
                         <option
                           value={role}
@@ -292,11 +311,13 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                     }
                   >
                     {allItems.map((item) => {
-                      return (
-                        <option value={item.itemId} key={item.itemId}>
-                          {item.itemName}
-                        </option>
-                      );
+                      if (!item.broken) {
+                        return (
+                          <option value={item.itemId} key={item.itemId}>
+                            {item.itemName}
+                          </option>
+                        );
+                      }
                     })}
                   </select>
                 </div>

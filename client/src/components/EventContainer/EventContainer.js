@@ -98,6 +98,9 @@ const EventContainer = function () {
 
   const handleDelete = function (event, deletedEvent) {
     event.preventDefault();
+    if (!window.confirm("Are you sure?")) {
+      return;
+    }
     axios
       .delete(`/api/event/${deletedEvent.eventId}`)
       .then(function (response) {

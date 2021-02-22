@@ -13,7 +13,7 @@ const AddLocation = function () {
         history.push("/");
       })
       .catch(function (error) {
-        console.log(error.response);
+        alert(error.response.data);
       });
   };
 
