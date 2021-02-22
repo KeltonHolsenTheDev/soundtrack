@@ -5,15 +5,15 @@ import { AuthContext } from "../../auth/auth";
 const EventCard = function (props) {
   const { user } = useContext(AuthContext);
   const buttonsAvailable =
-    user && (user.access === "ROLE_ADMINISTRATOR" || user.sub === props.owner.email);
+    user &&
+    (user.access === "ROLE_ADMINISTRATOR" || user.sub === props.owner.email);
 
-    const owner = props.owner;
-    const location = props.location;
-    const staffAndRoles = props.staffAndRoles;
-    console.log(props.staffAndRoles);
-    const equipment = props.equipment;
+  const owner = props.owner;
+  const location = props.location;
+  const staffAndRoles = props.staffAndRoles;
+  console.log(props.staffAndRoles);
+  const equipment = props.equipment;
   return (
-    
     <tr>
       <th scope="row">{props.eventId}</th>
       <td>{props.eventName}</td>
@@ -36,13 +36,14 @@ const EventCard = function (props) {
                 <tr>
                   <th scope="col">{userRole?.user?.lastName}</th>
                   <th scope="col">{userRole?.roles}</th>
-                </tr> 
-              );        
+                </tr>
+              );
             })}
           </tbody>
         </table>
       </td>
-      <td><table className="table table-hover table-dark">
+      <td>
+        <table className="table table-hover table-dark">
           <thead>
             <tr>
               <th scope="col">Items:</th>
@@ -54,12 +55,13 @@ const EventCard = function (props) {
               return (
                 <tr>
                   <th scope="col">{item?.itemName}</th>
-                </tr> 
-              );        
+                </tr>
+              );
             })}
           </tbody>
-        </table></td>
-        {buttonsAvailable ? (
+        </table>
+      </td>
+      {buttonsAvailable ? (
         <td>
           <i class=" btn fa fa-pencil fa-2x" onClick={props.handleEdit}></i>
           {/* <button className="btn btn-info mr-2" onClick={props.handleEdit}>

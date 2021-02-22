@@ -19,67 +19,56 @@ const EventContainer = function () {
         email: "email@email.com",
         phone: "555-455-5555",
         accessLevel: "ROLE_ADMINISTRATOR",
-        authorities: [
-          {}
-        ],
+        authorities: [{}],
         password: "passwordpassword",
-        roles: [
-          "test_role"
-        ]
+        roles: ["test_role"],
       },
       ownerId: 1,
-      staffIds: [
-        1
-      ],
+      staffIds: [1],
       staffAndRoles: [
-        { 
-        user: {
-          userId: 1,
-        firstName: "First",
-        lastName: "Last",
-        email: "email@email.com",
-        phone: "555-455-5555",
-        accessLevel: "ROLE_ADMINISTRATOR",
-        authorities: [
-          {}
-        ],
-        password: "passwordpassword",
-        roles: [
-          "test_role"
-        ]
+        {
+          user: {
+            userId: 1,
+            firstName: "First",
+            lastName: "Last",
+            email: "email@email.com",
+            phone: "555-455-5555",
+            accessLevel: "ROLE_ADMINISTRATOR",
+            authorities: [{}],
+            password: "passwordpassword",
+            roles: ["test_role"],
+          },
+          roles: ["test_role"],
         },
-        roles: ["test_role"]
-        }
       ],
       location: {
         locationId: 1,
         address: "123 Test Address",
-        name: "Test Address"
+        name: "Test Address",
       },
       locationId: 1,
       equipment: [
-      {
-        itemId: 1,
-        itemName: "Test Item",
-        description: "Test Item",
-        brand: "Test",
-        itemType: "test item",
-        itemCategory: "AUDIO",
-        locationId: 1,
-        location: {
+        {
+          itemId: 1,
+          itemName: "Test Item",
+          description: "Test Item",
+          brand: "Test",
+          itemType: "test item",
+          itemCategory: "AUDIO",
           locationId: 1,
-          address: "123 Test Address",
-          name: "Test Address"
+          location: {
+            locationId: 1,
+            address: "123 Test Address",
+            name: "Test Address",
+          },
+          locationDescription: "place",
+          isBroken: false,
+          notes: "no notes",
         },
-        locationDescription: "place",
-        isBroken: false,
-        notes: "no notes"
-      }
-    ],
-    equipmentIds: [
-      1
-    ]
-    }];
+      ],
+      equipmentIds: [1],
+    },
+  ];
 
   const [events, setEvents] = useState([testEvents]);
   const [enableEdit, setEnableEdit] = useState(false);

@@ -4,7 +4,9 @@ import { NavLink, useHistory } from "react-router-dom";
 import "./Dashboard.css";
 import ItemContainer from "../ItemContainer";
 import UserContainer from "../UserContainer";
-import EventContainer from "../EventContainer"
+
+import EventContainer from "../EventContainer";
+
 import image from "../../img/IMG_2224.JPG";
 
 const Dashboard = function () {
@@ -27,6 +29,7 @@ const Dashboard = function () {
     setShowUsers(false);
     setShowEvents(false);
     setShowItems(true);
+    setShowEvents(false);
     setEnableEditItem(false);
   };
 
@@ -34,6 +37,7 @@ const Dashboard = function () {
     setShowItems(false);
     setShowEvents(false);
     setShowUsers(true);
+    setShowEvents(false);
     setEnableEditUser(false);
   };
 
@@ -65,30 +69,39 @@ const Dashboard = function () {
             </div>
             <ul className="list-group list-group-flush">
               <li className="list-group-item dashboard-card">
-                <div className="card-body justify-content-center d-flex">
-                <span className="card-link" onClick={handleShowEvents}>
+                <div className="card-body justify-content-center d-flex text-center">
+                  <span className="card-link" onClick={handleShowEvents}>
                     <i class="fa fa-calendar fa-4x"></i>
+                    <p onClick={handleShowEvents}>events</p>
                   </span>
                 </div>
               </li>
               <li className="list-group-item dashboard-card">
-                <div className="card-body justify-content-center d-flex">
+                <div className="card-body justify-content-center d-flex text-center">
                   <span className="card-link" onClick={handleShowItems}>
                     <i className="fa fa-shopping-basket fa-4x"></i>
+                    <p onClick={handleShowEvents}>items</p>
+                  </span>
+                </div>
+              </li>
+              <li>
+                <div className="card-body justify-content-center d-flex text-center">
+                  <span
+                    className="card-link underline"
+                    onClick={handleShowUsers}
+                  >
+                    <i className="fa fa-address-book fa-4x"></i>
+                    <p className="underline" onClick={handleShowEvents}>
+                      contacts
+                    </p>
                   </span>
                 </div>
               </li>
               <li>
                 <div className="card-body justify-content-center d-flex">
-                  <span className="card-link" onClick={handleShowUsers}>
-                    <i class="fa fa-address-book fa-4x"></i>
-                  </span>
-                </div>
-              </li>
-              <li>
-                <div className="card-body justify-content-center d-flex">
-                  <NavLink to="/location" className="card-link">
+                  <NavLink to="/location" className="card-link underline">
                     <i class="fa fa-map-signs fa-4x"></i>
+                    <p className="map-signs underline">locations</p>
                   </NavLink>
                 </div>
               </li>
@@ -100,6 +113,7 @@ const Dashboard = function () {
           {showEvents ? <EventContainer enableEdit={enableEditEvent} setEnableEdit={setEnableEditEvent} /> : ""}
           {showUsers ? <UserContainer enableEdit={enableEditUser} setEnableEdit={setEnableEditUser} /> : ""}
           {showItems ? <ItemContainer enableEdit={enableEditItem} setEnableEdit={setEnableEditItem} /> : ""}
+          {showEvents ? <EventContainer enableEdit={enableEditEvent} setEnableEdit={setEnableEditEvent} /> : ""}
         </div>
       </div>
     </div>

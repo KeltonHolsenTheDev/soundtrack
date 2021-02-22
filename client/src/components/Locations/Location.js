@@ -5,8 +5,6 @@ import { useHistory } from "react-router-dom";
 import LocationCard from "./LocationCard";
 import "./Location.css";
 
-import "./Location.css";
-
 const Location = function () {
   const { setLocation } = useContext(AuthContext);
   const history = useHistory();

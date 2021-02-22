@@ -16,14 +16,14 @@
   background-size: cover;
   height: 80vh;
 
-  margin-top: 10vh;
+  margin-top: calc(10vh - 28px);
 }
 
 .login-card-container {
   align-items: center;
   justify-content: center;
   background-color: rgb(238, 238, 238);
-  height: 100vh;
+  height: calc(100vh - 56px);
 }
 
 .login-card {
