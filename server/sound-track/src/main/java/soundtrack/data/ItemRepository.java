@@ -15,4 +15,5 @@ public interface ItemRepository {
     boolean update(Item item);
     boolean deleteById(int itemId);
 
+    void deleteByLocation(int locationId);
 }

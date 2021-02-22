@@ -118,8 +118,9 @@ create table repair_ticket(
 delimiter //
 create procedure set_known_good_state()
 begin
-	
-       delete from item;
+
+	set sql_safe_updates = 0;
+	delete from item;
     alter table item auto_increment = 1;
     delete from item_type;
     alter table item_type auto_increment = 1;
