@@ -1,5 +1,6 @@
 package soundtrack.models;
 
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.FutureOrPresent;
@@ -40,6 +41,7 @@ public class Event {
 
     private int locationId; //service will grab the actual location
 
+    @UniqueElements(message = "The same item should not be added to an event multiple times!")
     private List<Item> equipment = new ArrayList<>();
 
     private List<Integer> equipmentIds = new ArrayList<>(); //service will grab the actual equipment

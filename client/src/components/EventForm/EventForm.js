@@ -46,7 +46,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
   const handleSelectRoles = function (selectedOptions) {
     const roles = [];
     for (let option of selectedOptions) {
-      roles.push(option.value);
+        roles.push(option.value);
     }
     setSelectedRoles(roles);
   };
@@ -55,10 +55,23 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
     event.preventDefault();
     if (selectedStaff.userId != 0 && selectedRoles.length > 0) {
       const newStaffAndRoles = [...staffAndRoles];
-      newStaffAndRoles.push({
-        user: selectedStaff,
-        roles: selectedRoles,
-      });
+      let alreadyPresent = false;
+      for (let userRole of newStaffAndRoles) {
+        if (userRole?.user?.userId === selectedStaff.userId) {
+          alreadyPresent = true;
+          break;
+        }
+      }
+      if (alreadyPresent) {
+        alert("That volunteer has already been added");
+      }
+      else {
+        newStaffAndRoles.push({
+          user: selectedStaff,
+          roles: selectedRoles,
+        });
+      }
+      
       setStaffAndRoles(newStaffAndRoles);
     }
   };
