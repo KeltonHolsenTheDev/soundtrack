@@ -115,6 +115,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
     newEvent.location = location;
     newEvent.equipment = equipment;
     submitFcn(newEvent);
+    // console.log(newEvent);
   };
 
   return (

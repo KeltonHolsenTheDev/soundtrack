@@ -4,17 +4,20 @@ import { NavLink, useHistory } from "react-router-dom";
 import "./Dashboard.css";
 import ItemContainer from "../ItemContainer";
 import UserContainer from "../UserContainer";
+
 import EventContainer from "../EventContainer";
-// import Location from "../Location/Location";
+
 import image from "../../img/IMG_2224.JPG";
 
 const Dashboard = function () {
   const [showItems, setShowItems] = useState(false);
   const [showUsers, setShowUsers] = useState(false);
   const [showEvents, setShowEvents] = useState(false);
+
   const [enableEditItem, setEnableEditItem] = useState(false);
   const [enableEditUser, setEnableEditUser] = useState(false);
   const [enableEditEvent, setEnableEditEvent] = useState(false);
+
   const { user } = useContext(AuthContext);
   const history = useHistory();
 
@@ -24,6 +27,7 @@ const Dashboard = function () {
 
   const handleShowItems = function (event) {
     setShowUsers(false);
+    setShowEvents(false);
     setShowItems(true);
     setShowEvents(false);
     setEnableEditItem(false);
@@ -31,6 +35,7 @@ const Dashboard = function () {
 
   const handleShowUsers = function (event) {
     setShowItems(false);
+    setShowEvents(false);
     setShowUsers(true);
     setShowEvents(false);
     setEnableEditUser(false);
@@ -39,7 +44,6 @@ const Dashboard = function () {
   const handleShowEvents = function (event) {
     setShowItems(false);
     setShowUsers(false);
-    setEnableEditUser(false);
     setShowEvents(true);
   };
 
@@ -106,7 +110,7 @@ const Dashboard = function () {
         </div>
         {/* prettier-ignore */}
         <div className="col-11 dashboard-col p-0">
-          {/* event card here */}
+          {showEvents ? <EventContainer enableEdit={enableEditEvent} setEnableEdit={setEnableEditEvent} /> : ""}
           {showUsers ? <UserContainer enableEdit={enableEditUser} setEnableEdit={setEnableEditUser} /> : ""}
           {showItems ? <ItemContainer enableEdit={enableEditItem} setEnableEdit={setEnableEditItem} /> : ""}
           {showEvents ? <EventContainer enableEdit={enableEditEvent} setEnableEdit={setEnableEditEvent} /> : ""}

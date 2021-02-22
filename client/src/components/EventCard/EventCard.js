@@ -1,39 +1,82 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import "./EventCard.css";
 import { AuthContext } from "../../auth/auth";
 
 const EventCard = function (props) {
   const { user } = useContext(AuthContext);
   const buttonsAvailable =
-    user && (user.access === "ROLE_ADMINISTRATOR" || user.sub === props.email);
+    user &&
+    (user.access === "ROLE_ADMINISTRATOR" || user.sub === props.owner.email);
+
+  const owner = props.owner;
+  const location = props.location;
+  const staffAndRoles = props.staffAndRoles;
+  console.log(props.staffAndRoles);
+  const equipment = props.equipment;
   return (
-    <div class="card">
-      <img
-        src="https://picsum.photos/id/1082/200/300"
-        class="card-img-top"
-        alt="..."
-      />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </p>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Cras justo odio</li>
-        <li class="list-group-item">Dapibus ac facilisis in</li>
-        <li class="list-group-item">Vestibulum at eros</li>
-      </ul>
-      <div class="card-body">
-        <a href="#" class="card-link">
-          Card link
-        </a>
-        <a href="#" class="card-link">
-          Another link
-        </a>
-      </div>
-    </div>
+    <tr>
+      <th scope="row">{props.eventId}</th>
+      <td>{props.eventName}</td>
+      <td>{props.startDate}</td>
+      <td>{props.endDate}</td>
+      <td>{owner?.lastName}</td>
+      <td>{location?.name}</td>
+      <td>
+        <table className="table table-hover table-dark">
+          <thead>
+            <tr>
+              <th scope="col">Volunteer:</th>
+              <th scope="col">Role:</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {staffAndRoles?.map((userRole) => {
+              return (
+                <tr>
+                  <th scope="col">{userRole?.user?.lastName}</th>
+                  <th scope="col">{userRole?.roles}</th>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </td>
+      <td>
+        <table className="table table-hover table-dark">
+          <thead>
+            <tr>
+              <th scope="col">Items:</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {equipment?.map((item) => {
+              return (
+                <tr>
+                  <th scope="col">{item?.itemName}</th>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </td>
+      {buttonsAvailable ? (
+        <td>
+          <i class=" btn fa fa-pencil fa-2x" onClick={props.handleEdit}></i>
+          {/* <button className="btn btn-info mr-2" onClick={props.handleEdit}>
+            edit
+          </button> */}
+          <i class="btn fa fa-trash fa-2x" onClick={props.handleDelete}></i>
+          {/* <button className="btn btn-danger" onClick={props.handleDelete}>
+            delete
+          </button> */}
+        </td>
+      ) : (
+        ""
+      )}
+    </tr>
   );
 };
+
 export default EventCard;
