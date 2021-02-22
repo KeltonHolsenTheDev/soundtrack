@@ -27,6 +27,8 @@ hs_err_pid*
 
 server/sound-track/.idea/workspace.xml
 
+server/sound-track/target
+
 server/sound-track/.idea
 server/sound-track/target
 .DS_Store
