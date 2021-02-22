@@ -17,8 +17,6 @@
   display: inline;
   text-align: center;
   padding-bottom: 0%;
-  color: oldlace;
-  /* height: min-content; */
 }
 
 .dashboard-img {
@@ -38,20 +36,45 @@
 
 .dashboard-card {
   background-color: rgb(61, 6, 6);
-}
-
-a.card-link {
   color: oldlace;
 }
 
-i.fa.fa-comment-dots {
+.fa-map-signs {
+  color: rgb(143, 137, 126);
+}
+
+.fa-map-signs:hover {
+  color: oldlace;
+}
+
+p.map-signs {
+  color: oldlace;
+}
+
+p.map-signs:hover {
   color: oldlace;
 }
 
 .fa-shopping-basket {
+  color: rgb(143, 137, 126);
+}
+
+.fa-shopping-basket:hover {
   color: oldlace;
 }
 
 .fa-address-book {
+  color: rgb(143, 137, 126);
+}
+
+.fa-address-book:hover {
+  color: oldlace;
+}
+
+.fa-calendar {
+  color: rgb(143, 137, 126);
+}
+
+.fa-calendar:hover {
   color: oldlace;
 }
