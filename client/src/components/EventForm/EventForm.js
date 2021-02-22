@@ -36,6 +36,9 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
 
   const handleSelectStaff = function (userId) {
     let selectedStaff;
+    if (userId == 0) {
+      return;
+    }
     for (let user of users) {
       if (user.userId == userId) {
         selectedStaff = user;
@@ -233,9 +236,10 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                   <select
                     className="custom-select mt-3 mb-1"
                     id="eventStaff"
-                    value={selectedStaff.userId}
+                    value={selectedStaff?.userId}
                     onChange={(e) => handleSelectStaff(e.target.value)}
                   >
+                    <option value="0">Select a staff member</option>
                     {users.map((user) => {
                       return (
                         <option
@@ -253,7 +257,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                       handleSelectRoles(e.target.selectedOptions)
                     }
                   >
-                    {selectedStaff.roles.map((role) => {
+                    {selectedStaff?.roles.map((role) => {
                       return (
                         <option
                           value={role}
