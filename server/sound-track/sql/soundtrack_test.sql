@@ -119,7 +119,7 @@ delimiter //
 create procedure set_known_good_state()
 begin
 	
-       delete from item;
+	delete from item;
     alter table item auto_increment = 1;
     delete from item_type;
     alter table item_type auto_increment = 1;
