@@ -185,4 +185,20 @@ public class EventJdbcRepository implements EventRepository {
         jdbcTemplate.update("delete from event_user_role where event_id = ?;", eventId);
         return jdbcTemplate.update("delete from event_ where event_id = ?;", eventId) > 0;
     }
+
+    @Override
+    public void deleteByLocation(int locationId) {
+        List<Integer> eventsToDelete = jdbcTemplate.query("select event_id from event_ where location_id = ?;", this::mapEventId, locationId);
+        for (int eventId: eventsToDelete) {
+            jdbcTemplate.update("set sql_safe_updates = 0;");
+            jdbcTemplate.update("delete from event_item where event_id = ?;", eventId);
+            jdbcTemplate.update("delete from event_user_role where event_id = ?;", eventId);
+            jdbcTemplate.update("set sql_safe_updates = 1;");
+        }
+        jdbcTemplate.update("delete from event_ where location_id = ?;", locationId);
+    }
+
+    private Integer mapEventId(ResultSet resultSet, int i) throws SQLException {
+        return resultSet.getInt("event_id");
+    }
 }
