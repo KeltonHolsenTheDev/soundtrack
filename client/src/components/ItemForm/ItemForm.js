@@ -146,7 +146,7 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
                     <option value="LIGHTING">Lighting</option>
                     <option value="AUDIO">Audio</option>
                   </select>
-                  <label htmlFor="itemLocation">Storage Location</label>
+                  <label htmlFor="itemLocation">Current Location</label>
                   <select
                     // multiple
                     class="form-control"
@@ -172,7 +172,7 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
                   </select>
                   <div class="form-group">
                     <label htmlFor="formGroupExampleInput2">
-                      Storage Location Description
+                      Location Description
                     </label>
                     <input
                       type="text"

@@ -7,10 +7,9 @@ import Registration from "./components/Registration";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Dashboard from "./components/Dashboard";
-import UserContainer from "./components/UserContainer";
 import Location from "./components/Locations/Location";
-import ItemContainer from "./components/ItemContainer";
 import AddItem from "./components/AddItem";
+import AddEvent from "./components/AddEvent";
 
 const App = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -23,9 +22,9 @@ const App = () => {
           <Route path="/login">
             <Login />
           </Route>
-          {/* <Route path="/contacts">
-            <UserContainer />
-          </Route> */}
+          <Route path="/event">
+            <AddEvent />
+          </Route>
           <Route path="/location">
             <Location />
           </Route>

@@ -79,6 +79,20 @@ function Navbar() {
                 exact={true}
                 className="nav-link"
                 activeClassName="nav-link active"
+                to="/event"
+              >
+                Create Event
+              </NavLink>
+            </li>
+          ) : (
+            ""
+          )}
+          {user && user.access === "ROLE_ADMINISTRATOR" ? (
+            <li className="nav-item">
+              <NavLink
+                exact={true}
+                className="nav-link"
+                activeClassName="nav-link active"
                 to="/item"
               >
                 Add Item

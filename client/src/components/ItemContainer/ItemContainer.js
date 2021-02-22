@@ -3,7 +3,7 @@ import axios from "axios";
 import "./ItemContainer.css";
 import ItemCard from "../ItemCard";
 import EditItem from "../EditItem";
-import ItemForm from "../ItemForm";
+// import ItemForm from "../ItemForm";
 
 const ItemContainer = function ({ enableEdit, setEnableEdit }) {
   const testItems = [
@@ -81,7 +81,7 @@ const ItemContainer = function ({ enableEdit, setEnableEdit }) {
           <th scope="col">Type</th>
           <th scope="col">Category</th>
           <th scope="col">Condition</th>
-          <th scope="col">Storage Location #</th>
+          <th scope="col">Location</th>
           <th scope="col">Storage Location Description</th>
           <th scope="col">Notes</th>
           <th scope="col"></th>
@@ -97,7 +97,7 @@ const ItemContainer = function ({ enableEdit, setEnableEdit }) {
               brand={item.brand}
               itemType={item.itemType}
               itemCategory={item.itemCategory}
-              locationId={item.locationId}
+              locationName={item?.location?.name}
               locationDescription={item.locationDescription}
               broken={item.broken}
               notes={item.notes}
