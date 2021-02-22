@@ -37,7 +37,7 @@ public class EventJdbcRepository implements EventRepository {
     private void attachStaffIds(Event event) {
         final String sql = "select u.user_id from user_role u inner join event_user_role e on e.user_role_id = u.user_role_id " +
                 "where e.event_id = ?;";
-        List<Integer> staffIds = jdbcTemplate.query(sql, this::mapUserId, event.getEventId());
+        List<Integer> staffIds = jdbcTemplate.query(sql, this::mapUserId, event.getEventId()).stream().distinct().collect(Collectors.toList());
         event.setStaffIds(staffIds);
     }
 

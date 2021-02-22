@@ -199,9 +199,8 @@ public class EventService {
         event.setEquipment(items);
         List<UserRole> roles = new ArrayList<>();
         for (int userId: event.getStaffIds()) {
-            Map<User, String> userMap = userRepository.findUserEventRoles(userId, event.getEventId());
             User user = userRepository.findById(userId);
-            List<String> userRoles = new ArrayList<>(userMap.values());
+            List<String> userRoles = userRepository.findUserEventRoles(userId, event.getEventId());
             roles.add(new UserRole(user, userRoles));
         }
         event.setStaffAndRoles(roles);
