@@ -1,6 +1,7 @@
 package soundtrack.models;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import soundtrack.validation.NoNullItemsInList;
 
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
@@ -30,6 +31,7 @@ public class Event {
 
     private int ownerId;
 
+    @NoNullItemsInList
     @NotEmpty(message = "Events must have at least one staff member!")
     private List<UserRole> staffAndRoles = new ArrayList<>(); //service will get this
 
