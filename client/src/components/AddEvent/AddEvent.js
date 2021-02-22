@@ -33,7 +33,7 @@ const AddEvent = function () {
         history.push("/");
       })
       .catch(function (error) {
-        console.log(error.response.data);
+        alert(error.response.data);
       });
   };
 

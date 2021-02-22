@@ -143,7 +143,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                 <div className="form-group">
                   <label htmlFor="startDate">Start Date</label>
                   <input
-                    type="text"
+                    type="date"
                     className="form-control"
                     id="startDate"
                     aria-describedby="startDate"
@@ -155,7 +155,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                 <div className="form-group">
                   <label htmlFor="endDate">End Date</label>
                   <input
-                    type="text"
+                    type="date"
                     className="form-control"
                     id="endDate"
                     aria-describedby="endDate"

@@ -57,7 +57,7 @@ const LocationForm = function ({ defaultLocation, submitFcn, formTitle }) {
                       type="text"
                       className="form-control"
                       id="formGroupExampleInput2"
-                      placeholder="address"
+                      placeholder="Address"
                       name="address"
                       onChange={(e) => setAddress(e.target.value)}
                       value={address}

@@ -31,11 +31,15 @@ public class UserService implements UserDetailsService {
     }
 
     public List<User> findAll() {
-        return repository.findAll();
+        List<User> all = repository.findAll();
+        all.forEach(this::nullPassword);
+        return all;
     }
 
     public User findById(int id) {
-        return repository.findById(id);
+        User user = repository.findById(id);
+        nullPassword(user);
+        return user;
     }
 
     @Override
@@ -50,7 +54,9 @@ public class UserService implements UserDetailsService {
     }
 
     public User findByEmail(String email) {
-        return repository.findByEmail(email);
+        User user = repository.findByEmail(email);
+        nullPassword(user);
+        return user;
     }
 
     public Result<User> add(User user) {
@@ -86,6 +92,10 @@ public class UserService implements UserDetailsService {
 
     public boolean deleteById(int userId) {
         return repository.deleteById(userId);
+    }
+
+    private void nullPassword(User user) {
+        user.setPassword(null);
     }
 
     private Result<User> validate(User user) {

@@ -36,7 +36,7 @@ export const loginUser = (setUser, setErrors) => (userData, history) => {
       history.push("/");
     })
     .catch((err) => {
-      console.log(err);
+      alert(err.response.data);
       // setErrors(err.response.data);
     });
 };
@@ -48,7 +48,7 @@ export const registerUser = (setErrors) => (userData, history) => {
     .post("api/user", userData)
     .then((res) => history.push("/"))
     .catch((err) => {
-      console.log(err.response.data);
+      alert(err.response.data);
       // setErrors(err.response.data);
     });
 };
