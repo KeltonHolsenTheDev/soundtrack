@@ -19,6 +19,12 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import java.util.*;
+import javax.activation.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.naming.*;
+
 @Service
 public class EventService {
     private final EventRepository eventRepository;
@@ -79,6 +85,7 @@ public class EventService {
             result.addMessage("Internal database error prevented adding event", ResultType.NOT_FOUND);
         }
         else {
+            sendVolunteerEmails(event);
             result.setPayLoad(out);
         }
         return result;
@@ -213,5 +220,38 @@ public class EventService {
             roles.add(new UserRole(user, userRoles));
         }
         event.setStaffAndRoles(roles);
+    }
+
+    private void sendVolunteerEmails(Event event) {
+        for (UserRole userRole: event.getStaffAndRoles()) {
+            Properties properties = System.getProperties();
+            properties.setProperty("mail.smtp.host", "smtp.gmail.com");
+            properties.setProperty("mail.smtp.auth", "true");
+            properties.setProperty("mail.smtp.starttls.enable", "true");
+            properties.setProperty("mail.smtp.port", "587");
+            Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication("soundtrackbyteamjak@gmail.com", "I pledge allegiance 2 Artemis.");
+                }
+            });
+            try {
+                MimeMessage message = new MimeMessage(session);
+                message.setFrom(new InternetAddress("soundtrackbyteamjak@gmail.com"));
+                message.addRecipient(Message.RecipientType.TO, new InternetAddress(userRole.getUser().getEmail()));
+                message.setSubject("Event Notification: " + event.getEventName());
+                String text = "This is a notification that " + event.getOwner().getFirstName() + " " + event.getOwner().getLastName() +
+                        "has signed you up to volunteer at event " + event.getEventName() + " taking place from " + event.getStartDate() + " to " +
+                        event.getEndDate() + ". You will be doing the following roles:\n";
+                for (String role: userRole.getRoles()) {
+                    text += role + "\n";
+                }
+                message.setText(text);
+                Transport.send(message);
+            } catch (AddressException e) {
+                e.printStackTrace();
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

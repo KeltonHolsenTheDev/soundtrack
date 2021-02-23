@@ -294,10 +294,18 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                     required
                     value={locationId}
                     onChange={(e) => {
-                      setLocationId(e.target.value);
+                      if (e.target.value > 0) {
+                        setLocationId(e.target.value);
+                      }
+                      
                     }}
                   >
+<<<<<<< HEAD
                     <option value={0}>Select a location</option>
+=======
+
+                    <option value="">Select a location...</option>
+>>>>>>> kelton
                     {allLocations.map((location) => {
                       return (
                         <option
