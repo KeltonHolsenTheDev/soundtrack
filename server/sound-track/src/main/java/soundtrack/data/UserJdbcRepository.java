@@ -58,8 +58,8 @@ public class UserJdbcRepository implements UserRepository {
         User user = this.findById(userId);
         final String sql = "select r.role_name from role r inner join user_role ur on r.role_id = ur.role_id " +
                 "inner join event_user_role er on er.user_role_id = ur.user_role_id " +
-                "where er.event_id = ?;";
-        return jdbcTemplate.query(sql, this::mapRoleName, eventId);
+                "where er.event_id = ? and ur.user_id = ?;";
+        return jdbcTemplate.query(sql, this::mapRoleName, eventId, userId);
     }
 
     /**

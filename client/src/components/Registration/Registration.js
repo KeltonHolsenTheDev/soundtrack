@@ -1,11 +1,12 @@
 import React, { useState, useContext } from "react";
-import { AuthContext } from "../../auth/auth";
+import { AuthContext , useAuth} from "../../auth/auth";
 import { useHistory } from "react-router-dom";
 import UserForm from "../UserForm";
 
 import "./Registration.css";
 
 const Registration = function () {
+  useAuth();
   const { user, registerUser } = useContext(AuthContext);
   const history = useHistory();
 
