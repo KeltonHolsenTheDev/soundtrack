@@ -1,6 +1,6 @@
 import React from "react";
 import "./EditEvent";
-//import EventForm from "../EventForm";
+import EventForm from "../EventForm";
 import axios from "axios";
 
 const EditEvent = function ({ chosenEvent, setEnableEdit, renderEvents }) {
@@ -13,17 +13,17 @@ const EditEvent = function ({ chosenEvent, setEnableEdit, renderEvents }) {
         renderEvents();
       })
       .catch(function (error) {
-        console.log(error.response);
+        alert(error.response.data[0].defaultMessage);
       });
   };
 
   return (
-    <button src="btn btn-primary">Update Placeholder</button>
-    /*<EventForm
+    //<button src="btn btn-primary">Update Placeholder</button>
+    <EventForm
       defaultEvent={chosenEvent}
       submitFcn={editEvent}
       formTitle="Update"
-    />*/
+    />
   );
 };
 export default EditEvent;

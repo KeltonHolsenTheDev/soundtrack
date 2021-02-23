@@ -12,7 +12,7 @@ const EditLocation = function ({ chosenLocation, setEnableEdit, renderLocations 
         renderLocations();
       })
       .catch(function (error) {
-        console.log(error.response);
+        alert(error.response.data[0].defaultMessage);
       });
   };
 

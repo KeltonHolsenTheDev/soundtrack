@@ -4,7 +4,7 @@ import { useAuth } from "../../auth/auth";
 import "./EventContainer.css";
 import EventCard from "../EventCard";
 import EditEvent from "../EditEvent";
-//import EventForm from "../EventForm";
+import EventForm from "../EventForm";
 
 const EventContainer = function () {
   useAuth();

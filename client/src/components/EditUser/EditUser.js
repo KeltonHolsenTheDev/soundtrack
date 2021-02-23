@@ -12,7 +12,7 @@ const EditUser = function ({ chosenUser, setEnableEdit, renderUsers }) {
         renderUsers();
       })
       .catch(function (error) {
-        console.log(error.response);
+        alert(error.response.data[0].defaultMessage);
       });
   };
 
