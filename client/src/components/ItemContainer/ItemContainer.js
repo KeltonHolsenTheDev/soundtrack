@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useAuth } from "../../auth/auth";
 import "./ItemContainer.css";
 import ItemCard from "../ItemCard";
 import EditItem from "../EditItem";
 // import ItemForm from "../ItemForm";
 
 const ItemContainer = function ({ enableEdit, setEnableEdit }) {
+  useAuth();
   const testItems = [
     {
       itemId: 1,
@@ -37,6 +39,7 @@ const ItemContainer = function ({ enableEdit, setEnableEdit }) {
         setItems(response.data);
       })
       .catch(function (error) {
+        
         console.log(error.response);
       });
   };

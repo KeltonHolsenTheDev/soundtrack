@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { AuthContext } from "../../auth/auth";
+import { AuthContext, useAuth } from "../../auth/auth";
 import { NavLink, useHistory } from "react-router-dom";
 import "./Dashboard.css";
 import ItemContainer from "../ItemContainer";
@@ -10,6 +10,7 @@ import EventContainer from "../EventContainer";
 import image from "../../img/IMG_2224.JPG";
 
 const Dashboard = function () {
+  useAuth();
   const [showItems, setShowItems] = useState(false);
   const [showUsers, setShowUsers] = useState(false);
   const [showEvents, setShowEvents] = useState(false);

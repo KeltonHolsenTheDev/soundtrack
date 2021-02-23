@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { AuthContext } from "../../auth/auth";
+import { AuthContext, useAuth } from "../../auth/auth";
 import { useHistory } from "react-router-dom";
 
 import "./UserContainer.css";
@@ -8,6 +8,7 @@ import UserCard from "../UserCard";
 import EditUser from "../EditUser";
 
 const UserContainer = function ({ enableEdit, setEnableEdit }) {
+  useAuth();
   // const users = [
   //   {
   //     firstName: "Mark",
