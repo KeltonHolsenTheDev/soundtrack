@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
+import { useAuth } from "../../auth/auth";
 import axios from "axios";
 import LocationForm from "../LocationForm";
 import { useHistory } from "react-router-dom";
 
 const AddLocation = function () {
+  useAuth();
   const history = useHistory();
   const addLocation = function (location) {
     console.log(location);

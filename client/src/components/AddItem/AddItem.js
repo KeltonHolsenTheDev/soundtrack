@@ -1,9 +1,11 @@
 import React from "react";
 import axios from "axios";
 import ItemForm from "../ItemForm";
+import { useAuth } from "../../auth/auth";
 import { useHistory } from "react-router-dom";
 
 const AddItem = function () {
+  useAuth();
   const history = useHistory();
   const addItem = function (item) {
     console.log(item);

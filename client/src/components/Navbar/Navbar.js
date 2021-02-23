@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
-import { AuthContext } from "../../auth/auth";
+import { AuthContext, useAuth } from "../../auth/auth";
 import { NavLink, useHistory } from "react-router-dom";
 import "./Navbar.css";
 
 function Navbar() {
+  useAuth();
   const { user, logoutUser } = useContext(AuthContext);
   const history = useHistory();
 

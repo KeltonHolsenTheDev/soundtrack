@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useAuth } from "../../auth/auth";
 import "./EventContainer.css";
 import EventCard from "../EventCard";
 import EditEvent from "../EditEvent";
 //import EventForm from "../EventForm";
 
 const EventContainer = function () {
+  useAuth();
   const testEvents = [
     {
       eventId: 1,
