@@ -72,7 +72,8 @@ const Dashboard = function () {
                 <div className="card-body justify-content-center d-flex text-center">
                   <span className="card-link" onClick={handleShowEvents}>
                     <i class="fa fa-calendar fa-4x"></i>
-                    <p onClick={handleShowEvents}>events</p>
+                    {/* <p onClick={handleShowEvents}>events</p> */}
+                    <p>events</p>
                   </span>
                 </div>
               </li>
@@ -113,7 +114,6 @@ const Dashboard = function () {
           {showEvents ? <EventContainer enableEdit={enableEditEvent} setEnableEdit={setEnableEditEvent} /> : ""}
           {showUsers ? <UserContainer enableEdit={enableEditUser} setEnableEdit={setEnableEditUser} /> : ""}
           {showItems ? <ItemContainer enableEdit={enableEditItem} setEnableEdit={setEnableEditItem} /> : ""}
-          {showEvents ? <EventContainer enableEdit={enableEditEvent} setEnableEdit={setEnableEditEvent} /> : ""}
         </div>
       </div>
     </div>

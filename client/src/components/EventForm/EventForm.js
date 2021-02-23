@@ -19,7 +19,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
   const [allLocations, setAllLocations] = useState([]);
   const [locationId, setLocationId] = useState([defaultEvent.locationId]);
   const [allItems, setAllItems] = useState([]);
-  const [selectedItems, setSelectedItems] = useState(0);
+  const [selectedItems, setSelectedItems] = useState([]);
   useEffect(() => {
     axios.get("/api/location").then(function (response) {
       setAllLocations(response.data);
@@ -29,6 +29,16 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
     });
     axios.get("/api/item").then(function (response) {
       setAllItems(response.data);
+      const itemIds = [];
+      for (let item of response.data) {
+        for (let equip of defaultEvent.equipment) {
+          if (item.itemId == equip.itemId) {
+            itemIds.push(item.itemId);
+            break;
+          }
+        }
+      }
+      setSelectedItems(itemIds);
     });
   }, []);
 
@@ -107,6 +117,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
         }
       }
     }
+    newEvent.eventId = defaultEvent.eventId;
     newEvent.eventName = eventName;
     newEvent.startDate = startDate;
     newEvent.endDate = endDate;
