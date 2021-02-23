@@ -40,6 +40,6 @@ const AddEvent = function () {
       });
   };
 
-  return <EventForm defaultEvent={blankEvent} submitFcn={addEvent} />;
+  return <EventForm defaultEvent={blankEvent} submitFcn={addEvent} formtitle = "Add Event"/>;
 };
 export default AddEvent;

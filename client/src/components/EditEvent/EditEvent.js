@@ -12,12 +12,12 @@ const EditEvent = function ({ chosenEvent, setEnableEdit, renderEvents }) {
         renderEvents();
       })
       .catch(function (error) {
-        console.log(error.response);
+        alert(error.response.data[0].defaultMessage);
       });
   };
 
   return (
-    // <button src="btn btn-primary">Update Placeholder</button>
+    //<button src="btn btn-primary">Update Placeholder</button>
     <EventForm
       defaultEvent={chosenEvent}
       submitFcn={editEvent}

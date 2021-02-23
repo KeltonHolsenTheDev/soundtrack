@@ -5,7 +5,7 @@ import { AuthContext } from "../../auth/auth";
 const ItemCard = function (props) {
   const { user } = useContext(AuthContext);
   const buttonsAvailable =
-    user && (user.access === "ROLE_ADMINISTRATOR" || user.sub === props.email);
+    user && (user.access === "ROLE_ADMINISTRATOR");
   return (
     <tr>
       <th scope="row">{props.itemId}</th>

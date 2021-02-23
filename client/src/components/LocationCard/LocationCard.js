@@ -5,7 +5,7 @@ const LocationCard = function (props) {
   const { user } = useContext(AuthContext);
   const buttonsAvailable =
     user &&
-    (user.access === "ROLE_ADMINISTRATOR" || user.sub === props.owner.email);
+    (user.access === "ROLE_ADMINISTRATOR");
   return (
     <tr className="card-list">
       <th>{props.locationId}</th>

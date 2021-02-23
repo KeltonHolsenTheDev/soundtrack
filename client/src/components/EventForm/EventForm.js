@@ -126,6 +126,10 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
       }
     }
     const equipment = [];
+    if (selectedItems == 0) {
+      alert("You must select at least one item!");
+      return;
+    }
     for (let itemId of selectedItems) {
       for (let item of allItems) {
         if (item.itemId == itemId) {
@@ -152,7 +156,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
         <div className="col ">
           <div className="card mt-5">
             <div className="card-body">
-              <h1 className="card-title text-center mb-2"> Event Form</h1>
+              <h1 className="card-title text-center mb-2">{formtitle}</h1>
 
               {/* Start of form */}
               <form>
@@ -300,12 +304,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                       
                     }}
                   >
-<<<<<<< HEAD
                     <option value={0}>Select a location</option>
-=======
-
-                    <option value="">Select a location...</option>
->>>>>>> kelton
                     {allLocations.map((location) => {
                       return (
                         <option
