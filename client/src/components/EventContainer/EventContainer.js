@@ -6,7 +6,7 @@ import EventCard from "../EventCard";
 import EditEvent from "../EditEvent";
 //import EventForm from "../EventForm";
 
-const EventContainer = function () {
+const EventContainer = function ({ enableEdit, setEnableEdit }) {
   useAuth();
   const testEvents = [
     {
@@ -73,7 +73,6 @@ const EventContainer = function () {
   ];
 
   const [events, setEvents] = useState([testEvents]);
-  const [enableEdit, setEnableEdit] = useState(false);
   const [chosenEvent, setChosenEvent] = useState(null);
 
   const renderEvents = function () {
