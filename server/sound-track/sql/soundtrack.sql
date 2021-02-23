@@ -150,7 +150,7 @@ insert into item_type (type_name) values
 
 insert into item (item_name, description, brand, item_type_id, item_category, location_id, location_description, is_broken, notes) values
 		("Microphone 1", "Bass mic", "Sony", 1, "AUDIO", 1 , "Shelf A", false, "no notes"),
-        ("Drum", "Kick", "DrumstickInc", 2, "AUDIO", 1 , "Shelf B", false, "no notes"),
+        ("Drum", "Kick", "DrumstickInc", 2, "AUDIO", 1 , "Shelf B", true, "no notes"),
         ("Short Throw", "Projector", "Panasonic", 3, "VIDEO", 1 , "Shelf C", false, "this one is good for short distance projecting");
 
 insert into item (item_name, description, brand, item_type_id, item_category, location_id, location_description, is_broken, notes) values
@@ -160,11 +160,6 @@ insert into item (item_name, description, brand, item_type_id, item_category, lo
         
 insert into user_role (user_id, role_id) values
 	(1, 1);
-    
-insert into event_item (event_id, item_id) values
-	(1, 1),
-    (2, 2),
-	(2, 3);
         
 insert into event_ (event_name, start_date, end_date, location_id, owner_id) values
 		("Church Service", '2021-02-21', '2021-02-21', 1, 1),
@@ -172,16 +167,19 @@ insert into event_ (event_name, start_date, end_date, location_id, owner_id) val
         
 insert into event_item (event_id, item_id) values
     (1, 1),
-    (2, 2);
+    (2, 3);
     
 insert into event_user_role(event_id, user_role_id) values
-    (1, 2);
+	(2, 3),
+    (1, 4);
            
 select * from system_user;
 
 select * from user_role;
 
 select * from event_user_role;
+
+select * from role;
 
 select * from event_;
 

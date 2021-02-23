@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import soundtrack.data.UserRepository;
+import soundtrack.models.AccessLevel;
 import soundtrack.models.Location;
 import soundtrack.models.User;
 
@@ -31,11 +32,15 @@ public class UserService implements UserDetailsService {
     }
 
     public List<User> findAll() {
-        return repository.findAll();
+        List<User> all = repository.findAll();
+        all.forEach(this::nullPassword);
+        return all;
     }
 
     public User findById(int id) {
-        return repository.findById(id);
+        User user = repository.findById(id);
+        nullPassword(user);
+        return user;
     }
 
     @Override
@@ -50,7 +55,9 @@ public class UserService implements UserDetailsService {
     }
 
     public User findByEmail(String email) {
-        return repository.findByEmail(email);
+        User user = repository.findByEmail(email);
+        nullPassword(user);
+        return user;
     }
 
     public Result<User> add(User user) {
@@ -74,6 +81,13 @@ public class UserService implements UserDetailsService {
         if (!result.isSuccess()) {
             return result;
         }
+        //make it so that users cannot be updated to admin status under any circumstances
+        User oldValues = repository.findById(user.getUserId());
+        if (oldValues.getAccessLevel() == AccessLevel.ROLE_USER && user.getAccessLevel() == AccessLevel.ROLE_ADMINISTRATOR) {
+            result.addMessage("User access level cannot be escalated via update. Create a new account to give this user administrator access.",
+                    ResultType.INVALID);
+            return result;
+        }
         user.setPassword(encoder.encode(user.getPassword()));
         if (repository.update(user)) {
             result.setPayLoad(user);
@@ -86,6 +100,10 @@ public class UserService implements UserDetailsService {
 
     public boolean deleteById(int userId) {
         return repository.deleteById(userId);
+    }
+
+    private void nullPassword(User user) {
+        user.setPassword(null);
     }
 
     private Result<User> validate(User user) {

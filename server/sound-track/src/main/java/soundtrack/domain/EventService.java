@@ -128,6 +128,15 @@ public class EventService {
             }
         }
 
+        //Make sure we don't have duplicate UserRoles in the event
+        HashSet<Integer> userIds = new HashSet<>();
+        for (UserRole ur: event.getStaffAndRoles()) {
+            userIds.add(ur.getUser().getUserId());
+        }
+        if (userIds.size() != event.getStaffAndRoles().size()) {
+            result.addMessage("Multiple user-role pairs exist for the same user in this event.", ResultType.INVALID);
+        }
+
         //Frontend should only allow users to be given roles that they have, but we want to make sure that no bad roles snuck in
         for (UserRole ur: event.getStaffAndRoles()) {
             for (String role: ur.getRoles()) {
@@ -199,9 +208,8 @@ public class EventService {
         event.setEquipment(items);
         List<UserRole> roles = new ArrayList<>();
         for (int userId: event.getStaffIds()) {
-            Map<User, String> userMap = userRepository.findUserEventRoles(userId, event.getEventId());
             User user = userRepository.findById(userId);
-            List<String> userRoles = new ArrayList<>(userMap.values());
+            List<String> userRoles = userRepository.findUserEventRoles(userId, event.getEventId());
             roles.add(new UserRole(user, userRoles));
         }
         event.setStaffAndRoles(roles);

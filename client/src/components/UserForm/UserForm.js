@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../../auth/auth";
 import { useHistory } from "react-router-dom";
 import "./UserForm.css";
 
@@ -6,6 +7,7 @@ const UserForm = function ({ defaultUser, submitFcn, formTitle }) {
   const history = useHistory();
   console.log(defaultUser);
 
+  const { user, logoutUser } = useContext(AuthContext);
   const [newUser, setNewUser] = useState(defaultUser);
   const [roleInput, setRoleInput] = useState("");
   const [roles, setRoles] = useState(defaultUser.roles);
@@ -39,7 +41,7 @@ const UserForm = function ({ defaultUser, submitFcn, formTitle }) {
       newUser.roles = roles;
       submitFcn(newUser, history);
     } else {
-      console.log("Passwords must match");
+      alert("Passwords must match");
     }
   };
 
@@ -141,18 +143,23 @@ const UserForm = function ({ defaultUser, submitFcn, formTitle }) {
                     />
                   </div>
                 </div>
-                <label htmlFor="inputAccessLevel">Access Level</label>
-                <select
-                  name="accessLevel"
-                  className="custom-select custom-select-sm mb-2"
-                  required
-                  value={newUser.accessLevel}
-                  onChange={onChangeHandler}
-                >
-                  <option value="">Open this select menu</option>
-                  <option value="ROLE_ADMINISTRATOR">Administrator</option>
-                  <option value="ROLE_USER">User</option>
-                </select>
+                {user && user.access === "ROLE_ADMINISTRATOR"? (
+                  <div>
+                    <label htmlFor="inputAccessLevel">Access Level</label>
+                    <select
+                      name="accessLevel"
+                      className="custom-select custom-select-sm mb-2"
+                      required
+                      value={newUser.accessLevel}
+                      onChange={onChangeHandler}
+                    >
+                      <option value="">Open this select menu</option>
+                      <option value="ROLE_ADMINISTRATOR">Administrator</option>
+                      <option value="ROLE_USER">User</option>
+                    </select>
+                  </div>     
+                ) : ""}
+                
                 <div className="form-group userform-form-group">
                   <label htmlFor="formGroupExampleInput">Roles</label>
                   {roles.map((role) => (

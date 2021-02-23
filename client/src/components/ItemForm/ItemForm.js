@@ -15,6 +15,7 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
     defaultItem.locationDescription
   );
   const [checked, setChecked] = useState(defaultItem.broken);
+  const [notes, setNotes] = useState(defaultItem.notes);
 
   useEffect(() => {
     axios.get("/api/location").then(function (response) {
@@ -59,6 +60,7 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
       locationId: locationId,
       locationDescription: locationDescription,
       broken: checked,
+      notes: notes
     };
     // item.location = chosenLocation;
     // item.locationId = chosenLocation.locationId;
@@ -97,7 +99,7 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
                       type="text"
                       className="form-control"
                       id="formGroupExampleInput2"
-                      placeholder="description"
+                      placeholder="Description"
                       name="description"
                       onChange={(e) => setDescription(e.target.value)}
                       value={description}
@@ -196,6 +198,20 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
                     <label class="custom-control-label" for="customCheck1">
                       Check if Item needs repair
                     </label>
+                  </div>
+
+                  <div class="form-group">
+                    <label htmlFor="formGroupExampleInput2">Notes</label>
+                    <textarea
+                      type="textarea"
+                      className="form-control"
+                      id="formGroupExampleInput2"
+                      placeholder="Notes"
+                      name="notes"
+                      onChange={(e) => setNotes(e.target.value)}
+                      value={notes}
+                      required
+                    />
                   </div>
 
                   <div className="form-group userform-form-group row">

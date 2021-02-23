@@ -61,6 +61,9 @@ const UserContainer = function ({ enableEdit, setEnableEdit }) {
 
   const handleDelete = function (event, deletedUser) {
     event.preventDefault();
+    if (!window.confirm("CONFIRM ACCOUNT DELETION.")) {
+      return;
+    }
     axios
       .delete(`/api/user/${deletedUser.userId}`)
       .then(function (response) {
@@ -72,7 +75,7 @@ const UserContainer = function ({ enableEdit, setEnableEdit }) {
         }
       })
       .catch(function (error) {
-        console.log(error.response);
+        console.log(error.response.data);
       });
   };
 

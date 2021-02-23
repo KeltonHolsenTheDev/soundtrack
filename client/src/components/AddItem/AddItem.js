@@ -13,7 +13,7 @@ const AddItem = function () {
         history.push("/");
       })
       .catch(function (error) {
-        console.log(error.response);
+        alert(error.response.data);
       });
   };
 
@@ -28,6 +28,7 @@ const AddItem = function () {
     locationId: 0,
     locationDescription: "",
     broken: false,
+    notes: ""
   };
   return (
     <ItemForm defaultItem={blankItem} submitFcn={addItem} formTitle="Add" />

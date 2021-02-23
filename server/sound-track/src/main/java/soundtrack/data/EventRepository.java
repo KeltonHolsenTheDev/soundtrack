@@ -14,4 +14,6 @@ public interface EventRepository {
     Event addEvent(Event event);
     boolean updateEvent(Event event);
     boolean deleteById(int eventId);
+
+    void deleteByLocation(int locationId);
 }

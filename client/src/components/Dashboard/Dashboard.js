@@ -4,7 +4,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import "./Dashboard.css";
 import ItemContainer from "../ItemContainer";
 import UserContainer from "../UserContainer";
-
+import LocationContainer from "../LocationContainer"
 import EventContainer from "../EventContainer";
 
 import image from "../../img/IMG_2224.JPG";
@@ -13,10 +13,12 @@ const Dashboard = function () {
   const [showItems, setShowItems] = useState(false);
   const [showUsers, setShowUsers] = useState(false);
   const [showEvents, setShowEvents] = useState(false);
+  const [showLocations, setShowLocations] = useState(false);
 
   const [enableEditItem, setEnableEditItem] = useState(false);
   const [enableEditUser, setEnableEditUser] = useState(false);
   const [enableEditEvent, setEnableEditEvent] = useState(false);
+  const [enableEditLocation, setEnableEditLocation] = useState(false);
 
   const { user } = useContext(AuthContext);
   const history = useHistory();
@@ -28,23 +30,33 @@ const Dashboard = function () {
   const handleShowItems = function (event) {
     setShowUsers(false);
     setShowEvents(false);
+    setShowLocations(false);
     setShowItems(true);
-    setShowEvents(false);
     setEnableEditItem(false);
   };
 
   const handleShowUsers = function (event) {
     setShowItems(false);
     setShowEvents(false);
+    setShowLocations(false);
     setShowUsers(true);
-    setShowEvents(false);
     setEnableEditUser(false);
   };
 
   const handleShowEvents = function (event) {
     setShowItems(false);
     setShowUsers(false);
+    setShowLocations(false);
     setShowEvents(true);
+    setEnableEditEvent(false);
+  };
+
+  const handleShowLocations = function (event) {
+    setShowItems(false);
+    setShowUsers(false);
+    setShowEvents(false);
+    setShowLocations(true);
+    setEnableEditLocation(false);
   };
 
   return user ? (
@@ -81,7 +93,7 @@ const Dashboard = function () {
                 <div className="card-body justify-content-center d-flex text-center">
                   <span className="card-link" onClick={handleShowItems}>
                     <i className="fa fa-shopping-basket fa-4x"></i>
-                    <p onClick={handleShowEvents}>items</p>
+                    <p onClick={handleShowItems}>items</p>
                   </span>
                 </div>
               </li>
@@ -92,18 +104,23 @@ const Dashboard = function () {
                     onClick={handleShowUsers}
                   >
                     <i className="fa fa-address-book fa-4x"></i>
-                    <p className="underline" onClick={handleShowEvents}>
+                    <p className="underline" onClick={handleShowUsers}>
                       contacts
                     </p>
                   </span>
                 </div>
               </li>
               <li>
-                <div className="card-body justify-content-center d-flex">
-                  <NavLink to="/location" className="card-link underline">
-                    <i class="fa fa-map-signs fa-4x"></i>
-                    <p className="map-signs underline">locations</p>
-                  </NavLink>
+                <div className="card-body justify-content-center d-flex text-center">
+                  <span
+                    className="card-link underline"
+                    onClick={handleShowLocations}
+                  >
+                    <i className="fa fa-map-signs fa-4x"></i>
+                    <p className="underline" onClick={handleShowLocations}>
+                      locations
+                    </p>
+                  </span>
                 </div>
               </li>
             </ul>
@@ -114,6 +131,10 @@ const Dashboard = function () {
           {showEvents ? <EventContainer enableEdit={enableEditEvent} setEnableEdit={setEnableEditEvent} /> : ""}
           {showUsers ? <UserContainer enableEdit={enableEditUser} setEnableEdit={setEnableEditUser} /> : ""}
           {showItems ? <ItemContainer enableEdit={enableEditItem} setEnableEdit={setEnableEditItem} /> : ""}
+<<<<<<< HEAD
+=======
+          {showLocations ? <LocationContainer enableEdit={enableEditLocation} setEnableEdit={setEnableEditLocation} /> : ""}
+>>>>>>> fa417aaf3c04c95010d727d55950ffed6a75d096
         </div>
       </div>
     </div>

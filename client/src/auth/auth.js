@@ -36,7 +36,7 @@ export const loginUser = (setUser, setErrors) => (userData, history) => {
       history.push("/");
     })
     .catch((err) => {
-      console.log(err);
+      alert(err.response.data);
       // setErrors(err.response.data);
     });
 };
@@ -47,8 +47,9 @@ export const registerUser = (setErrors) => (userData, history) => {
   axios
     .post("api/user", userData)
     .then((res) => history.push("/"))
-    .catch((err) => {
-      console.log(err.response.data);
+    .catch((error) => {
+      alert(error.response.data[0].defaultMessage);
+      console.log(error.response.data);
       // setErrors(err.response.data);
     });
 };
