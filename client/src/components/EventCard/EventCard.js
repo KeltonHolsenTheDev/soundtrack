@@ -6,7 +6,7 @@ const EventCard = function (props) {
   const { user } = useContext(AuthContext);
   const buttonsAvailable =
     user &&
-    (user.access === "ROLE_ADMINISTRATOR" || user.sub === props.owner.email);
+    (user.access === "ROLE_ADMINISTRATOR" || user.sub === props.owner?.email);
 
   const owner = props.owner;
   const location = props.location;

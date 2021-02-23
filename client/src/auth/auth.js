@@ -36,7 +36,7 @@ export const loginUser = (setUser, setErrors) => (userData, history) => {
       history.push("/");
     })
     .catch((err) => {
-      alert(err.response.data);
+      alert("Invalid login attempt");
       // setErrors(err.response.data);
     });
 };

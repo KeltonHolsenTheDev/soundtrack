@@ -290,8 +290,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                       
                     }}
                   >
-
-                    <option value="">Select a location...</option>
+                    <option value={0}>Select a location</option>
                     {allLocations.map((location) => {
                       return (
                         <option

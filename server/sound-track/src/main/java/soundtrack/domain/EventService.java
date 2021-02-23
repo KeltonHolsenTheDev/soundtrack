@@ -223,13 +223,19 @@ public class EventService {
     }
 
     private void sendVolunteerEmails(Event event) {
-        for (UserRole userRole: event.getStaffAndRoles()) {
+        List<UserRole> userRoles = event.getStaffAndRoles();
+        //make sure we aren't emailing someone who wasn't added to the event
+        Event previousValue = eventRepository.findById(event.getEventId());
+        if (previousValue != null) {
+            userRoles = userRoles.stream().filter(userRole -> !previousValue.getStaffAndRoles().contains(userRole)).collect(Collectors.toList());
+        }
+        for (UserRole userRole: userRoles) {
             Properties properties = System.getProperties();
             properties.setProperty("mail.smtp.host", "smtp.gmail.com");
             properties.setProperty("mail.smtp.auth", "true");
             properties.setProperty("mail.smtp.starttls.enable", "true");
             properties.setProperty("mail.smtp.port", "587");
-            Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
+            Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
                     return new PasswordAuthentication("soundtrackbyteamjak@gmail.com", "I pledge allegiance 2 Artemis.");
                 }
