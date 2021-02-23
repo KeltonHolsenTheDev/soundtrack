@@ -6,7 +6,7 @@ import axios from "axios";
 const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
   const [eventName, setEventName] = useState(defaultEvent.eventName);
   const [startDate, setStartDate] = useState(defaultEvent.startDate);
-  const [endDate, setEndDate] = useState(defaultEvent.startDate);
+  const [endDate, setEndDate] = useState(defaultEvent.endDate);
   const [users, setUsers] = useState([]);
   const [owner, setOwner] = useState(defaultEvent.owner.userId);
   const [staffAndRoles, setStaffAndRoles] = useState(
