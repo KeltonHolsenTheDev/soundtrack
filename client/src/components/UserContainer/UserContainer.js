@@ -75,7 +75,7 @@ const UserContainer = function ({ enableEdit, setEnableEdit }) {
         }
       })
       .catch(function (error) {
-        console.log(error.response);
+        console.log(error.response.data);
       });
   };
 

@@ -65,7 +65,8 @@ public class LocationJdbcRepository implements LocationRepository {
 
     @Override
     public boolean deleteById(int id) {
-        //Additional deletions will need to go here when other models are implemented
+        jdbcTemplate.update("delete from event_ where location_id = ?;", id);
+        jdbcTemplate.update("delete from item where location_id = ?;", id);
         return jdbcTemplate.update("delete from location where location_id = ?;", id) > 0;
     }
 }

@@ -170,6 +170,7 @@ insert into event_item (event_id, item_id) values
     (2, 3);
     
 insert into event_user_role(event_id, user_role_id) values
+	(2, 3),
     (1, 4);
            
 select * from system_user;

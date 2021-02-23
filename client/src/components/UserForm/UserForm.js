@@ -41,7 +41,7 @@ const UserForm = function ({ defaultUser, submitFcn, formTitle }) {
       newUser.roles = roles;
       submitFcn(newUser, history);
     } else {
-      console.log("Passwords must match");
+      alert("Passwords must match");
     }
   };
 

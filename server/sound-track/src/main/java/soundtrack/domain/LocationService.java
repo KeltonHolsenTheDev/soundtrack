@@ -2,6 +2,8 @@ package soundtrack.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import soundtrack.data.EventRepository;
+import soundtrack.data.ItemRepository;
 import soundtrack.data.LocationRepository;
 import soundtrack.models.Location;
 
@@ -14,7 +16,15 @@ public class LocationService {
 
     private final LocationRepository repository;
 
-    public LocationService(LocationRepository repository) {this.repository=repository; }
+    private final EventRepository eventRepository;
+
+    private final ItemRepository itemRepository;
+
+    public LocationService(LocationRepository repository, EventRepository eventRepository, ItemRepository itemRepository) {
+        this.repository = repository;
+        this.eventRepository = eventRepository;
+        this.itemRepository = itemRepository;
+    }
 
     public List<Location> findAll() {return repository.findAll(); }
 
@@ -55,6 +65,8 @@ public class LocationService {
     }
 
     public boolean deleteById(int locationId) {
+        itemRepository.deleteByLocation(locationId);
+        eventRepository.deleteByLocation(locationId);
         return repository.deleteById(locationId);
     }
 

@@ -157,7 +157,22 @@ public class ItemJdbcRepository implements ItemRepository{
 
     @Override
     public boolean deleteById(int itemId) {
-        //Additional deletions will need to go here when other models are implemented
+        jdbcTemplate.update("delete from event_item where item_id = ?;", itemId);
         return jdbcTemplate.update("delete from item where item_id = ?;", itemId) > 0;
+    }
+
+    @Override
+    public void deleteByLocation(int locationId) {
+        List<Integer> itemsToDelete = jdbcTemplate.query("select item_id from item where location_id = ?;", this::mapItemId, locationId);
+        for (int itemId: itemsToDelete) {
+            jdbcTemplate.update("set sql_safe_updates = 0;");
+            jdbcTemplate.update("delete from event_item where item_id = ?;", itemId);
+            jdbcTemplate.update("delete from item where item_id = ?;", itemId);
+            jdbcTemplate.update("set sql_safe_updates = 1;");
+        }
+    }
+
+    private Integer mapItemId(ResultSet resultSet, int i) throws SQLException {
+        return resultSet.getInt("item_id");
     }
 }
