@@ -4,7 +4,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import "./Dashboard.css";
 import ItemContainer from "../ItemContainer";
 import UserContainer from "../UserContainer";
-import LocationContainer from "../LocationContainer"
+import LocationContainer from "../LocationContainer";
 import EventContainer from "../EventContainer";
 
 import image from "../../img/IMG_2224.JPG";
@@ -131,10 +131,7 @@ const Dashboard = function () {
           {showEvents ? <EventContainer enableEdit={enableEditEvent} setEnableEdit={setEnableEditEvent} /> : ""}
           {showUsers ? <UserContainer enableEdit={enableEditUser} setEnableEdit={setEnableEditUser} /> : ""}
           {showItems ? <ItemContainer enableEdit={enableEditItem} setEnableEdit={setEnableEditItem} /> : ""}
-<<<<<<< HEAD
-=======
           {showLocations ? <LocationContainer enableEdit={enableEditLocation} setEnableEdit={setEnableEditLocation} /> : ""}
->>>>>>> fa417aaf3c04c95010d727d55950ffed6a75d096
         </div>
       </div>
     </div>

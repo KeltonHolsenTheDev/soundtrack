@@ -16,7 +16,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
     userId: 0,
     roles: [],
   });
-  
+
   const [selectedRoles, setSelectedRoles] = useState([]);
   const [allLocations, setAllLocations] = useState([]);
   const [locationId, setLocationId] = useState([defaultEvent.locationId]);
@@ -61,7 +61,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
   const handleSelectRoles = function (selectedOptions) {
     const roles = [];
     for (let option of selectedOptions) {
-        roles.push(option.value);
+      roles.push(option.value);
     }
     setSelectedRoles(roles);
   };
@@ -79,14 +79,13 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
       }
       if (alreadyPresent) {
         alert("That volunteer has already been added");
-      }
-      else {
+      } else {
         newStaffAndRoles.push({
           user: selectedStaff,
           roles: selectedRoles,
         });
       }
-      
+
       setStaffAndRoles(newStaffAndRoles);
     }
   };
@@ -298,6 +297,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                       setLocationId(e.target.value);
                     }}
                   >
+                    <option value={0}>Select a location</option>
                     {allLocations.map((location) => {
                       return (
                         <option
