@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/item", "/api/item/*").hasAnyRole("USER", "ADMINISTRATOR")
                 .antMatchers(HttpMethod.GET, "/api/event", "/api/event/*").hasAnyRole("USER", "ADMINISTRATOR")
                 .antMatchers(HttpMethod.GET, "/api/user", "/api/user/*").hasAnyRole("USER", "ADMINISTRATOR")
-                .antMatchers(HttpMethod.POST).hasAnyRole("ADMINISTRATOR") //change to permitAll() to add initial user
+                .antMatchers(HttpMethod.POST).permitAll() //change to permitAll() to add initial user
                 .antMatchers("/api/user/{userId}").access("@webSecurity.checkUserId(authentication, #userId)")
                 .antMatchers(HttpMethod.PUT).hasAnyRole("ADMINISTRATOR")
                 .antMatchers(HttpMethod.DELETE).hasAnyRole("ADMINISTRATOR")
