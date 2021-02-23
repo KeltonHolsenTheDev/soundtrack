@@ -32,7 +32,6 @@ export const loginUser = (setUser, setErrors) => (userData, history) => {
       const decoded = jwt_decode(jwt_token);
       // Set current user
       setUser(decoded);
-      console.log(decoded);
       history.push("/");
     })
     .catch((err) => {

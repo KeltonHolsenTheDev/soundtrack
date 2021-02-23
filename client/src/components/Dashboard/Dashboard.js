@@ -4,7 +4,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import "./Dashboard.css";
 import ItemContainer from "../ItemContainer";
 import UserContainer from "../UserContainer";
-import LocationContainer from "../LocationContainer"
+import LocationContainer from "../LocationContainer";
 import EventContainer from "../EventContainer";
 
 import image from "../../img/IMG_2224.JPG";
@@ -85,7 +85,8 @@ const Dashboard = function () {
                 <div className="card-body justify-content-center d-flex text-center">
                   <span className="card-link" onClick={handleShowEvents}>
                     <i class="fa fa-calendar fa-4x"></i>
-                    <p onClick={handleShowEvents}>events</p>
+                    {/* <p onClick={handleShowEvents}>events</p> */}
+                    <p>events</p>
                   </span>
                 </div>
               </li>
