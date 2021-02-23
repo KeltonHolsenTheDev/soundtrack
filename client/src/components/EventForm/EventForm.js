@@ -284,9 +284,14 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                     required
                     value={locationId}
                     onChange={(e) => {
-                      setLocationId(e.target.value);
+                      if (e.target.value > 0) {
+                        setLocationId(e.target.value);
+                      }
+                      
                     }}
                   >
+
+                    <option value="">Select a location...</option>
                     {allLocations.map((location) => {
                       return (
                         <option
