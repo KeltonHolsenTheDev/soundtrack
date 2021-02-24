@@ -18,15 +18,25 @@ XIII. License
 
 ## Live site:
 
-Coming Soon!!
+Come visit our beautiful app at https://dev10-capstone-team7.azurewebsites.net/
+
 
 ## Description:
 
-We want to build an event planning app that is specifically geared towards use in music events where sound equipment will need to be checked out and used. This app will track the equipment that an organization has and who is using it for what events, and will also allow event planners to track what members of a tech team are assigned to a given event.
+SoundTrack is an event-planning app geared towards technicians who need to track their organization's staff and inventory. 
+The app allows administrators to manage inventory, staff and locations for the organization, and to use that information
+to plan events, including what equipment or volunteers will be present at which events. The app makes sure that the user
+can only check out equipment, locations, or staff members that are not already busy with another event, and also allows
+regular users to see what events they are signed up for as well as to see an overview of the organization's information.
+The app also notifies users via email when they are added to an event as well as when they are added to the system
+or change their password.
 
 ## Usage:
 
-Users will be able to check out equipment for their event on a first-come, first-serve basis depending on the time of the event. The app will also allow users to submit repair requests for equipment, removing it from the pool of available equipment until the administrator fulfills the repair ticket by fixing the equipment (we are assuming that the administrator is someone who handles repairs, as the app is primarily geared towards smaller organizations). The system will also be able to contact technicians to let them know about assignments for events.
+For administrators, the navbar contains links to add locations, users, items and events to the system. 
+These will be displayed on the main dashboard, which has image links to navigate between information. These pages
+also include the ability to update or remove information from the system (note that anything deleted will be gone forever).
+
 
 ## Images:
 
@@ -47,6 +57,16 @@ No installation necessary
 - Validation Factory
 
 ## Contributions:
+This app is the brainchild of three developers from the Dev10 Program, collectively referred to as **Team JAK**:
+
+**Justin Torres** is [enter bio here]
+
+**AyDy Burling** is [enter bio here]
+
+**Kelton Holsen** is a software developer with Ameriprise Financial. They have a B.A. in Computer Science and Creative Writing
+from Augsburg University. They live in a small apartment with their partner, Jessie, and their cat, Artemis. In their free time,
+they enjoy going on long walks, running tabletop RPGs, and making mashups.
+
 
 ## Challenges:
 
