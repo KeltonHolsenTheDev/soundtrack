@@ -273,12 +273,35 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                   >
                     <option value="0">Select a staff member</option>
                     {users.map((user) => {
-                      return (
-                        <option
+                      let busy = false;
+                      for (let e of events) {
+                        if (e.staffAndRoles != undefined) {
+                          for (let u of e.staffAndRoles) {
+                            if (u?.user?.userId === user?.userId && ((new Date(e?.startDate) >= new Date(startDate) && new Date(e?.startDate) <= new Date(endDate)) 
+                              || (new Date(e?.endDate) >= new Date(startDate) && new Date(e?.endDate) <= new Date(endDate)))) {
+                              busy = true;
+                              break;
+                            }
+                          }
+                        }
+                        
+                      }
+                      if (busy) {
+                        return (
+                          <option
                           key={user.userId}
-                          value={user.userId}
+                          value={user.userId} disabled
                         >{`${user.firstName} ${user.lastName}`}</option>
-                      );
+                        );
+                      } 
+                      else {
+                        return (
+                          <option
+                            key={user.userId}
+                            value={user.userId}
+                          >{`${user.firstName} ${user.lastName}`}</option>
+                        );
+                      }  
                     })}
                   </select>
                   <select
