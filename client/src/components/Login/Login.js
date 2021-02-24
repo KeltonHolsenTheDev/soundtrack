@@ -40,7 +40,7 @@ const Login = function () {
   };
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid login-container">
       <div className="row">
         <div className="d-none d-xl-block col-1 home-brand-container">
           <h1 className="text-light">JAK</h1>
@@ -59,11 +59,11 @@ const Login = function () {
                 <div className="form-group login-form-group row">
                   <label
                     htmlFor="staticEmail"
-                    className="col-sm-2 col-form-label text-right"
+                    className="col-3 col-form-label text-right"
                   >
                     Email
                   </label>
-                  <div className="col-sm-9">
+                  <div className="col-8">
                     <input
                       type="email"
                       name="email"
@@ -80,11 +80,11 @@ const Login = function () {
                 <div className="form-group login-form-group row">
                   <label
                     htmlFor="inputPassword"
-                    className="col-sm-2 col-form-label text-right"
+                    className="col-3 col-form-label text-right"
                   >
                     Password
                   </label>
-                  <div className="col-sm-9">
+                  <div className="col-8">
                     <input
                       type="password"
                       name="password"

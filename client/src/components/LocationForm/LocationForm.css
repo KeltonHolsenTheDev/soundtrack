@@ -1,0 +1,21 @@
+.location-form-col {
+  height: 100vh;
+  margin-top: 10%;
+}
+
+.location-col-left {
+  background: url("../../img/dark_brick_wall.png");
+  margin-right: 15%;
+  background-size: 70%;
+}
+
+/* .location-form {
+  height: 100vh;
+} */
+
+.location-form-container {
+  padding: 0%;
+  margin: 0%;
+  height: 100vh;
+  overflow: hidden;
+}

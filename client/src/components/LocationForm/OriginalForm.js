@@ -42,10 +42,9 @@ const LocationForm = function ({ defaultLocation, submitFcn, formTitle }) {
   return (
     <div className="container location-form-container">
       <div className="container location-form">
-        <div className="row ">
-          <div class="col-4 d-none d-md-block location-col-left">JAK</div>
-          <div className="col location-form-col">
-            <div className="card shadow location-form-card">
+        <div className="row">
+          <div className="col">
+            <div className="card shadow-lg location-form-card">
               <div className="card-body location-form-cardBody">
                 <h1 className="card-title mb-3 text-center">
                   {`${formTitle} Location `}
@@ -85,7 +84,7 @@ const LocationForm = function ({ defaultLocation, submitFcn, formTitle }) {
                   </div>
 
                   <div className="form-group userform-form-group row">
-                    <div className="col-10">
+                    <div className="col-sm-10">
                       <button
                         // onClick={handleSubmit}
                         type="submit"

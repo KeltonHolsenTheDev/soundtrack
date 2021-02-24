@@ -15,12 +15,12 @@ function Navbar() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg">
+    <nav className="navbar navbar-dark navbar-expand-lg fixed-top">
       <NavLink className="navbar-brand" exact={true} to="/">
         🎧
       </NavLink>
       <button
-        className="navbar-toggler"
+        className="navbar-toggler "
         type="button"
         data-toggle="collapse"
         data-target="#navbarNav"
@@ -28,7 +28,7 @@ function Navbar() {
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span className="navbar-toggler-icon"></span>
+        <span className="navbar-toggler-icon "></span>
       </button>
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav ml-auto">

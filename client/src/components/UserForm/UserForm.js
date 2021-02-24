@@ -192,7 +192,7 @@ const UserForm = function ({ defaultUser, submitFcn, formTitle }) {
                     value={roleInput}
                   />
                   <button
-                    className="btn btn-info rounded-0"
+                    className="btn btn-info rounded-0 mt-3 mb-5"
                     onClick={(e) => handleAddRole(e)}
                   >
                     Add role

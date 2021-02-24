@@ -100,7 +100,7 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
 
   return (
     <div className="container item-form-container">
-      <div className="container item-form">
+      <div className="container item-form pt-3">
         <div className="row">
           <div className="col">
             <div className="card shadow-lg item-form-card">
@@ -244,7 +244,6 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
                       name="notes"
                       onChange={(e) => setNotes(e.target.value)}
                       value={notes}
-                      required
                     />
                   </div>
 
