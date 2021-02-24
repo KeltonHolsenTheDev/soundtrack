@@ -23,71 +23,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
   const [selectedItems, setSelectedItems] = useState([]);
   const [errors, setErrors] = useState([]);
 
-  const testEvents = [
-    {
-      eventId: 1,
-      eventName: "Event Name Here",
-      startDate: "0000-00-00",
-      endDate: "0000-00-00",
-      owner: {
-        userId: 1,
-        firstName: "First",
-        lastName: "Last",
-        email: "email@email.com",
-        phone: "555-455-5555",
-        accessLevel: "ROLE_ADMINISTRATOR",
-        authorities: [{}],
-        password: "passwordpassword",
-        roles: ["test_role"],
-      },
-      ownerId: 1,
-      staffIds: [1],
-      staffAndRoles: [
-        {
-          user: {
-            userId: 1,
-            firstName: "First",
-            lastName: "Last",
-            email: "email@email.com",
-            phone: "555-455-5555",
-            accessLevel: "ROLE_ADMINISTRATOR",
-            authorities: [{}],
-            password: "passwordpassword",
-            roles: ["test_role"],
-          },
-          roles: ["test_role"],
-        },
-      ],
-      location: {
-        locationId: 1,
-        address: "123 Test Address",
-        name: "Test Address",
-      },
-      locationId: 1,
-      equipment: [
-        {
-          itemId: 1,
-          itemName: "Test Item",
-          description: "Test Item",
-          brand: "Test",
-          itemType: "test item",
-          itemCategory: "AUDIO",
-          locationId: 1,
-          location: {
-            locationId: 1,
-            address: "123 Test Address",
-            name: "Test Address",
-          },
-          locationDescription: "place",
-          isBroken: false,
-          notes: "no notes",
-        },
-      ],
-      equipmentIds: [1],
-    },
-  ];
-
-  const [events, setEvents] = useState([testEvents]);
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
     axios.get("/api/location").then(function (response) {
@@ -389,19 +325,36 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                   >
                     <option value={0}>Select a location</option>
                     {allLocations.map((location) => {
-                      return (
-                        <option
-                          key={location.locationId}
-                          value={location.locationId}
-                        >
-                          {`${location.name}: ${location.address}`}
-                        </option>
-                      );
+                      let busy = false;
+                      for (let e of events) {
+                        if (e.equipment != undefined) {
+                          if (e.locationId === location.locationId && ((new Date(e?.startDate) >= new Date(startDate) && new Date(e?.startDate) <= new Date(endDate)) 
+                              || (new Date(e?.endDate) >= new Date(startDate) && new Date(e?.endDate) <= new Date(endDate)))) {
+                              busy = true;
+                              break;
+                            }
+                        }
+                        
+                      }
+                      if (busy) {
+                        return (
+                          <option value={location.locationId} key={location.locationId} disabled>
+                            {location.name}
+                          </option>
+                        );
+                      } 
+                      else {
+                        return (
+                          <option value={location.locationId} key={location.locationId}>
+                            {location.name}
+                          </option>
+                        );
+                      }
                     })}
                   </select>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="eventEquipment">Event Equipment</label>
+                  <label htmlFor="eventEquipment">Event Equipment (items used by another event at the same time will not show up)</label>
                   <select
                     className="custom-select mb-1"
                     id="eventEquipment"
