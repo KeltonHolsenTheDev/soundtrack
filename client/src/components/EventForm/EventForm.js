@@ -22,6 +22,8 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
   const [locationId, setLocationId] = useState([defaultEvent.locationId]);
   const [allItems, setAllItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
+  const [errors, setErrors] = useState([]);
+
   useEffect(() => {
     axios.get("/api/location").then(function (response) {
       setAllLocations(response.data);
@@ -155,7 +157,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
               <h1 className="card-title text-center mb-2"> Event Form</h1>
 
               {/* Start of form */}
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label htmlFor="eventName">Name</label>
                   <input
@@ -163,6 +165,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                     className="form-control"
                     id="eventName"
                     aria-describedby="eventName"
+                    required
                     placeholder="event name"
                     value={eventName}
                     onChange={(e) => setEventName(e.target.value)}
@@ -190,6 +193,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                     placeholder="yyyy-mm-dd"
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
+                    required
                   />
                 </div>
                 <div className="form-group">
@@ -233,7 +237,10 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                         {staffRole.roles.map((role) => {
                           return (
                             <>
-                              <small key={staffRole.roles.indexOf(role)}>
+                              <small
+                                key={staffRole.roles.indexOf(role)}
+                                required
+                              >
                                 {role}
                               </small>
                               <br />
@@ -248,6 +255,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                     id="eventStaff"
                     value={selectedStaff?.userId}
                     onChange={(e) => handleSelectStaff(e.target.value)}
+                    required
                   >
                     <option value="0">Select a staff member</option>
                     {users.map((user) => {
@@ -263,6 +271,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                     className="custom-select mb-1"
                     multiple={true}
                     value={selectedRoles}
+                    required
                     onChange={(e) =>
                       handleSelectRoles(e.target.selectedOptions)
                     }
@@ -336,7 +345,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                 <button
                   type="submit"
                   className="btn btn-primary"
-                  onClick={(e) => handleSubmit(e)}
+                  // onClick={(e) => handleSubmit(e)}
                 >
                   Submit
                 </button>

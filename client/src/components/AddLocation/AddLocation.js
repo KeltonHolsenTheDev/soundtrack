@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { useAuth } from "../../auth/auth";
 import axios from "axios";
 import LocationForm from "../LocationForm";
@@ -22,10 +22,14 @@ const AddLocation = function () {
   const blankLocation = {
     locationId: 0,
     name: "",
-    address: ""
+    address: "",
   };
   return (
-    <LocationForm defaultLocation={blankLocation} submitFcn={addLocation} formTitle="Add" />
+    <LocationForm
+      defaultLocation={blankLocation}
+      submitFcn={addLocation}
+      formTitle="Add"
+    />
   );
 };
 

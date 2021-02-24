@@ -35,8 +35,17 @@ const AddEvent = function () {
         history.push("/");
       })
       .catch(function (error) {
-        alert(error.response.data);
+        let errorMessage = "";
+        for (let message of error.response.data) {
+          errorMessage += message + "\n";
+        }
+
+        // eslint-disable-next-line react/jsx-no-undef
+        alert(errorMessage);
         console.log(error.response.data);
+
+        // alert(error.response.data);
+        // console.log(error.response.data);
       });
   };
 

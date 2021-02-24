@@ -10,6 +10,7 @@ public class Location {
     @NotBlank(message = "Address cannot be null or blank!")
     private String address;
 
+    @NotBlank(message = "name cannot be null or blank!")
     private String name;
 
     public Location() {

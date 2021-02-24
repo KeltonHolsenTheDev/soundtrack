@@ -16,6 +16,7 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
   );
   const [checked, setChecked] = useState(defaultItem.broken);
   const [notes, setNotes] = useState(defaultItem.notes);
+  const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     axios.get("/api/location").then(function (response) {
@@ -42,31 +43,59 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const newErrors = [];
     let location = {};
+
     for (let loc of allLocations) {
       if (loc.locationId == locationId) {
         location = loc;
         break;
       }
     }
-    const item = {
-      itemId: defaultItem.itemId,
-      itemName: name,
-      description: description,
-      brand: brand,
-      itemType: itemType,
-      itemCategory: category,
-      location: location,
-      locationId: locationId,
-      locationDescription: locationDescription,
-      broken: checked,
-      notes: notes
-    };
-    // item.location = chosenLocation;
-    // item.locationId = chosenLocation.locationId;
-    submitFcn(item);
-    // console.log(item);
-    // console.log(submitFcn);
+    if (name === "") {
+      newErrors.push("Name cannot be blank");
+    }
+    if (description === "") {
+      newErrors.push("Description cannot be blank");
+    }
+    if (brand === "") {
+      newErrors.push("Brand cannot be blank");
+    }
+    if (itemType === "") {
+      newErrors.push("Type cannot be blank");
+    }
+
+    if (location === {}) {
+      newErrors.push("Please select a location");
+    }
+    if (locationId === 0) {
+      newErrors.push("Please select a location");
+    }
+    if (locationDescription === "") {
+      newErrors.push("Location description cannot be blank");
+    }
+    if (newErrors.length > 0) {
+      setErrors(newErrors);
+    } else {
+      const item = {
+        itemId: defaultItem.itemId,
+        itemName: name,
+        description: description,
+        brand: brand,
+        itemType: itemType,
+        itemCategory: category,
+        location: location,
+        locationId: locationId,
+        locationDescription: locationDescription,
+        broken: checked,
+        notes: notes,
+      };
+      // item.location = chosenLocation;
+      // item.locationId = chosenLocation.locationId;
+      submitFcn(item);
+      // console.log(item);
+      // console.log(submitFcn);
+    }
   };
 
   return (
@@ -79,7 +108,16 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
                 <h1 className="card-title mb-3 text-center">
                   {`${formTitle} Item `}
                 </h1>
-                <form>
+                {errors.map((error) => (
+                  <p
+                    key={errors.indexOf(error)}
+                    className="card-text error-item-form"
+                  >
+                    {error}
+                  </p>
+                ))}
+
+                <form onSubmit={handleSubmit}>
                   <div className="form-group">
                     <label htmlFor="formGroupExampleInput">Name</label>
                     <input
@@ -103,7 +141,6 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
                       name="description"
                       onChange={(e) => setDescription(e.target.value)}
                       value={description}
-                      required
                     />
                   </div>
                   <div class="form-group">
@@ -116,7 +153,6 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
                       name="brand"
                       onChange={(e) => setBrand(e.target.value)}
                       value={brand}
-                      required
                     />
                   </div>
                   <div class="form-group">
@@ -129,7 +165,6 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
                       name="itemType"
                       onChange={(e) => setItemType(e.target.value)}
                       value={itemType}
-                      required
                     />
                   </div>
 
@@ -153,7 +188,6 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
                     // multiple
                     class="form-control"
                     id="exampleFormControlSelect2"
-                    required
                     value={locationId}
                     onChange={(e) => {
                       console.log(e.target.value);
@@ -217,7 +251,7 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
                   <div className="form-group userform-form-group row">
                     <div className="col-sm-10">
                       <button
-                        onClick={handleSubmit}
+                        // onClick={handleSubmit}
                         type="submit"
                         className="btn btn-primary rounded-0 mt-3"
                       >

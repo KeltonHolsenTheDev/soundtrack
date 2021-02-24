@@ -15,7 +15,12 @@ const AddItem = function () {
         history.push("/");
       })
       .catch(function (error) {
-        alert(error.response.data);
+        let errorMessage = "";
+        for (let message of error.response.data) {
+          errorMessage += message.defaultMessage + "\n";
+        }
+        alert(errorMessage);
+        console.log(error.response.data);
       });
   };
 
@@ -30,7 +35,7 @@ const AddItem = function () {
     locationId: 0,
     locationDescription: "",
     broken: false,
-    notes: ""
+    notes: "",
   };
   return (
     <ItemForm defaultItem={blankItem} submitFcn={addItem} formTitle="Add" />

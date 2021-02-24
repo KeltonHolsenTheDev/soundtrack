@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../../auth/auth";
 import { useHistory } from "react-router-dom";
 import "./UserForm.css";
+import { Formik } from "formik";
 
 const UserForm = function ({ defaultUser, submitFcn, formTitle }) {
   const history = useHistory();
@@ -12,6 +13,7 @@ const UserForm = function ({ defaultUser, submitFcn, formTitle }) {
   const [roleInput, setRoleInput] = useState("");
   const [roles, setRoles] = useState(defaultUser.roles);
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [errors, setErrors] = useState([]);
 
   const onChangeHandler = (event) => {
     const updatedUser = { ...newUser };
@@ -55,6 +57,7 @@ const UserForm = function ({ defaultUser, submitFcn, formTitle }) {
               <h1 className="card-title mb-3 text-center">
                 {`${formTitle} User`}{" "}
               </h1>
+
               <form onSubmit={handleSubmit}>
                 <div className="form-group userform-form-group">
                   <label htmlFor="formGroupExampleInput">First Name</label>
@@ -120,6 +123,7 @@ const UserForm = function ({ defaultUser, submitFcn, formTitle }) {
                       className="form-control"
                       id="inputPassword"
                       placeholder="Password"
+                      minlength="16"
                       onChange={onChangeHandler}
                       value={newUser.password}
                       required
@@ -135,6 +139,7 @@ const UserForm = function ({ defaultUser, submitFcn, formTitle }) {
                       className="form-control"
                       id="inputConfirmPassword"
                       placeholder="Confirm password"
+                      minlength="16"
                       onChange={(e) => {
                         setConfirmPassword(e.target.value);
                       }}
@@ -143,7 +148,7 @@ const UserForm = function ({ defaultUser, submitFcn, formTitle }) {
                     />
                   </div>
                 </div>
-                {user && user.access === "ROLE_ADMINISTRATOR"? (
+                {user && user.access === "ROLE_ADMINISTRATOR" ? (
                   <div>
                     <label htmlFor="inputAccessLevel">Access Level</label>
                     <select
@@ -157,9 +162,11 @@ const UserForm = function ({ defaultUser, submitFcn, formTitle }) {
                       <option value="ROLE_ADMINISTRATOR">Administrator</option>
                       <option value="ROLE_USER">User</option>
                     </select>
-                  </div>     
-                ) : ""}
-                
+                  </div>
+                ) : (
+                  ""
+                )}
+
                 <div className="form-group userform-form-group">
                   <label htmlFor="formGroupExampleInput">Roles</label>
                   {roles.map((role) => (
@@ -169,6 +176,7 @@ const UserForm = function ({ defaultUser, submitFcn, formTitle }) {
                         type="button"
                         className="close"
                         aria-label="Close"
+                        required
                         onClick={(e) => handleDeleteRole(e, role)}
                       >
                         <span aria-hidden="true">&times;</span>

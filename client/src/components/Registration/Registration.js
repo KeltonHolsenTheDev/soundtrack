@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { AuthContext , useAuth} from "../../auth/auth";
+import { AuthContext, useAuth } from "../../auth/auth";
 import { useHistory } from "react-router-dom";
 import UserForm from "../UserForm";
 

@@ -35,7 +35,8 @@ export const loginUser = (setUser, setErrors) => (userData, history) => {
       history.push("/");
     })
     .catch((err) => {
-      alert(err.response.data);
+      alert("email or password incorrect");
+      console.log(err.response);
       // setErrors(err.response.data);
     });
 };
@@ -48,7 +49,8 @@ export const registerUser = (setErrors) => (userData, history) => {
     .then((res) => history.push("/"))
     .catch((error) => {
       alert(error.response.data[0].defaultMessage);
-      console.log(error.response.data);
+      // alert(error.response.data);
+      console.log(error);
       // setErrors(err.response.data);
     });
 };
@@ -68,7 +70,7 @@ export function useAuth() {
       // Check for expired token
       const currentTime = Date.now() / 1000; // to get in milliseconds
       if (decoded.exp < currentTime) {
-        alert("Your session has expired.")
+        alert("Your session has expired.");
         // Logout user
         logoutUser(setUser);
 
