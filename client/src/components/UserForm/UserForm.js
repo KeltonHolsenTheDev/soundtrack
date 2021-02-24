@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../../auth/auth";
 import { useHistory } from "react-router-dom";
 import "./UserForm.css";
-import { Formik } from "formik";
 
 const UserForm = function ({ defaultUser, submitFcn, formTitle }) {
   const history = useHistory();
@@ -39,7 +38,7 @@ const UserForm = function ({ defaultUser, submitFcn, formTitle }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (newUser.password == confirmPassword) {
+    if (newUser.password == confirmPassword || newUser.password == null) {
       newUser.roles = roles;
       submitFcn(newUser, history);
     } else {
@@ -126,7 +125,6 @@ const UserForm = function ({ defaultUser, submitFcn, formTitle }) {
                       minlength="16"
                       onChange={onChangeHandler}
                       value={newUser.password}
-                      required
                     />
                   </div>
                 </div>
@@ -144,7 +142,6 @@ const UserForm = function ({ defaultUser, submitFcn, formTitle }) {
                         setConfirmPassword(e.target.value);
                       }}
                       value={confirmPassword}
-                      required
                     />
                   </div>
                 </div>

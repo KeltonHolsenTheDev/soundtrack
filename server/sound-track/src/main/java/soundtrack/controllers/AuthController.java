@@ -55,6 +55,6 @@ public class AuthController {
             ex.printStackTrace();
         }
 
-        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        return new ResponseEntity<>("Username or password is incorrect!", HttpStatus.FORBIDDEN);
     }
 }

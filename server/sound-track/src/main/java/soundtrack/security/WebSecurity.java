@@ -2,6 +2,7 @@ package soundtrack.security;
 
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import soundtrack.models.AccessLevel;
 import soundtrack.models.User;
 import org.springframework.stereotype.Component;
 import soundtrack.domain.UserService;
@@ -21,6 +22,9 @@ public class WebSecurity {
         User user = service.findByEmail(email);
         if (user == null) {
             return false;
+        }
+        if (user.getAccessLevel() == AccessLevel.ROLE_ADMINISTRATOR) {
+            return true;
         }
         return user.getUserId() == userId;
     }

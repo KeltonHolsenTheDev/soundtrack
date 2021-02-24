@@ -37,9 +37,9 @@ export const loginUser = (setUser, setErrors) => (userData, history) => {
       }
       history.push("/");
     })
-    .catch((err) => {
-      alert("email or password incorrect");
-      console.log(err.response);
+    .catch((error) => {
+      alert(error.response.data);
+      console.log(error.response);
       // setErrors(err.response.data);
     });
 };

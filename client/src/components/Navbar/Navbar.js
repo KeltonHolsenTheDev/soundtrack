@@ -74,7 +74,7 @@ function Navbar() {
           ) : (
             ""
           )}
-          {user ? (
+          {user && user.access === "ROLE_ADMINISTRATOR" ? (
             <li className="nav-location">
               <NavLink
                 exact={true}
