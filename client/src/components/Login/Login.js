@@ -22,6 +22,7 @@ const Login = function () {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     loginUser(login, history);
     // hard-coded for demonstration until authentication is available
     // const blankUser = {
