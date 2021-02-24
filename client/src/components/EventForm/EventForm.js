@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./EventForm.css";
-import events from "../EventContainer";
 import axios from "axios";
 
 const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
@@ -24,6 +23,72 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
   const [selectedItems, setSelectedItems] = useState([]);
   const [errors, setErrors] = useState([]);
 
+  const testEvents = [
+    {
+      eventId: 1,
+      eventName: "Event Name Here",
+      startDate: "0000-00-00",
+      endDate: "0000-00-00",
+      owner: {
+        userId: 1,
+        firstName: "First",
+        lastName: "Last",
+        email: "email@email.com",
+        phone: "555-455-5555",
+        accessLevel: "ROLE_ADMINISTRATOR",
+        authorities: [{}],
+        password: "passwordpassword",
+        roles: ["test_role"],
+      },
+      ownerId: 1,
+      staffIds: [1],
+      staffAndRoles: [
+        {
+          user: {
+            userId: 1,
+            firstName: "First",
+            lastName: "Last",
+            email: "email@email.com",
+            phone: "555-455-5555",
+            accessLevel: "ROLE_ADMINISTRATOR",
+            authorities: [{}],
+            password: "passwordpassword",
+            roles: ["test_role"],
+          },
+          roles: ["test_role"],
+        },
+      ],
+      location: {
+        locationId: 1,
+        address: "123 Test Address",
+        name: "Test Address",
+      },
+      locationId: 1,
+      equipment: [
+        {
+          itemId: 1,
+          itemName: "Test Item",
+          description: "Test Item",
+          brand: "Test",
+          itemType: "test item",
+          itemCategory: "AUDIO",
+          locationId: 1,
+          location: {
+            locationId: 1,
+            address: "123 Test Address",
+            name: "Test Address",
+          },
+          locationDescription: "place",
+          isBroken: false,
+          notes: "no notes",
+        },
+      ],
+      equipmentIds: [1],
+    },
+  ];
+
+  const [events, setEvents] = useState([testEvents]);
+
   useEffect(() => {
     axios.get("/api/location").then(function (response) {
       setAllLocations(response.data);
@@ -44,6 +109,15 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
       }
       setSelectedItems(itemIds);
     });
+    axios
+      .get("/api/event")
+      .then(function (response) {
+        console.log(response.data);
+        setEvents(response.data);
+      })
+      .catch(function (error) {
+        console.log(error.response);
+      });
   }, []);
 
   const handleSelectStaff = function (userId) {
@@ -339,11 +413,26 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                   >
                     {allItems.map((item) => {
                       if (!item.broken) {
-                        return (
-                          <option value={item.itemId} key={item.itemId}>
-                            {item.itemName}
-                          </option>
-                        );
+                        let busy = false;
+                        for (let e of events) {
+                          if (e.equipment != undefined) {
+                            for (let i of e.equipment) {
+                              if (i?.itemId === item?.itemId && ((new Date(e?.startDate) >= new Date(startDate) && new Date(e?.startDate) <= new Date(endDate)) 
+                                || (new Date(e?.endDate) >= new Date(startDate) && new Date(e?.endDate) <= new Date(endDate)))) {
+                                busy = true;
+                                break;
+                              }
+                            }
+                          }
+                          
+                        }
+                        if (!busy) {
+                          return (
+                            <option value={item.itemId} key={item.itemId}>
+                              {item.itemName}
+                            </option>
+                          );
+                        } 
                       }
                     })}
                   </select>

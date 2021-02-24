@@ -4,7 +4,6 @@ import { useAuth } from "../../auth/auth";
 import "./EventContainer.css";
 import EventCard from "../EventCard";
 import EditEvent from "../EditEvent";
-import EventForm from "../EventForm";
 
 const EventContainer = function ({ enableEdit, setEnableEdit }) {
   useAuth();
@@ -162,3 +161,5 @@ const EventContainer = function ({ enableEdit, setEnableEdit }) {
 };
 
 export default EventContainer;
+
+
