@@ -28,6 +28,7 @@
 
 .dashboard-container {
   padding: 0%;
+  margin-top: 56px;
 }
 
 .dashboard-row {
@@ -45,6 +46,7 @@
 
 .fa-map-signs:hover {
   color: oldlace;
+  cursor: pointer;
 }
 
 p.map-signs {
@@ -53,6 +55,7 @@ p.map-signs {
 
 p.map-signs:hover {
   color: oldlace;
+  cursor: pointer;
 }
 
 .fa-shopping-basket {
@@ -61,6 +64,7 @@ p.map-signs:hover {
 
 .fa-shopping-basket:hover {
   color: oldlace;
+  cursor: pointer;
 }
 
 .fa-address-book {
@@ -69,6 +73,7 @@ p.map-signs:hover {
 
 .fa-address-book:hover {
   color: oldlace;
+  cursor: pointer;
 }
 
 .fa-calendar {
@@ -77,4 +82,5 @@ p.map-signs:hover {
 
 .fa-calendar:hover {
   color: oldlace;
+  cursor: pointer;
 }

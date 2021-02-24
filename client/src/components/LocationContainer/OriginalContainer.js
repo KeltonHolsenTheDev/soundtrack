@@ -68,30 +68,34 @@ const LocationContainer = function ({ enableEdit, setEnableEdit }) {
       renderLocations={renderLocations}
     />
   ) : (
-    <div class="container">
-      <div class="row">
-        {/* <div className="col-12 card-deck"> */}
+    <table className="table table-hover table-striped text-center">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Address</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
         {locations.map((location) => {
           return (
-            <div class="col-12 col-sm-6 col-lg-4 mb-3">
-              <LocationCard
-                locationId={location.locationId}
-                name={location.name}
-                address={location.address}
-                key={location.locationId}
-                handleEdit={(event) => {
-                  handleEdit(event, location);
-                }}
-                handleDelete={(event) => {
-                  handleDelete(event, location);
-                }}
-              />
-            </div>
+            <LocationCard
+              locationId={location.locationId}
+              name={location.name}
+              address={location.address}
+              key={location.locationId}
+              handleEdit={(event) => {
+                handleEdit(event, location);
+              }}
+              handleDelete={(event) => {
+                handleDelete(event, location);
+              }}
+            />
           );
         })}
-      </div>
-    </div>
-    // </div>
+      </tbody>
+    </table>
   );
 };
 

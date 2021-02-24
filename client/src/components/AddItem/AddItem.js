@@ -20,7 +20,7 @@ const AddItem = function () {
           errorMessage += message.defaultMessage + "\n";
         }
         alert(errorMessage);
-        console.log(error.response.data);
+        // console.log(error.response.data);
       });
   };
 
