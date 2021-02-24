@@ -158,6 +158,9 @@ insert into item (item_name, description, brand, item_type_id, item_category, lo
         ("Drum", "Kick", "DrumstickInc", 2, "AUDIO", 1 , "Shelf B", false, "no notes"),
         ("Short Throw", "Projector", "Panasonic", 3, "VIDEO", 1 , "Shelf C", false, "this one is good for short distance projecting");
         
+insert into system_user (first_name, last_name, email, phone, access_level, password_hash) values
+	("Admin", "Admin", "default@login.email", "555-555-5555", "ROLE_ADMINISTRATOR", "$2y$12$OW9tWlw1ECSWaBrZicW4qO6eAry1ZkDh9HAG9hy4WYLWUDtDDE/Ga");
+        
 insert into user_role (user_id, role_id) values
 	(1, 1);
         
@@ -170,8 +173,7 @@ insert into event_item (event_id, item_id) values
     (2, 3);
     
 insert into event_user_role(event_id, user_role_id) values
-	(2, 3),
-    (1, 4);
+    (1, 1);
            
 select * from system_user;
 

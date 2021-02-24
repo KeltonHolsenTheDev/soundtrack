@@ -32,11 +32,11 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> authenticate(@RequestBody Map<String, String> credentials) {
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                credentials.get("email"), credentials.get("password") //these are read just fine
+                credentials.get("email"), credentials.get("password")
         );
 
         try {
-            Authentication authentication = authenticationManager.authenticate(authToken); //This is where the error gets thrown
+            Authentication authentication = authenticationManager.authenticate(authToken);
             if (authentication.isAuthenticated()) {
                 System.out.println(authentication.getPrincipal());
                 org.springframework.security.core.userdetails.User userDetails =
