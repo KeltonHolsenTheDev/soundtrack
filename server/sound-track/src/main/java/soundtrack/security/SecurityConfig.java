@@ -67,7 +67,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:3000")
+                        .allowedOrigins(
+                            //Added local host and dev10-cap...
+                            "http://localhost",
+                            "http://localhost:3000",
+                            "https://dev10-capstone-team7.azurewebsites.net"
+                            )
                         .allowedMethods("*");
             }
         };
