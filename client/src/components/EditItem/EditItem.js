@@ -13,7 +13,7 @@ const EditItem = function ({ chosenItem, setEnableEdit, renderItems }) {
         renderItems();
       })
       .catch(function (error) {
-        console.log(error.response);
+        alert(error.response.data[0].defaultMessage);
       });
   };
 

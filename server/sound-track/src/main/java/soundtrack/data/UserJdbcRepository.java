@@ -163,7 +163,15 @@ public class UserJdbcRepository implements UserRepository {
 
     @Override
     public boolean deleteById(int userId) {
+        List<Integer> userRoleIds = jdbcTemplate.query("select user_role_id from user_role where user_id = ?;", this::mapUserRoleId, userId);
+        for (int userRoleId: userRoleIds) {
+            jdbcTemplate.update("delete from event_user_role where user_role_id = ?;", userRoleId);
+        }
         jdbcTemplate.update("delete from user_role where user_id = ?;", userId); //delete the user's roles
         return jdbcTemplate.update("delete from system_user where user_id = ?;", userId) > 0;
+    }
+
+    private Integer mapUserRoleId(ResultSet resultSet, int i) throws SQLException {
+        return resultSet.getInt("user_role_id");
     }
 }
