@@ -10,15 +10,15 @@ const ItemContainer = function ({ enableEdit, setEnableEdit }) {
   useAuth();
   const testItems = [
     {
-      itemId: 1,
+      itemId: 0,
       itemName: "test item",
       description: "test item description",
       brand: "test brand",
       itemType: "test item type",
       itemCategory: "OTHER",
-      locationId: 2,
+      locationId: 0,
       location: {
-        locationId: 2,
+        locationId: 0,
         address: "777 test some place",
         name: "test house",
       },
@@ -98,27 +98,30 @@ const ItemContainer = function ({ enableEdit, setEnableEdit }) {
       </thead>
       <tbody>
         {items.map((item) => {
-          return (
-            <ItemCard
-              itemId={item.itemId}
-              itemName={item.itemName}
-              description={item.description}
-              brand={item.brand}
-              itemType={item.itemType}
-              itemCategory={item.itemCategory}
-              locationName={item?.location?.name}
-              locationDescription={item.locationDescription}
-              broken={item.broken}
-              notes={item.notes}
-              key={item.itemId}
-              handleEdit={(event) => {
-                handleEdit(event, item);
-              }}
-              handleDelete={(event) => {
-                handleDelete(event, item);
-              }}
-            />
-          );
+          if (item.itemId > 0) {
+            return (
+              <ItemCard
+                itemId={item.itemId}
+                itemName={item.itemName}
+                description={item.description}
+                brand={item.brand}
+                itemType={item.itemType}
+                itemCategory={item.itemCategory}
+                locationName={item?.location?.name}
+                locationDescription={item.locationDescription}
+                broken={item.broken}
+                notes={item.notes}
+                key={item.itemId}
+                handleEdit={(event) => {
+                  handleEdit(event, item);
+                }}
+                handleDelete={(event) => {
+                  handleDelete(event, item);
+                }}
+              />
+            );
+          }
+          
         })}
       </tbody>
     </table>

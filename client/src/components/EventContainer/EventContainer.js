@@ -19,7 +19,7 @@ const EventContainer = function ({ enableEdit, setEnableEdit }) {
   useAuth();
   const testEvents = [
     {
-      eventId: 1,
+      eventId: 0,
       eventName: "Event Name Here",
       startDate: "0000-00-00",
       endDate: "0000-00-00",
@@ -34,12 +34,12 @@ const EventContainer = function ({ enableEdit, setEnableEdit }) {
         password: "passwordpassword",
         roles: ["test_role"],
       },
-      ownerId: 1,
-      staffIds: [1],
+      ownerId: 0,
+      staffIds: [0],
       staffAndRoles: [
         {
           user: {
-            userId: 1,
+            userId: 0,
             firstName: "First",
             lastName: "Last",
             email: "email@email.com",
@@ -53,14 +53,14 @@ const EventContainer = function ({ enableEdit, setEnableEdit }) {
         },
       ],
       location: {
-        locationId: 1,
+        locationId: 0,
         address: "123 Test Address",
         name: "Test Address",
       },
-      locationId: 1,
+      locationId: 0,
       equipment: [
         {
-          itemId: 1,
+          itemId: 0,
           itemName: "Test Item",
           description: "Test Item",
           brand: "Test",
@@ -68,7 +68,7 @@ const EventContainer = function ({ enableEdit, setEnableEdit }) {
           itemCategory: "AUDIO",
           locationId: 1,
           location: {
-            locationId: 1,
+            locationId: 0,
             address: "123 Test Address",
             name: "Test Address",
           },
@@ -77,7 +77,7 @@ const EventContainer = function ({ enableEdit, setEnableEdit }) {
           notes: "no notes",
         },
       ],
-      equipmentIds: [1],
+      equipmentIds: [0],
     },
   ];
 
@@ -142,8 +142,10 @@ const EventContainer = function ({ enableEdit, setEnableEdit }) {
       <h1>Events</h1>
       <div class="row">
         {events.map((event_) => {
-          return (
-            <div class="col-12 col-sm-6 col-lg-4 mb-3 text-center">
+          
+          if (event_.eventId > 0) {
+            return (
+              <div class="col-12 col-sm-6 col-lg-4 mb-3 text-center">
               <EventCard
                 eventId={event_.eventId}
                 eventName={event_.eventName}
@@ -168,6 +170,7 @@ const EventContainer = function ({ enableEdit, setEnableEdit }) {
               />
             </div>
           );
+        }
         })}
       </div>
     </div>

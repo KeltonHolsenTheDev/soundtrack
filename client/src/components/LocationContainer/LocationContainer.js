@@ -18,7 +18,7 @@ const LocationContainer = function ({ enableEdit, setEnableEdit }) {
   useAuth();
   const testLocations = [
     {
-      locationId: 1,
+      locationId: 0,
       name: "test location",
       address: "123 placeholder street",
     },
@@ -31,7 +31,7 @@ const LocationContainer = function ({ enableEdit, setEnableEdit }) {
     axios
       .get("/api/location")
       .then(function (response) {
-        console.log(response.data);
+        //console.log(response.data);
         setLocations(response.data);
       })
       .catch(function (error) {
@@ -77,26 +77,30 @@ const LocationContainer = function ({ enableEdit, setEnableEdit }) {
     />
   ) : (
     <div class="container">
+      <h1>Locations</h1>
       <div class="row">
         {/* <div className="col-12 card-deck"> */}
         {locations.map((location) => {
-          return (
-            <div class="col-12 col-sm-6 col-lg-4 mb-3">
-              <LocationCard
-                locationId={location.locationId}
-                name={location.name}
-                address={location.address}
-                key={location.locationId}
-                handleEdit={(event) => {
-                  handleEdit(event, location);
-                }}
-                handleDelete={(event) => {
-                  handleDelete(event, location);
-                }}
-                image={images[Math.floor(Math.random() * images.length)]}
-              />
-            </div>
-          );
+          console.log(location);
+          if (location.locationId > 0) {
+            return (
+              <div class="col-12 col-sm-6 col-lg-4 mb-3">
+                <LocationCard
+                  locationId={location.locationId}
+                  name={location.name}
+                  address={location.address}
+                  key={location.locationId}
+                  handleEdit={(event) => {
+                    handleEdit(event, location);
+                  }}
+                  handleDelete={(event) => {
+                    handleDelete(event, location);
+                  }}
+                  image={images[Math.floor(Math.random() * images.length)]}
+                />
+              </div>
+            );
+          }
         })}
       </div>
     </div>
