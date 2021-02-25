@@ -35,9 +35,11 @@ export const loginUser = (setUser, setErrors) => (userData, history) => {
       history.push("/");
     })
     .catch((err) => {
-      alert("email or password incorrect");
-      console.log(err.response);
-      // setErrors(err.response.data);
+      // alert("email or password incorrect");
+      // console.log(err.response);
+      const newErrors = [];
+      newErrors.push("email or password incorrect");
+      setErrors(newErrors);
     });
 };
 
@@ -48,16 +50,22 @@ export const registerUser = (setErrors) => (userData, history) => {
     .post("api/user", userData)
     .then((res) => history.push("/"))
     .catch((error) => {
-      alert(error.response.data[0].defaultMessage);
+      const newErrors = [];
+      for (let message of error.response.data) {
+        newErrors.push(message.defaultMessage);
+      }
+      setErrors(newErrors);
+      // alert(error.response.data[0].defaultMessage);
       // alert(error.response.data);
-      console.log(error);
+      // console.log(error);
       // setErrors(err.response.data);
     });
 };
 
 export function useAuth() {
   const [user, setUser] = useState(null);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState([]);
+  // const [expiredAlert, setExpiredAlert] = useState(false);
   useEffect(() => {
     if (localStorage.jwtToken) {
       // Set auth token header auth
@@ -83,6 +91,7 @@ export function useAuth() {
   return {
     user,
     errors,
+    setErrors,
     loginUser: loginUser(setUser, setErrors),
     // loginUser: loginUser(setUser),
     logoutUser: () => logoutUser(setUser),
@@ -92,11 +101,25 @@ export function useAuth() {
 }
 
 export function Auth({ children }) {
-  const { user, errors, loginUser, logoutUser, registerUser } = useAuth();
+  const {
+    user,
+    errors,
+    setErrors,
+    loginUser,
+    logoutUser,
+    registerUser,
+  } = useAuth();
   // const { user, loginUser, logoutUser, registerUser } = useAuth();
   return (
     <AuthContext.Provider
-      value={{ user, errors, loginUser, logoutUser, registerUser }}
+      value={{
+        user,
+        errors,
+        setErrors,
+        loginUser,
+        logoutUser,
+        registerUser,
+      }}
       // value={{ user, loginUser, logoutUser, registerUser }}
     >
       {children}

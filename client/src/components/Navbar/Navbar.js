@@ -17,35 +17,22 @@ function Navbar() {
   return (
     <nav className="navbar navbar-dark navbar-expand-lg fixed-top">
       <NavLink className="navbar-brand" exact={true} to="/">
-        🎧
+        JAK🎧
       </NavLink>
       <button
-        className="navbar-toggler "
+        class="navbar-toggler"
         type="button"
         data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span className="navbar-toggler-icon "></span>
+        <span class="navbar-toggler-icon"></span>
       </button>
-      <div className="collapse navbar-collapse" id="navbarNav">
-        <ul className="navbar-nav ml-auto">
-          {/* {user ? (
-            ""
-          ) : (
-            <li className="nav-item">
-              <NavLink
-                exact={true}
-                className="nav-link"
-                activeClassName="nav-link active"
-                to="/login"
-              >
-                Login
-              </NavLink>
-            </li>
-          )} */}
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
           {user ? (
             <li className="nav-item">
               <NavLink
@@ -60,77 +47,104 @@ function Navbar() {
           ) : (
             ""
           )}
+
           {user && user.access === "ROLE_ADMINISTRATOR" ? (
-            <li className="nav-item">
-              <NavLink
-                exact={true}
-                className="nav-link"
-                activeClassName="nav-link active"
-                to="/register"
-              >
-                Add User
-              </NavLink>
-            </li>
-          ) : (
-            ""
-          )}
-          {user ? (
-            <li className="nav-location">
-              <NavLink
-                exact={true}
-                className="nav-link"
-                activeClassName="nav-link active"
-                to="/location"
-              >
-                Add Location
-              </NavLink>
-            </li>
-          ) : (
-            ""
-          )}
-          {user && user.access === "ROLE_ADMINISTRATOR" ? (
-            <li className="nav-item">
-              <NavLink
-                exact={true}
-                className="nav-link"
-                activeClassName="nav-link active"
-                to="/event"
-              >
-                Create Event
-              </NavLink>
-            </li>
-          ) : (
-            ""
-          )}
-          {user && user.access === "ROLE_ADMINISTRATOR" ? (
-            <li className="nav-item">
-              <NavLink
-                exact={true}
-                className="nav-link"
-                activeClassName="nav-link active"
-                to="/item"
-              >
-                Add Item
-              </NavLink>
-            </li>
-          ) : (
-            ""
-          )}
-          {user ? (
-            <li className="nav-item">
+            <li class="nav-item dropdown nav-dropdown-background">
               <a
-                className="nav-link"
-                onClick={(e) => {
-                  handleLogout(e);
-                }}
-                href="/"
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
               >
-                Logout
+                Forms
               </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {user && user.access === "ROLE_ADMINISTRATOR" ? (
+                  <li className="nav-item">
+                    <NavLink
+                      exact={true}
+                      className="nav-link"
+                      activeClassName="nav-link active"
+                      to="/register"
+                    >
+                      Add User
+                    </NavLink>
+                  </li>
+                ) : (
+                  ""
+                )}
+
+                {user && user.access === "ROLE_ADMINISTRATOR" ? (
+                  <li className="nav-location">
+                    <NavLink
+                      exact={true}
+                      className="nav-link"
+                      activeClassName="nav-link active"
+                      to="/location"
+                    >
+                      Add Location
+                    </NavLink>
+                  </li>
+                ) : (
+                  ""
+                )}
+
+                {user && user.access === "ROLE_ADMINISTRATOR" ? (
+                  <li className="nav-item">
+                    <NavLink
+                      exact={true}
+                      className="nav-link"
+                      activeClassName="nav-link active"
+                      to="/item"
+                    >
+                      Add Item
+                    </NavLink>
+                  </li>
+                ) : (
+                  ""
+                )}
+
+                <div class="dropdown-divider"></div>
+                {user && user.access === "ROLE_ADMINISTRATOR" ? (
+                  <li className="nav-item">
+                    <NavLink
+                      exact={true}
+                      className="nav-link"
+                      activeClassName="nav-link active"
+                      to="/event"
+                    >
+                      Create Event
+                    </NavLink>
+                  </li>
+                ) : (
+                  ""
+                )}
+              </div>
             </li>
           ) : (
             ""
           )}
+
+          <li class="nav-item">
+            {user ? (
+              <li className="nav-item">
+                <a
+                  className="nav-link"
+                  onClick={(e) => {
+                    handleLogout(e);
+                  }}
+                  href="/"
+                >
+                  Logout
+                </a>
+              </li>
+            ) : (
+              ""
+            )}
+          </li>
         </ul>
       </div>
     </nav>

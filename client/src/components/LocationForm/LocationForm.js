@@ -3,11 +3,16 @@ import "./LocationForm.css";
 import axios from "axios";
 import { CSSTransition } from "react-transition-group";
 
-const LocationForm = function ({ defaultLocation, submitFcn, formTitle }) {
+const LocationForm = function ({
+  defaultLocation,
+  submitFcn,
+  formTitle,
+  errors,
+  setErrors,
+}) {
   // const [newLocation, setNewLocation] = useState(starterLocation);
   const [name, setName] = useState(defaultLocation.name);
   const [address, setAddress] = useState(defaultLocation.address);
-  const [errors, setErrors] = useState([]);
 
   // const onChangeHandler = (event) => {
   //   const updatedLocation = { ...newLocation };
@@ -18,9 +23,9 @@ const LocationForm = function ({ defaultLocation, submitFcn, formTitle }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newErrors = [];
-    if (name === "") {
-      newErrors.push("Name cannot be blank");
-    }
+    // if (name === "") {
+    //   newErrors.push("Name cannot be blank");
+    // }
     if (address === "") {
       newErrors.push("Address cannot be blank");
     }
@@ -51,7 +56,10 @@ const LocationForm = function ({ defaultLocation, submitFcn, formTitle }) {
                   {`${formTitle} Location `}
                 </h1>
                 {errors.map((error) => (
-                  <p key={errors.indexOf(error)} className="card-text">
+                  <p
+                    key={errors.indexOf(error)}
+                    className="card-text error-location-form"
+                  >
                     {error}
                   </p>
                 ))}

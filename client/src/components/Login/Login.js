@@ -4,7 +4,8 @@ import "./Login.css";
 import { useHistory } from "react-router-dom";
 
 const Login = function () {
-  const { loginUser } = useContext(AuthContext);
+  const { loginUser, errors } = useContext(AuthContext);
+
   const history = useHistory();
   const blankUser = {
     email: "",
@@ -22,7 +23,6 @@ const Login = function () {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     loginUser(login, history);
     // hard-coded for demonstration until authentication is available
     // const blankUser = {
@@ -43,7 +43,7 @@ const Login = function () {
     <div className="container-fluid login-container">
       <div className="row">
         <div className="d-none d-xl-block col-1 home-brand-container">
-          <h1 className="text-light">JAK</h1>
+          <h1 className="text-light">SOUNDTRACK</h1>
         </div>
         <div className="d-none col-5 home-background p-0 d-xl-flex justify-content-end">
           <div className="home-headphones w-100"></div>
@@ -55,6 +55,14 @@ const Login = function () {
               <p className="card-text mb-5 text-center login-text text-muted">
                 Be doers of the word, and not hearers only
               </p>
+              {errors.map((error) => (
+                <p
+                  key={errors.indexOf(error)}
+                  className="card-text error-item-form"
+                >
+                  {error}
+                </p>
+              ))}
               <form onSubmit={handleSubmit}>
                 <div className="form-group login-form-group row">
                   <label

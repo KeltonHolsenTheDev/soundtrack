@@ -19,3 +19,7 @@
   height: 100vh;
   overflow: hidden;
 }
+
+.error-location-form {
+  color: red;
+}

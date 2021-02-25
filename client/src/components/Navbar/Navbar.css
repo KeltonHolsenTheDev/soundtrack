@@ -1,5 +1,6 @@
 .navbar {
   background-color: rgb(24, 24, 24);
+  color: aliceblue;
 }
 
 .nav-link {
@@ -8,6 +9,15 @@
 
 a:hover {
   color: greenyellow;
+}
+
+.nav-dropdown-background {
+  background-color: black;
+  color: aliceblue;
+}
+div.dropdown-menu.show {
+  background-color: black;
+  color: aliceblue;
 }
 
 /* .navbar-toggler {

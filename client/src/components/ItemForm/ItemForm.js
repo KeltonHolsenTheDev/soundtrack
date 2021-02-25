@@ -2,7 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./ItemForm.css";
 import axios from "axios";
 
-const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
+const ItemForm = function ({
+  defaultItem,
+  submitFcn,
+  formTitle,
+  errors,
+  setErrors,
+}) {
   // const [newItem, setNewItem] = useState(starterItem);
   const [name, setName] = useState(defaultItem.itemName);
   const [description, setDescription] = useState(defaultItem.description);
@@ -16,7 +22,6 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
   );
   const [checked, setChecked] = useState(defaultItem.broken);
   const [notes, setNotes] = useState(defaultItem.notes);
-  const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     axios.get("/api/location").then(function (response) {
@@ -52,15 +57,15 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
         break;
       }
     }
-    if (name === "") {
-      newErrors.push("Name cannot be blank");
-    }
-    if (description === "") {
-      newErrors.push("Description cannot be blank");
-    }
-    if (brand === "") {
-      newErrors.push("Brand cannot be blank");
-    }
+    // if (name === "") {
+    //   newErrors.push("Name cannot be blank");
+    // }
+    // if (description === "") {
+    //   newErrors.push("Description cannot be blank");
+    // }
+    // if (brand === "") {
+    //   newErrors.push("Brand cannot be blank");
+    // }
     if (itemType === "") {
       newErrors.push("Type cannot be blank");
     }
@@ -128,7 +133,7 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
                       name="itemName"
                       onChange={(e) => setName(e.target.value)}
                       value={name}
-                      required
+                      // required
                     />
                   </div>
                   <div class="form-group">
@@ -165,6 +170,7 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
                       name="itemType"
                       onChange={(e) => setItemType(e.target.value)}
                       value={itemType}
+                      required
                     />
                   </div>
 
@@ -173,10 +179,10 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
                     // multiple
                     class="form-control"
                     id="exampleFormControlSelect2"
-                    required
                     name="itemCategory"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
+                    required
                   >
                     <option value="OTHER">Other</option>
                     <option value="VIDEO">Video</option>
@@ -193,7 +199,9 @@ const ItemForm = function ({ defaultItem, submitFcn, formTitle }) {
                       console.log(e.target.value);
                       setLocationId(e.target.value);
                     }}
+                    required
                   >
+                    <option selected>Choose...</option>
                     {allLocations.map((location) => {
                       // console.log(newItem);
                       return (

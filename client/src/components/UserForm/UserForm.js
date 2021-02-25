@@ -2,18 +2,21 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../../auth/auth";
 import { useHistory } from "react-router-dom";
 import "./UserForm.css";
-import { Formik } from "formik";
 
-const UserForm = function ({ defaultUser, submitFcn, formTitle }) {
+const UserForm = function ({
+  defaultUser,
+  submitFcn,
+  formTitle,
+  errors,
+  setErrors,
+}) {
   const history = useHistory();
-  console.log(defaultUser);
 
-  const { user, logoutUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [newUser, setNewUser] = useState(defaultUser);
   const [roleInput, setRoleInput] = useState("");
   const [roles, setRoles] = useState(defaultUser.roles);
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState([]);
 
   const onChangeHandler = (event) => {
     const updatedUser = { ...newUser };
@@ -39,11 +42,14 @@ const UserForm = function ({ defaultUser, submitFcn, formTitle }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    // console.log(errors);
+    const newErrors = [];
     if (newUser.password == confirmPassword) {
       newUser.roles = roles;
       submitFcn(newUser, history);
-    } else {
-      alert("Passwords must match");
+    } else if (newErrors.length > 0) {
+      setErrors(newErrors);
+      // alert("Passwords must match");
     }
   };
 
@@ -57,7 +63,14 @@ const UserForm = function ({ defaultUser, submitFcn, formTitle }) {
               <h1 className="card-title mb-3 text-center">
                 {`${formTitle} User`}{" "}
               </h1>
-
+              {errors.map((error) => (
+                <p
+                  key={errors.indexOf(error)}
+                  className="card-text error-location-form"
+                >
+                  {error}
+                </p>
+              ))}
               <form onSubmit={handleSubmit}>
                 <div className="form-group userform-form-group">
                   <label htmlFor="formGroupExampleInput">First Name</label>

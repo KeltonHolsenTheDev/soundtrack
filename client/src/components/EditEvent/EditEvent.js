@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./EditEvent";
 import EventForm from "../EventForm";
 import axios from "axios";
 
 const EditEvent = function ({ chosenEvent, setEnableEdit, renderEvents }) {
+  const [errors, setErrors] = useState([]);
   const editEvent = function (updatedEvent) {
     axios
       .put(`/api/event/${chosenEvent.eventId}`, updatedEvent)
@@ -12,7 +13,12 @@ const EditEvent = function ({ chosenEvent, setEnableEdit, renderEvents }) {
         renderEvents();
       })
       .catch(function (error) {
-        alert(error.response.data[0].defaultMessage);
+        const newErrors = [];
+        for (let message of error.response.data) {
+          newErrors.push(message.defaultMessage);
+        }
+        setErrors(newErrors);
+        // alert(error.response.data[0].defaultMessage);
       });
   };
 
@@ -22,6 +28,8 @@ const EditEvent = function ({ chosenEvent, setEnableEdit, renderEvents }) {
       defaultEvent={chosenEvent}
       submitFcn={editEvent}
       formTitle="Update"
+      errors={errors}
+      setErrors={setErrors}
     />
   );
 };

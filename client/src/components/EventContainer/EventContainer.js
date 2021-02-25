@@ -5,6 +5,9 @@ import "./EventContainer.css";
 import EventCard from "../EventCard";
 import EditEvent from "../EditEvent";
 import EventForm from "../EventForm";
+import image1 from "../../img/audio-868487_1280.jpg";
+import image2 from "../../img/brickwall_@2X.png";
+import image3 from "../../img/dark_brick_wall.png";
 
 const EventContainer = function ({ enableEdit, setEnableEdit }) {
   useAuth();
@@ -71,6 +74,9 @@ const EventContainer = function ({ enableEdit, setEnableEdit }) {
       equipmentIds: [1],
     },
   ];
+
+  //TODO: replace images
+  const images = [image1, image2, image3];
 
   const [events, setEvents] = useState([testEvents]);
   const [chosenEvent, setChosenEvent] = useState(null);
@@ -153,6 +159,7 @@ const EventContainer = function ({ enableEdit, setEnableEdit }) {
               handleDelete={(event) => {
                 handleDelete(event, event_);
               }}
+              image={images[Math.floor(Math.random() * images.length)]}
             />
           );
         })}

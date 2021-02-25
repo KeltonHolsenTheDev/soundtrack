@@ -13,7 +13,7 @@ const Dashboard = function () {
   useAuth();
   const [showItems, setShowItems] = useState(false);
   const [showUsers, setShowUsers] = useState(false);
-  const [showEvents, setShowEvents] = useState(false);
+  const [showEvents, setShowEvents] = useState(true);
   const [showLocations, setShowLocations] = useState(false);
 
   const [enableEditItem, setEnableEditItem] = useState(false);

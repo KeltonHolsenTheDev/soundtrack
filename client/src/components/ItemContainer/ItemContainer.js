@@ -39,7 +39,6 @@ const ItemContainer = function ({ enableEdit, setEnableEdit }) {
         setItems(response.data);
       })
       .catch(function (error) {
-        
         console.log(error.response);
       });
   };
@@ -79,6 +78,10 @@ const ItemContainer = function ({ enableEdit, setEnableEdit }) {
   ) : (
     <table className="table table-hover table-striped text-center">
       <thead>
+        <tr>
+          <h1 className="ml-3">ITEMS</h1>
+        </tr>
+
         <tr>
           <th scope="col">#</th>
           <th scope="col">Name</th>

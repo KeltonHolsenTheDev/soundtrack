@@ -14,6 +14,7 @@ const EventCard = function (props) {
   const equipment = props.equipment;
   return (
     <tr>
+      <img src={props.image} alt="" className="event-img" />
       <th scope="row">{props.eventId}</th>
       <td>{props.eventName}</td>
       <td>{props.startDate}</td>
@@ -35,17 +36,17 @@ const EventCard = function (props) {
               return (
                 <tr>
                   <th scope="col">{userRole?.user?.lastName}</th>
-                  <th scope="col">{userRole?.roles?.map ((role) => {
-                    return (
-                      <ul>
-                        <li>{role}</li>
-                      </ul>
-                    );
-                  }
-
-                  )}</th>
-                </tr> 
-              );        
+                  <th scope="col">
+                    {userRole?.roles?.map((role) => {
+                      return (
+                        <ul>
+                          <li>{role}</li>
+                        </ul>
+                      );
+                    })}
+                  </th>
+                </tr>
+              );
             })}
           </tbody>
         </table>
