@@ -2,7 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./EventForm.css";
 import axios from "axios";
 
-const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
+const EventForm = function ({
+  defaultEvent,
+  submitFcn,
+  formtitle,
+  errors,
+  setErrors,
+}) {
   const [eventName, setEventName] = useState(defaultEvent.eventName);
   const [startDate, setStartDate] = useState(defaultEvent.startDate);
   const [endDate, setEndDate] = useState(defaultEvent.endDate);
@@ -15,13 +21,13 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
     userId: 0,
     roles: [],
   });
+  const [staffError, setStaffError] = useState(null);
 
   const [selectedRoles, setSelectedRoles] = useState([]);
   const [allLocations, setAllLocations] = useState([]);
   const [locationId, setLocationId] = useState([defaultEvent.locationId]);
   const [allItems, setAllItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
-  const [errors, setErrors] = useState([]);
 
   const [events, setEvents] = useState([]);
 
@@ -90,8 +96,9 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
         }
       }
       if (alreadyPresent) {
-        alert("That volunteer has already been added");
+        setStaffError("That volunteer has already been added");
       } else {
+        setStaffError(null);
         newStaffAndRoles.push({
           user: selectedStaff,
           roles: selectedRoles,
@@ -104,6 +111,7 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
 
   const handleDeleteStaff = function (event, staffRole) {
     event.preventDefault();
+    setStaffError(null);
     const newStaffAndRoles = [];
     for (let existingStaffRole of staffAndRoles) {
       if (existingStaffRole.user.userId != staffRole.user.userId) {
@@ -123,6 +131,8 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setStaffError(null);
+    const newErrors = [];
     const newEvent = {};
     let eventOwner = {};
     for (let user of users) {
@@ -150,14 +160,19 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
         }
       }
     }
-    newEvent.eventId = defaultEvent.eventId;
-    newEvent.eventName = eventName;
-    newEvent.startDate = startDate;
-    newEvent.endDate = endDate;
-    newEvent.owner = eventOwner;
-    newEvent.staffAndRoles = staffAndRoles;
-    newEvent.location = location;
-    newEvent.equipment = equipment;
+
+    if (newErrors.length > 0) {
+      setErrors(newErrors);
+    } else {
+      newEvent.eventId = defaultEvent.eventId;
+      newEvent.eventName = eventName;
+      newEvent.startDate = startDate;
+      newEvent.endDate = endDate;
+      newEvent.owner = eventOwner;
+      newEvent.staffAndRoles = staffAndRoles;
+      newEvent.location = location;
+      newEvent.equipment = equipment;
+    }
     submitFcn(newEvent);
     // console.log(newEvent);
   };
@@ -169,7 +184,14 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
           <div className="card mt-5">
             <div className="card-body">
               <h1 className="card-title text-center mb-2">{formtitle}</h1>
-
+              {errors.map((error) => (
+                <p
+                  key={errors.indexOf(error)}
+                  className="card-text error-event-form"
+                >
+                  {error}
+                </p>
+              ))}
               {/* Start of form */}
               <form onSubmit={handleSubmit}>
                 <div className="form-group">
@@ -234,6 +256,11 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                   <label htmlFor="eventStaff" className="mb-0">
                     Staff and Roles
                   </label>
+                  {staffError ? (
+                    <p className="card-text error-event-form">{staffError}</p>
+                  ) : (
+                    ""
+                  )}
                   {staffAndRoles.map((staffRole) => {
                     return (
                       <>
@@ -343,7 +370,6 @@ const EventForm = function ({ defaultEvent, submitFcn, formtitle }) {
                       if (e.target.value > 0) {
                         setLocationId(e.target.value);
                       }
-                      
                     }}
                   >
                     <option value={0}>Select a location</option>

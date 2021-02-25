@@ -4,6 +4,14 @@ import { useAuth } from "../../auth/auth";
 import "./LocationContainer.css";
 import LocationCard from "../LocationCard";
 import EditLocation from "../EditLocation";
+import image1 from "../../img/event-1.jpg";
+import image2 from "../../img/event-2.jpg";
+import image3 from "../../img/event-3.jpg";
+import image4 from "../../img/event-4.jpg";
+import image5 from "../../img/event-5.jpg";
+import image6 from "../../img/event-6.jpg";
+import image7 from "../../img/event-7.jpg";
+
 // import LocationForm from "../LocationForm";
 
 const LocationContainer = function ({ enableEdit, setEnableEdit }) {
@@ -15,7 +23,7 @@ const LocationContainer = function ({ enableEdit, setEnableEdit }) {
       address: "123 placeholder street",
     },
   ];
-
+  const images = [image1, image2, image3, image4, image5, image6, image7];
   const [locations, setLocations] = useState([testLocations]);
   const [chosenLocation, setChosenLocation] = useState(null);
 
@@ -85,13 +93,13 @@ const LocationContainer = function ({ enableEdit, setEnableEdit }) {
                 handleDelete={(event) => {
                   handleDelete(event, location);
                 }}
+                image={images[Math.floor(Math.random() * images.length)]}
               />
             </div>
           );
         })}
       </div>
     </div>
-    // </div>
   );
 };
 

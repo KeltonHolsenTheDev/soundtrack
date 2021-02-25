@@ -91,6 +91,11 @@ const UserContainer = function ({ enableEdit, setEnableEdit }) {
       <table className="table table-hover table-striped">
         <thead>
           <tr>
+            <th>
+              <h1>CONTACTS</h1>
+            </th>
+          </tr>
+          <tr>
             <th scope="col">#</th>
             <th scope="col">First</th>
             <th scope="col">Last</th>

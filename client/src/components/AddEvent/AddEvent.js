@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./AddEvent.css";
 import EventForm from "../EventForm";
 import { useHistory } from "react-router-dom";
@@ -6,6 +6,7 @@ import { useAuth } from "../../auth/auth";
 import axios from "axios";
 
 const AddEvent = function () {
+  const [errors, setErrors] = useState([]);
   useAuth();
   const history = useHistory();
 
@@ -35,20 +36,28 @@ const AddEvent = function () {
         history.push("/");
       })
       .catch(function (error) {
-        let errorMessage = "";
+        const newErrors = [];
         for (let message of error.response.data) {
-          errorMessage += message + "\n";
+          // errorMessage += message + "\n";
+          newErrors.push(message);
         }
-
-        // eslint-disable-next-line react/jsx-no-undef
-        alert(errorMessage);
-        console.log(error.response.data);
+        setErrors(newErrors);
+        // alert(newErrors);
+        // console.log(error.response.data);
 
         // alert(error.response.data);
         // console.log(error.response.data);
       });
   };
 
-  return <EventForm defaultEvent={blankEvent} submitFcn={addEvent} formtitle = "Add Event"/>;
+  return (
+    <EventForm
+      defaultEvent={blankEvent}
+      submitFcn={addEvent}
+      formtitle="Add Event"
+      errors={errors}
+      setErrors={setErrors}
+    />
+  );
 };
 export default AddEvent;

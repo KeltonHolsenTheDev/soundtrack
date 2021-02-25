@@ -3,11 +3,16 @@ import "./LocationForm.css";
 import axios from "axios";
 import { CSSTransition } from "react-transition-group";
 
-const LocationForm = function ({ defaultLocation, submitFcn, formTitle }) {
+const LocationForm = function ({
+  defaultLocation,
+  submitFcn,
+  formTitle,
+  errors,
+  setErrors,
+}) {
   // const [newLocation, setNewLocation] = useState(starterLocation);
   const [name, setName] = useState(defaultLocation.name);
   const [address, setAddress] = useState(defaultLocation.address);
-  const [errors, setErrors] = useState([]);
 
   // const onChangeHandler = (event) => {
   //   const updatedLocation = { ...newLocation };
@@ -18,9 +23,9 @@ const LocationForm = function ({ defaultLocation, submitFcn, formTitle }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newErrors = [];
-    if (name === "") {
-      newErrors.push("Name cannot be blank");
-    }
+    // if (name === "") {
+    //   newErrors.push("Name cannot be blank");
+    // }
     if (address === "") {
       newErrors.push("Address cannot be blank");
     }
@@ -43,15 +48,18 @@ const LocationForm = function ({ defaultLocation, submitFcn, formTitle }) {
     <div className="container location-form-container">
       <div className="container location-form">
         <div className="row ">
-          <div class="col-4 d-none d-md-block location-col-left">JAK</div>
-          <div className="col location-form-col">
+          <div class="col d-none d-md-block location-col-left"></div>
+          <div className="col location-form-col ml-5">
             <div className="card shadow location-form-card">
               <div className="card-body location-form-cardBody">
                 <h1 className="card-title mb-3 text-center">
                   {`${formTitle} Location `}
                 </h1>
                 {errors.map((error) => (
-                  <p key={errors.indexOf(error)} className="card-text">
+                  <p
+                    key={errors.indexOf(error)}
+                    className="card-text error-location-form"
+                  >
                     {error}
                   </p>
                 ))}
@@ -85,7 +93,7 @@ const LocationForm = function ({ defaultLocation, submitFcn, formTitle }) {
                   </div>
 
                   <div className="form-group userform-form-group row">
-                    <div className="col-10">
+                    <div className="col">
                       <button
                         // onClick={handleSubmit}
                         type="submit"
