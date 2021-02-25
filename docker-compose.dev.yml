@@ -22,7 +22,7 @@ services:
     environment:
       DB_URL: jdbc:mysql://db:3306/soundtrack
       DB_USERNAME: root
-      DB_PASSWORD: justin05
+      DB_PASSWORD: root
     depends_on:
       - db
   db:
