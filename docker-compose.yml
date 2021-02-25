@@ -18,4 +18,4 @@ services:
     depends_on:
       - db
   db:
-    image: dev10capstoneteam7images.azurecr.io/capstone-db:v2
+    image: dev10capstoneteam7images.azurecr.io/capstone-db:v3
