@@ -76,12 +76,12 @@ const LocationContainer = function ({ enableEdit, setEnableEdit }) {
       renderLocations={renderLocations}
     />
   ) : (
-    <div class="container">
-      <div class="row">
-        {/* <div className="col-12 card-deck"> */}
+    <div className="container">
+      <div className="row">
+        {/* <div classNameName="col-12 card-deck"> */}
         {locations.map((location) => {
           return (
-            <div class="col-12 col-sm-6 col-lg-4 mb-3">
+            <div className="col-12 col-sm-6 col-lg-4 mb-3">
               <LocationCard
                 locationId={location.locationId}
                 name={location.name}

@@ -47,13 +47,15 @@ function Navbar() {
               </NavLink>
             </li>
           ) : (
-            <span class="navbar-brand navbar-text logo-text">SoundTrack</span>
+            <span className="navbar-brand navbar-text logo-text">
+              SoundTrack
+            </span>
           )}
 
           {user && user.access === "ROLE_ADMINISTRATOR" ? (
             <li class="nav-item dropdown nav-dropdown-background">
               <a
-                class="nav-link dropdown-toggle"
+                className="nav-link dropdown-toggle"
                 href="#"
                 id="navbarDropdown"
                 role="button"
@@ -63,7 +65,7 @@ function Navbar() {
               >
                 Forms
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                 {user && user.access === "ROLE_ADMINISTRATOR" ? (
                   <li className="nav-item">
                     <NavLink

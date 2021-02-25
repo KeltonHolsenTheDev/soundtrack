@@ -29,23 +29,6 @@ const ItemForm = function ({
     });
   }, []);
 
-  // const onChangeHandler = (event) => {
-  //   const updatedItem = { ...newItem };
-  //   updatedItem[event.target.name] = event.target.value;
-  //   setNewItem(updatedItem);
-  // };
-
-  // const chooseLocation = (event) => {
-  //   let location = {};
-  //   for (let loc of allLocations) {
-  //     if (loc.locationId == event.target.value) {
-  //       location = loc;
-  //       break;
-  //     }
-  //   }
-  //   setChosenLocation(location);
-  // };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const newErrors = [];
@@ -57,15 +40,7 @@ const ItemForm = function ({
         break;
       }
     }
-    // if (name === "") {
-    //   newErrors.push("Name cannot be blank");
-    // }
-    // if (description === "") {
-    //   newErrors.push("Description cannot be blank");
-    // }
-    // if (brand === "") {
-    //   newErrors.push("Brand cannot be blank");
-    // }
+
     if (itemType === "") {
       newErrors.push("Type cannot be blank");
     }
@@ -177,7 +152,7 @@ const ItemForm = function ({
                   <label htmlFor="itemLocation">Category</label>
                   <select
                     // multiple
-                    class="form-control"
+                    className="form-control"
                     id="exampleFormControlSelect2"
                     name="itemCategory"
                     value={category}
@@ -192,7 +167,7 @@ const ItemForm = function ({
                   <label htmlFor="itemLocation">Current Location</label>
                   <select
                     // multiple
-                    class="form-control"
+                    className="form-control"
                     id="exampleFormControlSelect2"
                     value={locationId}
                     onChange={(e) => {
@@ -229,7 +204,7 @@ const ItemForm = function ({
                       required
                     />
                   </div>
-                  <div class="custom-control custom-checkbox">
+                  <div className="custom-control custom-checkbox">
                     <input
                       type="checkbox"
                       class="custom-control-input"
@@ -242,7 +217,7 @@ const ItemForm = function ({
                     </label>
                   </div>
 
-                  <div class="form-group">
+                  <div className="form-group">
                     <label htmlFor="formGroupExampleInput2">Notes</label>
                     <textarea
                       type="textarea"
