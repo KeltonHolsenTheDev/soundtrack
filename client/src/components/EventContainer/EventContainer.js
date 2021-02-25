@@ -134,15 +134,10 @@ const EventContainer = function ({ enableEdit, setEnableEdit }) {
       <h1>Events</h1>
       <div className="row">
         {events.map((event_) => {
-<<<<<<< HEAD
           
           if (event_.eventId > 0) {
             return (
-              <div class="col-12 col-sm-6 col-lg-4 mb-3 text-center">
-=======
-          return (
-            <div className="col-12 col-sm-6 col-lg-4 mb-3 text-center">
->>>>>>> 000ec78851e91d2a1287ecb59a9afa540f531cf0
+              <div className="col-12 col-sm-6 col-lg-4 mb-3 text-center">
               <EventCard
                 eventId={event_.eventId}
                 eventName={event_.eventName}
