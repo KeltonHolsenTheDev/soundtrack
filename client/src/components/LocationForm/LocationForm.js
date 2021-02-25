@@ -48,8 +48,8 @@ const LocationForm = function ({
     <div className="container location-form-container">
       <div className="container location-form">
         <div className="row ">
-          <div class="col-4 d-none d-md-block location-col-left">JAK</div>
-          <div className="col location-form-col">
+          <div class="col d-none d-md-block location-col-left"></div>
+          <div className="col location-form-col ml-5">
             <div className="card shadow location-form-card">
               <div className="card-body location-form-cardBody">
                 <h1 className="card-title mb-3 text-center">
@@ -93,7 +93,7 @@ const LocationForm = function ({
                   </div>
 
                   <div className="form-group userform-form-group row">
-                    <div className="col-10">
+                    <div className="col">
                       <button
                         // onClick={handleSubmit}
                         type="submit"

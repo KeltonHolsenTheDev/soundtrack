@@ -1,4 +1,8 @@
 .event-img {
-  height: 50px;
-  width: 50px;
+  height: 200px;
+  width: 200px;
+}
+
+.event-table {
+  background-color: rgba(233, 239, 250, 0.849);
 }

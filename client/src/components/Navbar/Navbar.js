@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useContext } from "react";
 import { AuthContext, useAuth } from "../../auth/auth";
 import { NavLink, useHistory } from "react-router-dom";
@@ -19,6 +20,7 @@ function Navbar() {
       <NavLink className="navbar-brand" exact={true} to="/">
         JAK🎧
       </NavLink>
+
       <button
         class="navbar-toggler"
         type="button"
@@ -45,67 +47,11 @@ function Navbar() {
               </NavLink>
             </li>
           ) : (
-            ""
+            <span class="navbar-brand navbar-text logo-text">SoundTrack</span>
           )}
 
           {user && user.access === "ROLE_ADMINISTRATOR" ? (
-            <li className="nav-item dropdown nav-dropdown-background">
-              <NavLink
-                exact={true}
-                className="nav-link"
-                activeClassName="nav-link active"
-                to="/register"
-              >
-                Add User
-              </NavLink>
-            </li>
-          ) : (
-            ""
-          )}
-          {user && user.access === "ROLE_ADMINISTRATOR" ? (
-            <li className="nav-location">
-              <NavLink
-                exact={true}
-                className="nav-link"
-                activeClassName="nav-link active"
-                to="/location"
-              >
-                Add Location
-              </NavLink>
-            </li>
-          ) : (
-            ""
-          )}
-          {user && user.access === "ROLE_ADMINISTRATOR" ? (
-            <li className="nav-item">
-              <NavLink
-                exact={true}
-                className="nav-link"
-                activeClassName="nav-link active"
-                to="/event"
-              >
-                Create Event
-              </NavLink>
-            </li>
-          ) : (
-            ""
-          )}
-          {user && user.access === "ROLE_ADMINISTRATOR" ? (
-            <li className="nav-item">
-              <NavLink
-                exact={true}
-                className="nav-link"
-                activeClassName="nav-link active"
-                to="/item"
-              >
-                Add Item
-              </NavLink>
-            </li>
-          ) : (
-            ""
-          )}
-          {user ? (
-            <li className="nav-item">
+            <li class="nav-item dropdown nav-dropdown-background">
               <a
                 class="nav-link dropdown-toggle"
                 href="#"

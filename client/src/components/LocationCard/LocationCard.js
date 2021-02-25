@@ -6,11 +6,11 @@ const LocationCard = function (props) {
 
   const buttonsAvailable = user && user.access === "ROLE_ADMINISTRATOR";
   return (
-    <div class="card mt-3">
-      <img src="https://picsum.photos/100" class="card-img-top" alt="..." />
+    <div class="card mt-3 text-center">
       <div class="card-body text-center">
         <h5 class="card-title">{props.locationId}</h5>
         <p class="card-text">{props.name}</p>
+        <img src={props.image} alt="" className="event-img" />
       </div>
       <div>
         <p className="card-text">{props.address}</p>

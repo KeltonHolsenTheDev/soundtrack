@@ -43,7 +43,7 @@ const Login = function () {
     <div className="container-fluid login-container">
       <div className="row">
         <div className="d-none d-xl-block col-1 home-brand-container">
-          <h1 className="text-light">SOUNDTRACK</h1>
+          {/* <h1 className="text-light">SoundTrack</h1> */}
         </div>
         <div className="d-none col-5 home-background p-0 d-xl-flex justify-content-end">
           <div className="home-headphones w-100"></div>

@@ -5,9 +5,15 @@ import "./EventContainer.css";
 import EventCard from "../EventCard";
 import EditEvent from "../EditEvent";
 import EventForm from "../EventForm";
-import image1 from "../../img/audio-868487_1280.jpg";
-import image2 from "../../img/brickwall_@2X.png";
-import image3 from "../../img/dark_brick_wall.png";
+import image1 from "../../img/event-1.jpg";
+import image2 from "../../img/event-2.jpg";
+import image3 from "../../img/event-3.jpg";
+import image4 from "../../img/event-4.jpg";
+import image5 from "../../img/event-5.jpg";
+import image6 from "../../img/event-6.jpg";
+import image7 from "../../img/event-7.jpg";
+
+import ReactCardFlip from "react-card-flip";
 
 const EventContainer = function ({ enableEdit, setEnableEdit }) {
   useAuth();
@@ -76,7 +82,7 @@ const EventContainer = function ({ enableEdit, setEnableEdit }) {
   ];
 
   //TODO: replace images
-  const images = [image1, image2, image3];
+  const images = [image1, image2, image3, image4, image5, image6, image7];
 
   const [events, setEvents] = useState([testEvents]);
   const [chosenEvent, setChosenEvent] = useState(null);
@@ -102,6 +108,10 @@ const EventContainer = function ({ enableEdit, setEnableEdit }) {
     setChosenEvent(editedEvent);
     setEnableEdit(true);
   };
+  const [isFlipped, setIsFlipped] = useState(false);
+  const handleFlip = function () {
+    setIsFlipped(true);
+  };
 
   const handleDelete = function (event, deletedEvent) {
     event.preventDefault();
@@ -120,51 +130,47 @@ const EventContainer = function ({ enableEdit, setEnableEdit }) {
   };
 
   return enableEdit ? (
-    <EditEvent
-      chosenEvent={chosenEvent}
-      setEnableEdit={setEnableEdit}
-      renderEvents={renderEvents}
-    />
+    <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
+      <EditEvent
+        chosenEvent={chosenEvent}
+        setEnableEdit={setEnableEdit}
+        renderEvents={renderEvents}
+      />
+    </ReactCardFlip>
   ) : (
-    <table className="table table-hover table-striped">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Event Name</th>
-          <th scope="col">Start Date</th>
-          <th scope="col">End Date</th>
-          <th scope="col">Owner</th>
-          <th scope="col">Location</th>
-          <th scope="col">Staff</th>
-          <th scope="col">Equipment</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
+    <div class="container">
+      <h1>Events</h1>
+      <div class="row">
         {events.map((event_) => {
           return (
-            <EventCard
-              eventId={event_.eventId}
-              eventName={event_.eventName}
-              startDate={event_.startDate}
-              endDate={event_.endDate}
-              owner={event_.owner}
-              location={event_.location}
-              staffAndRoles={event_.staffAndRoles}
-              equipment={event_.equipment}
-              key={event_.eventId}
-              handleEdit={(event) => {
-                handleEdit(event, event_);
-              }}
-              handleDelete={(event) => {
-                handleDelete(event, event_);
-              }}
-              image={images[Math.floor(Math.random() * images.length)]}
-            />
+            <div class="col-12 col-sm-6 col-lg-4 mb-3 text-center">
+              <EventCard
+                eventId={event_.eventId}
+                eventName={event_.eventName}
+                startDate={event_.startDate}
+                endDate={event_.endDate}
+                owner={event_.owner}
+                location={event_.location}
+                staffAndRoles={event_.staffAndRoles}
+                equipment={event_.equipment}
+                key={event_.eventId}
+                handleEdit={(event) => {
+                  handleEdit(event, event_);
+                }}
+                handleDelete={(event) => {
+                  handleDelete(event, event_);
+                }}
+                handleFlip={(e) => {
+                  handleFlip();
+                  console.log("you got clicked", handleFlip);
+                }}
+                image={images[Math.floor(Math.random() * images.length)]}
+              />
+            </div>
           );
         })}
-      </tbody>
-    </table>
+      </div>
+    </div>
   );
 };
 

@@ -10,6 +10,7 @@ const EditEvent = function ({ chosenEvent, setEnableEdit, renderEvents }) {
       .put(`/api/event/${chosenEvent.eventId}`, updatedEvent)
       .then(function (response) {
         setEnableEdit(false);
+
         renderEvents();
       })
       .catch(function (error) {
