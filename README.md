@@ -19,6 +19,7 @@ XIII. License
 ## Live site:
 
 Come visit our beautiful app at https://dev10-capstone-team7.azurewebsites.net/
+Default login is default@login.email with a password of "admin". Please change this login as soon as you log in.
 
 ## Description:
 
