@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./LocationForm.css";
-import axios from "axios";
-import { CSSTransition } from "react-transition-group";
 
 const LocationForm = function ({
   defaultLocation,
@@ -14,21 +12,10 @@ const LocationForm = function ({
   const [name, setName] = useState(defaultLocation.name);
   const [address, setAddress] = useState(defaultLocation.address);
 
-  // const onChangeHandler = (event) => {
-  //   const updatedLocation = { ...newLocation };
-  //   updatedLocation[event.target.name] = event.target.value;
-  //   setNewLocation(updatedLocation);
-  // };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const newErrors = [];
-    // if (name === "") {
-    //   newErrors.push("Name cannot be blank");
-    // }
-    if (address === "") {
-      newErrors.push("Address cannot be blank");
-    }
+
     if (newErrors.length > 0) {
       setErrors(newErrors);
     } else {

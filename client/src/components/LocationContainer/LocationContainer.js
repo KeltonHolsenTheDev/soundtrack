@@ -84,7 +84,7 @@ const LocationContainer = function ({ enableEdit, setEnableEdit }) {
           console.log(location);
           if (location.locationId > 0) {
             return (
-              <div class="col-12 col-sm-6 col-lg-4 mb-3">
+              <div className="col-12 col-sm-6 col-lg-4 mb-3">
                 <LocationCard
                   locationId={location.locationId}
                   name={location.name}

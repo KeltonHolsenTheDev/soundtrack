@@ -9,26 +9,6 @@ import EditUser from "../EditUser";
 
 const UserContainer = function ({ enableEdit, setEnableEdit }) {
   useAuth();
-  // const users = [
-  //   {
-  //     firstName: "Mark",
-  //     lastName: "Otto",
-  //     phone: "111-111-1111",
-  //     email: "@mdo",
-  //   },
-  //   {
-  //     firstName: "Jacob",
-  //     lastName: "Thornton",
-  //     phone: "222-222-2222",
-  //     email: "@fat",
-  //   },
-  //   {
-  //     firstName: "Jenny",
-  //     lastName: "Johnson",
-  //     phone: "333-333-3333",
-  //     email: "@twitter",
-  //   },
-  // ];
 
   const [users, setUsers] = useState([]);
   const [chosenUser, setChosenUser] = useState(null);

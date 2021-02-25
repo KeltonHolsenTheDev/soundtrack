@@ -4,7 +4,7 @@ import { useAuth } from "../../auth/auth";
 import "./EventContainer.css";
 import EventCard from "../EventCard";
 import EditEvent from "../EditEvent";
-import EventForm from "../EventForm";
+
 import image1 from "../../img/event-1.jpg";
 import image2 from "../../img/event-2.jpg";
 import image3 from "../../img/event-3.jpg";
@@ -12,8 +12,6 @@ import image4 from "../../img/event-4.jpg";
 import image5 from "../../img/event-5.jpg";
 import image6 from "../../img/event-6.jpg";
 import image7 from "../../img/event-7.jpg";
-
-import ReactCardFlip from "react-card-flip";
 
 const EventContainer = function ({ enableEdit, setEnableEdit }) {
   useAuth();
@@ -108,10 +106,6 @@ const EventContainer = function ({ enableEdit, setEnableEdit }) {
     setChosenEvent(editedEvent);
     setEnableEdit(true);
   };
-  const [isFlipped, setIsFlipped] = useState(false);
-  const handleFlip = function () {
-    setIsFlipped(true);
-  };
 
   const handleDelete = function (event, deletedEvent) {
     event.preventDefault();
@@ -130,22 +124,25 @@ const EventContainer = function ({ enableEdit, setEnableEdit }) {
   };
 
   return enableEdit ? (
-    <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
-      <EditEvent
-        chosenEvent={chosenEvent}
-        setEnableEdit={setEnableEdit}
-        renderEvents={renderEvents}
-      />
-    </ReactCardFlip>
+    <EditEvent
+      chosenEvent={chosenEvent}
+      setEnableEdit={setEnableEdit}
+      renderEvents={renderEvents}
+    />
   ) : (
-    <div class="container">
+    <div className="container">
       <h1>Events</h1>
-      <div class="row">
+      <div className="row">
         {events.map((event_) => {
+<<<<<<< HEAD
           
           if (event_.eventId > 0) {
             return (
               <div class="col-12 col-sm-6 col-lg-4 mb-3 text-center">
+=======
+          return (
+            <div className="col-12 col-sm-6 col-lg-4 mb-3 text-center">
+>>>>>>> 000ec78851e91d2a1287ecb59a9afa540f531cf0
               <EventCard
                 eventId={event_.eventId}
                 eventName={event_.eventName}
@@ -161,10 +158,6 @@ const EventContainer = function ({ enableEdit, setEnableEdit }) {
                 }}
                 handleDelete={(event) => {
                   handleDelete(event, event_);
-                }}
-                handleFlip={(e) => {
-                  handleFlip();
-                  console.log("you got clicked", handleFlip);
                 }}
                 image={images[Math.floor(Math.random() * images.length)]}
               />
