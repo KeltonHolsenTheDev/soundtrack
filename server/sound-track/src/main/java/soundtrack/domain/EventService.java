@@ -246,7 +246,7 @@ public class EventService {
                 message.addRecipient(Message.RecipientType.TO, new InternetAddress(userRole.getUser().getEmail()));
                 message.setSubject("Event Notification: " + event.getEventName());
                 String text = "This is a notification that " + event.getOwner().getFirstName() + " " + event.getOwner().getLastName() +
-                        "has signed you up to volunteer at event " + event.getEventName() + " taking place from " + event.getStartDate() + " to " +
+                        " has signed you up to volunteer at event " + event.getEventName() + " taking place from " + event.getStartDate() + " to " +
                         event.getEndDate() + ". You will be doing the following roles:\n";
                 for (String role: userRole.getRoles()) {
                     text += role + "\n";

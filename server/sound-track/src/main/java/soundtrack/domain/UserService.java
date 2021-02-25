@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import soundtrack.data.EventRepository;
 import soundtrack.data.UserRepository;
 import soundtrack.models.AccessLevel;
 import soundtrack.models.Location;
@@ -29,10 +30,13 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository repository;
 
+    private final EventRepository eventRepository;
+
     private final PasswordEncoder encoder;
 
-    public UserService(UserRepository repository, PasswordEncoder encoder) {
+    public UserService(UserRepository repository, EventRepository eventRepository, PasswordEncoder encoder) {
         this.repository = repository;
+        this.eventRepository = eventRepository;
         this.encoder = encoder;
     }
 
@@ -126,6 +130,7 @@ public class UserService implements UserDetailsService {
     }
 
     public boolean deleteById(int userId) {
+        eventRepository.deleteByOwner(userId);
         return repository.deleteById(userId);
     }
 
