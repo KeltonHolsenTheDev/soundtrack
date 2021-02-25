@@ -16,4 +16,6 @@ public interface EventRepository {
     boolean deleteById(int eventId);
 
     void deleteByLocation(int locationId);
+
+    void deleteByOwner(int ownerId);
 }
