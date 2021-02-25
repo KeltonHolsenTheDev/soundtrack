@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./EventForm.css";
-import events from "../EventContainer";
 import axios from "axios";
 
 const EventForm = function ({
@@ -30,6 +29,8 @@ const EventForm = function ({
   const [allItems, setAllItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
 
+  const [events, setEvents] = useState([]);
+
   useEffect(() => {
     axios.get("/api/location").then(function (response) {
       setAllLocations(response.data);
@@ -50,6 +51,15 @@ const EventForm = function ({
       }
       setSelectedItems(itemIds);
     });
+    axios
+      .get("/api/event")
+      .then(function (response) {
+        console.log(response.data);
+        setEvents(response.data);
+      })
+      .catch(function (error) {
+        console.log(error.response);
+      });
   }, []);
 
   const handleSelectStaff = function (userId) {
@@ -290,12 +300,35 @@ const EventForm = function ({
                   >
                     <option value="0">Select a staff member</option>
                     {users.map((user) => {
-                      return (
-                        <option
+                      let busy = false;
+                      for (let e of events) {
+                        if (e.staffAndRoles != undefined) {
+                          for (let u of e.staffAndRoles) {
+                            if (u?.user?.userId === user?.userId && ((new Date(e?.startDate) >= new Date(startDate) && new Date(e?.startDate) <= new Date(endDate)) 
+                              || (new Date(e?.endDate) >= new Date(startDate) && new Date(e?.endDate) <= new Date(endDate)))) {
+                              busy = true;
+                              break;
+                            }
+                          }
+                        }
+                        
+                      }
+                      if (busy) {
+                        return (
+                          <option
                           key={user.userId}
-                          value={user.userId}
+                          value={user.userId} disabled
                         >{`${user.firstName} ${user.lastName}`}</option>
-                      );
+                        );
+                      } 
+                      else {
+                        return (
+                          <option
+                            key={user.userId}
+                            value={user.userId}
+                          >{`${user.firstName} ${user.lastName}`}</option>
+                        );
+                      }  
                     })}
                   </select>
                   <select
@@ -341,19 +374,36 @@ const EventForm = function ({
                   >
                     <option value={0}>Select a location</option>
                     {allLocations.map((location) => {
-                      return (
-                        <option
-                          key={location.locationId}
-                          value={location.locationId}
-                        >
-                          {`${location.name}: ${location.address}`}
-                        </option>
-                      );
+                      let busy = false;
+                      for (let e of events) {
+                        if (e.equipment != undefined) {
+                          if (e.locationId === location.locationId && ((new Date(e?.startDate) >= new Date(startDate) && new Date(e?.startDate) <= new Date(endDate)) 
+                              || (new Date(e?.endDate) >= new Date(startDate) && new Date(e?.endDate) <= new Date(endDate)))) {
+                              busy = true;
+                              break;
+                            }
+                        }
+                        
+                      }
+                      if (busy) {
+                        return (
+                          <option value={location.locationId} key={location.locationId} disabled>
+                            {location.name}
+                          </option>
+                        );
+                      } 
+                      else {
+                        return (
+                          <option value={location.locationId} key={location.locationId}>
+                            {location.name}
+                          </option>
+                        );
+                      }
                     })}
                   </select>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="eventEquipment">Event Equipment</label>
+                  <label htmlFor="eventEquipment">Event Equipment (items used by another event at the same time will not show up)</label>
                   <select
                     className="custom-select mb-1"
                     id="eventEquipment"
@@ -365,11 +415,26 @@ const EventForm = function ({
                   >
                     {allItems.map((item) => {
                       if (!item.broken) {
-                        return (
-                          <option value={item.itemId} key={item.itemId}>
-                            {item.itemName}
-                          </option>
-                        );
+                        let busy = false;
+                        for (let e of events) {
+                          if (e.equipment != undefined) {
+                            for (let i of e.equipment) {
+                              if (i?.itemId === item?.itemId && ((new Date(e?.startDate) >= new Date(startDate) && new Date(e?.startDate) <= new Date(endDate)) 
+                                || (new Date(e?.endDate) >= new Date(startDate) && new Date(e?.endDate) <= new Date(endDate)))) {
+                                busy = true;
+                                break;
+                              }
+                            }
+                          }
+                          
+                        }
+                        if (!busy) {
+                          return (
+                            <option value={item.itemId} key={item.itemId}>
+                              {item.itemName}
+                            </option>
+                          );
+                        } 
                       }
                     })}
                   </select>

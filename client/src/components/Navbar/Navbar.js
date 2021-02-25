@@ -49,7 +49,63 @@ function Navbar() {
           )}
 
           {user && user.access === "ROLE_ADMINISTRATOR" ? (
-            <li class="nav-item dropdown nav-dropdown-background">
+            <li className="nav-item dropdown nav-dropdown-background">
+              <NavLink
+                exact={true}
+                className="nav-link"
+                activeClassName="nav-link active"
+                to="/register"
+              >
+                Add User
+              </NavLink>
+            </li>
+          ) : (
+            ""
+          )}
+          {user && user.access === "ROLE_ADMINISTRATOR" ? (
+            <li className="nav-location">
+              <NavLink
+                exact={true}
+                className="nav-link"
+                activeClassName="nav-link active"
+                to="/location"
+              >
+                Add Location
+              </NavLink>
+            </li>
+          ) : (
+            ""
+          )}
+          {user && user.access === "ROLE_ADMINISTRATOR" ? (
+            <li className="nav-item">
+              <NavLink
+                exact={true}
+                className="nav-link"
+                activeClassName="nav-link active"
+                to="/event"
+              >
+                Create Event
+              </NavLink>
+            </li>
+          ) : (
+            ""
+          )}
+          {user && user.access === "ROLE_ADMINISTRATOR" ? (
+            <li className="nav-item">
+              <NavLink
+                exact={true}
+                className="nav-link"
+                activeClassName="nav-link active"
+                to="/item"
+              >
+                Add Item
+              </NavLink>
+            </li>
+          ) : (
+            ""
+          )}
+          {user ? (
+            <li className="nav-item">
               <a
                 class="nav-link dropdown-toggle"
                 href="#"

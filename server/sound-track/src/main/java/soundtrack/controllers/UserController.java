@@ -59,12 +59,9 @@ public class UserController {
     }
 
     @PutMapping("/{userId}")
-    public ResponseEntity<Object> updateUser(@PathVariable int userId, @RequestBody @Valid User user, BindingResult result) {
+    public ResponseEntity<Object> updateUser(@PathVariable int userId, @RequestBody User user) {
         if (userId != user.getUserId()) {
             return new ResponseEntity<>("User IDs must match", HttpStatus.CONFLICT);
-        }
-        if (result.hasErrors()) {
-            return new ResponseEntity<>(result.getAllErrors(), HttpStatus.BAD_REQUEST);
         }
         Result<User> userResult = service.update(user);
         if (userResult.getType() == ResultType.NOT_FOUND) {

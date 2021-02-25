@@ -156,6 +156,10 @@ public class UserJdbcRepository implements UserRepository {
 
     private void updateRoles(List<String> roles, int userId) {
         //Delete the user's old roles
+        List<Integer> userRoleIds = jdbcTemplate.query("select user_role_id from user_role where user_id = ?;", this::mapUserRoleId, userId);
+        for (int userRoleId: userRoleIds) {
+            jdbcTemplate.update("delete from event_user_role where user_role_id = ?;", userRoleId);
+        }
         jdbcTemplate.update("delete from user_role where user_id = ?;", userId);
         //Add their new roles
         addRoles(roles, userId);

@@ -32,6 +32,11 @@ export const loginUser = (setUser, setErrors) => (userData, history) => {
       const decoded = jwt_decode(jwt_token);
       // Set current user
       setUser(decoded);
+      if (userData.email == "default@login.email") {
+        alert(
+          "Warning: This administrator account is set up with a default password and is not secure. Please create a new administrator account and then delete this one."
+        );
+      }
       history.push("/");
     })
     .catch((err) => {

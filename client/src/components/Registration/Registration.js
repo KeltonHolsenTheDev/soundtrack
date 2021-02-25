@@ -26,7 +26,13 @@ const Registration = function () {
   };
 
   const addUser = function (newUser, history) {
-    registerUser(newUser, history);
+    if (newUser.password == "") {
+      alert("User cannot be added without a password")
+    }
+    else {
+      registerUser(newUser, history);
+    }
+    
   };
 
   return (

@@ -44,7 +44,7 @@ const UserForm = function ({
     event.preventDefault();
     // console.log(errors);
     const newErrors = [];
-    if (newUser.password == confirmPassword) {
+    if (newUser.password == confirmPassword || newUser.password == null) {
       newUser.roles = roles;
       submitFcn(newUser, history);
     } else if (newErrors.length > 0) {
@@ -139,7 +139,6 @@ const UserForm = function ({
                       minlength="16"
                       onChange={onChangeHandler}
                       value={newUser.password}
-                      required
                     />
                   </div>
                 </div>
@@ -157,7 +156,6 @@ const UserForm = function ({
                         setConfirmPassword(e.target.value);
                       }}
                       value={confirmPassword}
-                      required
                     />
                   </div>
                 </div>

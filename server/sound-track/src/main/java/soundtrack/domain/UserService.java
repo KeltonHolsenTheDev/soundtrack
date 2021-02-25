@@ -12,11 +12,16 @@ import soundtrack.models.AccessLevel;
 import soundtrack.models.Location;
 import soundtrack.models.User;
 
+import javax.mail.*;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 
 @Service
@@ -56,12 +61,17 @@ public class UserService implements UserDetailsService {
 
     public User findByEmail(String email) {
         User user = repository.findByEmail(email);
-        nullPassword(user);
+        if (user != null) {
+            nullPassword(user);
+        }
         return user;
     }
 
     public Result<User> add(User user) {
         Result<User> result = validate(user);
+        if (user.getPassword().equals("@@@@@@@@@@@@@@@@")) {
+            result.addMessage("That password is not allowed", ResultType.INVALID);
+        }
         if (!result.isSuccess()) {
             return result;
         }
@@ -71,13 +81,24 @@ public class UserService implements UserDetailsService {
             result.addMessage("Could not add user due to repository error", ResultType.NOT_FOUND);
         }
         else {
+            contactNewUser(user);
             result.setPayLoad(out);
         }
         return result;
     }
 
     public Result<User> update(User user) {
+        boolean theyUsedTheBad = false;
+        if (user.getPassword().equals("@@@@@@@@@@@@@@@@")) { //special password to signify not changing password
+            theyUsedTheBad = true;
+        }
+        if (user.getPassword().isBlank()) {
+            user.setPassword("@@@@@@@@@@@@@@@@");
+        }
         Result<User> result = validate(user);
+        if (theyUsedTheBad) {
+            result.addMessage("That password is not allowed", ResultType.INVALID);
+        }
         if (!result.isSuccess()) {
             return result;
         }
@@ -88,7 +109,13 @@ public class UserService implements UserDetailsService {
                     ResultType.INVALID);
             return result;
         }
-        user.setPassword(encoder.encode(user.getPassword()));
+        if (user.getPassword().equals("@@@@@@@@@@@@@@@@")) {
+            user.setPassword(repository.findById(user.getUserId()).getPassword());
+        }
+        else {
+            alertUserOfPasswordChange(user);
+            user.setPassword(encoder.encode(user.getPassword()));
+        }
         if (repository.update(user)) {
             result.setPayLoad(user);
         }
@@ -129,5 +156,58 @@ public class UserService implements UserDetailsService {
             result.addMessage("User email already exists in the system!", ResultType.INVALID);
         }
         return result;
+    }
+
+    private void contactNewUser(User user) {
+        Properties properties = System.getProperties();
+        properties.setProperty("mail.smtp.host", "smtp.gmail.com");
+        properties.setProperty("mail.smtp.auth", "true");
+        properties.setProperty("mail.smtp.starttls.enable", "true");
+        properties.setProperty("mail.smtp.port", "587");
+        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("soundtrackbyteamjak@gmail.com", "I pledge allegiance 2 Artemis.");
+            }
+        });
+        try {
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("soundtrackbyteamjak@gmail.com"));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail()));
+            message.setSubject("Account Creation Notification");
+            String text = "This is a notification that a user account has been created for you at SoundTrack using this email address as the username. Please ask the " +
+                    "administrator for your login password.";
+            message.setText(text);
+            Transport.send(message);
+        } catch (AddressException e) {
+            e.printStackTrace();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void alertUserOfPasswordChange(User user) {
+        Properties properties = System.getProperties();
+        properties.setProperty("mail.smtp.host", "smtp.gmail.com");
+        properties.setProperty("mail.smtp.auth", "true");
+        properties.setProperty("mail.smtp.starttls.enable", "true");
+        properties.setProperty("mail.smtp.port", "587");
+        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("soundtrackbyteamjak@gmail.com", "I pledge allegiance 2 Artemis.");
+            }
+        });
+        try {
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("soundtrackbyteamjak@gmail.com"));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail()));
+            message.setSubject("Password Update Notification");
+            String text = "This is a notification that your password has been updated. If you did not request this, please contact an administrator.";
+            message.setText(text);
+            Transport.send(message);
+        } catch (AddressException e) {
+            e.printStackTrace();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
     }
 }
