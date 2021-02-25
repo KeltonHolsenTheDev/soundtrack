@@ -1,7 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "./EventCard.css";
 import { AuthContext } from "../../auth/auth";
-import ReactCardFlip from "react-card-flip";
 
 const EventCard = function (props) {
   const { user } = useContext(AuthContext);
@@ -16,9 +15,9 @@ const EventCard = function (props) {
   const equipment = props.equipment;
 
   return (
-    <div class="card mt-3">
-      <div class="card-body text-center">
-        <h5 class="card-title event-front">{`${props.eventId}: ${props.eventName}`}</h5>
+    <div className="card mt-3">
+      <div className="card-body text-center">
+        <h5 className="card-title event-front">{`${props.eventId}: ${props.eventName}`}</h5>
         <img src={props.image} alt="" className="event-img" />
       </div>
       <div>
@@ -32,14 +31,14 @@ const EventCard = function (props) {
         </p>
       </div>
       <div>
-        <ul class="list-group list-group-flush event-back">
-          <li class="list-group-item">
+        <ul className="list-group list-group-flush event-back">
+          <li className="list-group-item">
             <b>Owner:</b> {owner?.lastName}
           </li>
-          <li class="list-group-item">
+          <li className="list-group-item">
             <b>Location: </b> {location?.name}
           </li>
-          <li class="list-group-item">
+          <li className="list-group-item">
             <b className="">Staff:</b>
 
             <table className="table table-hover event-table ">
@@ -75,7 +74,7 @@ const EventCard = function (props) {
               </tbody>
             </table>
           </li>
-          <li class="list-group-item">
+          <li className="list-group-item">
             <b>Equipment: </b>
             (items):
             <table className="table table-hover event-table">
@@ -97,16 +96,16 @@ const EventCard = function (props) {
 
       {buttonsAvailable ? (
         <div className="text-center">
-          <i class=" btn fa fa-pencil fa-2x" onClick={props.handleEdit}></i>
+          <i className=" btn fa fa-pencil fa-2x" onClick={props.handleEdit}></i>
           {/* <button className="btn btn-info mr-2" onClick={props.handleEdit}>
             edit
           </button> */}
-          <i class="btn fa fa-trash fa-2x" onClick={props.handleDelete}></i>
+          <i className="btn fa fa-trash fa-2x" onClick={props.handleDelete}></i>
           {/* <button className="btn btn-danger" onClick={props.handleDelete}>
             delete
           </button> */}
           <i
-            class="btn fa fa-share-square fa-2x"
+            className="btn fa fa-share-square fa-2x"
             onClick={props.handleFlip}
           ></i>
         </div>

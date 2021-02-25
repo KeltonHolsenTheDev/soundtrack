@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { AuthContext, useAuth } from "../../auth/auth";
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "./Dashboard.css";
 import ItemContainer from "../ItemContainer";
 import UserContainer from "../UserContainer";
@@ -84,7 +84,7 @@ const Dashboard = function () {
               <li className="list-group-item dashboard-card">
                 <div className="card-body justify-content-center d-flex text-center">
                   <span className="card-link" onClick={handleShowEvents}>
-                    <i class="fa fa-calendar fa-4x"></i>
+                    <i className="fa fa-calendar fa-4x"></i>
                     {/* <p onClick={handleShowEvents}>events</p> */}
                     <p>events</p>
                   </span>

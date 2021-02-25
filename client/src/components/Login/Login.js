@@ -24,19 +24,6 @@ const Login = function () {
   const handleSubmit = (event) => {
     event.preventDefault();
     loginUser(login, history);
-    // hard-coded for demonstration until authentication is available
-    // const blankUser = {
-    //   id: 0,
-    //   firstName: "George",
-    //   lastName: "Michael",
-    //   phone: "999-999-9999",
-    //   email: login.email,
-    //   accessLevel: "Access Level: Administrator",
-    //   password: login.password,
-    //   roles: [],
-    // };
-    // setUser(blankUser);
-    // history.push("/");
   };
 
   return (
@@ -116,9 +103,6 @@ const Login = function () {
                 </div>
               </form>
             </div>
-            {/* <div className="card-footer text-center">
-              Don't have an account? <a href="/register">Sign up</a>
-            </div> */}
           </div>
         </div>
       </div>

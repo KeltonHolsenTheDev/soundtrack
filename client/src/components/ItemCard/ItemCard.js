@@ -4,8 +4,7 @@ import { AuthContext } from "../../auth/auth";
 
 const ItemCard = function (props) {
   const { user } = useContext(AuthContext);
-  const buttonsAvailable =
-    user && (user.access === "ROLE_ADMINISTRATOR");
+  const buttonsAvailable = user && user.access === "ROLE_ADMINISTRATOR";
   return (
     <tr>
       <th scope="row">{props.itemId}</th>
@@ -20,11 +19,11 @@ const ItemCard = function (props) {
       <td>{props.notes}</td>
       {buttonsAvailable ? (
         <td>
-          <i class=" btn fa fa-pencil fa-2x" onClick={props.handleEdit}></i>
+          <i className=" btn fa fa-pencil fa-2x" onClick={props.handleEdit}></i>
           {/* <button className="btn btn-info mr-2" onClick={props.handleEdit}>
             edit
           </button> */}
-          <i class="btn fa fa-trash fa-2x" onClick={props.handleDelete}></i>
+          <i className="btn fa fa-trash fa-2x" onClick={props.handleDelete}></i>
           {/* <button className="btn btn-danger" onClick={props.handleDelete}>
             delete
           </button> */}
